@@ -4,8 +4,8 @@ import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@emotion/react';
 import theme from '@/styles/theme';
 import { Box, CssBaseline } from '@mui/material';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
+import Footer from '@/components/global/Footer';
+import Navbar from '@/components/global/Navbar';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
