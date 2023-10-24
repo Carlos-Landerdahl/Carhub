@@ -1,3 +1,5 @@
+'use client';
+
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -8,7 +10,7 @@ const theme = createTheme({
     },
     background: {
       main: '#333333',
-      secundary: '#595959',
+      secondary: '#595959',
     },
   },
   typography: {

@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -54,7 +56,7 @@ function Navbar(props) {
         component="nav"
         sx={{
           height: '80px',
-          background: theme.palette.background.secundary,
+          background: '#595959',
           justifyContent: 'center',
         }}
       >

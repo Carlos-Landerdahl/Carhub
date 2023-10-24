@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
 
 export default function Home() {
   const theme = useTheme();
@@ -18,6 +18,9 @@ export default function Home() {
       <Typography variant="h1" color={theme.palette.primary.text}>
         Content
       </Typography>
+      <Link href={`/login`} sx={{ color: 'blueviolet', textDecoration: 'none' }}>
+        Login
+      </Link>
     </Box>
   );
 }
