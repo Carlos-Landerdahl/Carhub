@@ -15,7 +15,9 @@ export default function Home() {
         background: theme.palette.background.main,
       }}
     >
-      <Typography variant="h1">Content</Typography>
+      <Typography variant="h1" color={theme.palette.primary.text}>
+        Content
+      </Typography>
     </Box>
   );
 }

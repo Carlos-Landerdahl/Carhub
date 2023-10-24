@@ -26,11 +26,6 @@ const theme = createTheme({
           padding: 0,
           boxSizing: 'border-box',
         },
-        body: {
-          fontFamily: 'Arial, sans-serif',
-          lineHeight: 1.6,
-          color: 'white',
-        },
         'h1, h2, h3, h4, h5, h6': {
           margin: '0 0 1rem 0',
         },
@@ -39,12 +34,6 @@ const theme = createTheme({
         },
         a: {
           textDecoration: 'none',
-        },
-        img: {
-          maxWidth: '100%',
-        },
-        'button, input, textarea, select': {
-          fontFamily: 'inherit',
         },
       },
     },
