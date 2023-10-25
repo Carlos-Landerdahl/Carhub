@@ -12,6 +12,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import './styles.css';
+import { Tune } from '@mui/icons-material';
 
 function SearchBlock() {
   const [cidade, setCidade] = useState('');
@@ -60,7 +61,7 @@ function SearchBlock() {
         id="panel1a-header"
         sx={{ color: 'white', textAlign: 'center' }}
       >
-        <FilterListIcon sx={{ marginRight: '10px' }} /> Filtro de busca Filtro de busca
+        <Tune sx={{ marginRight: '10px' }} /> Filtro de busca
       </AccordionSummary>
       <AccordionDetails
         style={{
@@ -90,7 +91,7 @@ function SearchBlock() {
             onChange={(e) => setCidade(e.target.value)}
             error={!!erroCidade}
             helperText={erroCidade}
-            sx={{ background: 'white' }}
+            sx={{ background: 'white', fontFamily: 'Roboto' }}
           />
           <TextField
             fullWidth
@@ -102,7 +103,7 @@ function SearchBlock() {
             error={!!erroDataInicio}
             helperText={erroDataInicio}
             InputLabelProps={{ shrink: true }}
-            sx={{ background: 'white' }}
+            sx={{ background: 'white', fontFamily: 'Roboto' }}
           />
           <TextField
             fullWidth
@@ -114,7 +115,7 @@ function SearchBlock() {
             error={!!erroDataFim}
             helperText={erroDataFim}
             InputLabelProps={{ shrink: true }}
-            sx={{ background: 'white' }}
+            sx={{ background: 'white', fontFamily: 'Roboto' }}
           />
           <Button
             variant="contained"
@@ -124,9 +125,10 @@ function SearchBlock() {
               backgroundColor: '#5A67D8',
               color: 'white',
               width: '100%',
+              fontFamily: 'Roboto',
             }}
           >
-            Buscar
+            Filtrar
           </Button>
         </form>
       </AccordionDetails>

@@ -6,7 +6,7 @@ import ThemeRegistry from './ThemeRegistry';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Algue seu carro - promoções ativas',
+  title: 'Alugue seu carro - promoções ativas',
   description: 'Faça o aluguel do seu carro - Dirija seus sonhos',
   icons: {
     icon: ['/favicon.ico'],

@@ -14,8 +14,12 @@ const theme = createTheme({
     },
   },
   typography: {
+    subtitle1: {
+      fontFamily: 'Roboto, sans-serif',
+    },
+
     h1: {
-      fontFamily: 'Arial, sans-serif',
+      fontFamily: 'Roboto, sans-serif',
       fontSize: '2rem',
       fontWeight: 'bold',
     },
@@ -27,6 +31,7 @@ const theme = createTheme({
           margin: 0,
           padding: 0,
           boxSizing: 'border-box',
+          fontFamily: 'Roboto',
         },
         'h1, h2, h3, h4, h5, h6': {
           margin: '0 0 1rem 0',

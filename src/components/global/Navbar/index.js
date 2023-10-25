@@ -80,7 +80,12 @@ function Navbar(props) {
             </Link>
             <Typography
               variant="subtitle1"
-              sx={{ fontStyle: 'italic', fontWeight: 'bold', color: '#4E7CC1' }}
+              sx={{
+                fontFamily: 'Roboto',
+                fontStyle: 'italic',
+                fontWeight: 'bold',
+                color: '#4E7CC1',
+              }}
             >
               Dirija seus sonhos
             </Typography>
@@ -88,7 +93,7 @@ function Navbar(props) {
           <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px' } }}>
             {navItems.map((item, index) => (
               <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
-                <Button variant="outlined" sx={{ color: 'dark' }}>
+                <Button variant="outlined" sx={{ color: 'dark', fontFamily: 'Roboto' }}>
                   {item}
                 </Button>
               </Link>
