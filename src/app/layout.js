@@ -21,7 +21,6 @@ export default function RootLayout({ children }) {
         <Box>
           <Navbar />
           <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
-          <MainBody />
           <Footer />
         </Box>
       </body>

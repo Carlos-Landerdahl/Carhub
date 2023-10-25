@@ -1,17 +1,19 @@
 'use client';
 
 import React from 'react';
-import styled from 'styled-components';
+import { Box } from '@mui/material';
+// import styled from 'styled-components';
 
 
 function MainBody () {
     return (
-        <Body sx={{
+        <Box sx={{
             backgroundColor: '#fcba03',
             width: '100%',
+            height: '100%',
         }}>
             
-        </Body>
+        </Box>
     );
 };
 
