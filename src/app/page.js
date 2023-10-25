@@ -18,9 +18,6 @@ export default function Home() {
       <Typography variant="h1" color={theme.palette.primary.text}>
         Content
       </Typography>
-      <Link href={`/login`} sx={{ color: 'blueviolet', textDecoration: 'none' }}>
-        Login
-      </Link>
     </Box>
   );
 }

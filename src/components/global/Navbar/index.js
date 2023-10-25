@@ -17,9 +17,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
+import Image from 'next/image';
+import Logo from '../../../../public/img/logo.png';
+import { Container } from '@mui/material';
+import Link from 'next/link';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Carros', 'Login'];
+const navItems = ['Criar conta', 'Iniciar sessão'];
 
 function Navbar(props) {
   const theme = useTheme();
@@ -32,9 +36,7 @@ function Navbar(props) {
 
   const mobile = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Carros
-      </Typography>
+      <Image src={Logo} sx={{ flexGrow: '1' }} alt="Logo" width={90} height={90} />
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -56,13 +58,13 @@ function Navbar(props) {
         component="nav"
         sx={{
           height: '80px',
-          background: '#595959',
+          background: '#fff',
           justifyContent: 'center',
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <IconButton
-            color="inherit"
+            color="dark"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
@@ -70,14 +72,26 @@ function Navbar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Carros
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
+          >
+            <Link href="/" passHref>
+              <Image src={Logo} sx={{ flexGrow: '1' }} alt="Logo" width={90} height={90} />
+            </Link>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontStyle: 'italic', fontWeight: 'bold', color: '#4E7CC1' }}
+            >
+              Dirija seus sonhos
+            </Typography>
+          </Box>
+          <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px' } }}>
+            {navItems.map((item, index) => (
+              <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
+                <Button variant="outlined" sx={{ color: 'dark' }}>
+                  {item}
+                </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>
