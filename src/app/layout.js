@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import Footer from '@/components/global/Footer';
 import Navbar from '@/components/global/Navbar';
 import ThemeRegistry from './ThemeRegistry';
+import MainBody from '@/components/global/mainBody';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
         <Box>
           <Navbar />
           <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
+          <MainBody />
           <Footer />
         </Box>
       </body>
