@@ -76,7 +76,7 @@ function Navbar(props) {
             sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
           >
             <Link href="/" passHref>
-              <Image src={Logo} sx={{ flexGrow: '1' }} alt="Logo" width={90} height={90} />
+              <Image src={Logo} sx={{ flexGrow: '1' }} alt="Logo" width={90} height={90} priority />
             </Link>
             <Typography
               variant="subtitle1"

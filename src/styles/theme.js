@@ -39,6 +39,15 @@ const theme = createTheme({
         },
       },
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          '&.Mui-error': {
+            backgroundColor: 'transparent',
+          },
+        },
+      },
+    },
   },
 });
 

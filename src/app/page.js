@@ -2,6 +2,7 @@
 
 import { useTheme } from '@mui/material/styles';
 import { Box, Typography, Link } from '@mui/material';
+import SearchBlock from '@/components/shared/search';
 
 export default function Home() {
   const theme = useTheme();
@@ -11,13 +12,9 @@ export default function Home() {
       sx={{
         height: '100vh',
         mt: '80px',
-        padding: '10px',
-        background: theme.palette.background.main,
       }}
     >
-      <Typography variant="h1" color={theme.palette.primary.text}>
-        Content
-      </Typography>
+      <SearchBlock />
     </Box>
   );
 }
