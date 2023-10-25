@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
-import Logo from '../../../../public/img/logo.png';
+import Logo from '../../../../public/img/logo.svg';
 import { Container } from '@mui/material';
 import Link from 'next/link';
 
@@ -35,16 +35,23 @@ function Navbar(props) {
   };
 
   const mobile = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Image src={Logo} sx={{ flexGrow: '1' }} alt="Logo" width={90} height={90} />
-      <Divider />
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{ textAlign: 'center', height: '100vh', background: '#333333' }}
+    >
+      <Image src={Logo} style={{ flexGrow: '1', width: '100%' }} alt="Logo" />
+      <Divider sx={{ background: 'white', mt: '10px' }} />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
+          <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={item} passHref>
+            <ListItem disablePadding>
+              <ListItemButton
+                sx={{ textAlign: 'center', color: 'white', borderBottom: '1px solid #595959' }}
+              >
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Box>
@@ -58,7 +65,7 @@ function Navbar(props) {
         component="nav"
         sx={{
           height: '80px',
-          background: '#fff',
+          background: '#202125',
           justifyContent: 'center',
         }}
       >
@@ -70,30 +77,19 @@ function Navbar(props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: 'white' }} />
           </IconButton>
           <Box
             sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
           >
             <Link href="/" passHref>
-              <Image src={Logo} sx={{ flexGrow: '1' }} alt="Logo" width={90} height={90} priority />
+              <Image src={Logo} width={300} height={80} alt="Logo" priority />
             </Link>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontFamily: 'Roboto',
-                fontStyle: 'italic',
-                fontWeight: 'bold',
-                color: '#4E7CC1',
-              }}
-            >
-              Dirija seus sonhos
-            </Typography>
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px' } }}>
             {navItems.map((item, index) => (
               <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
-                <Button variant="outlined" sx={{ color: 'dark', fontFamily: 'Roboto' }}>
+                <Button variant="outlined" sx={{ color: 'white', fontFamily: 'Roboto' }}>
                   {item}
                 </Button>
               </Link>

@@ -3,6 +3,7 @@
 import { Box, Button, Card, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
+import './styles.css';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -39,7 +40,7 @@ export default function Home() {
         background: 'linear-gradient(90deg, #0a2239 0%, #4b6a90 100%)',
       }}
     >
-      <Card sx={{ padding: 2, maxWidth: 400 }}>
+      <Card raised sx={{ padding: 2, maxWidth: '400px', margin: '0px 10px' }}>
         <Typography sx={{ mb: '20px' }} variant="h5" gutterBottom>
           Iniciar sessão
         </Typography>

@@ -54,7 +54,13 @@ function SearchBlock() {
   };
 
   return (
-    <Accordion style={{ backgroundColor: '#7097C3' }}>
+    <Accordion
+      style={{
+        backgroundColor: '#595959',
+        borderTopLeftRadius: '0px',
+        borderTopRightRadius: '0px',
+      }}
+    >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />}
         aria-controls="panel1a-content"
@@ -122,7 +128,7 @@ function SearchBlock() {
             color="primary"
             type="submit"
             style={{
-              backgroundColor: '#5A67D8',
+              backgroundColor: '#00875f',
               color: 'white',
               width: '100%',
               fontFamily: 'Roboto',

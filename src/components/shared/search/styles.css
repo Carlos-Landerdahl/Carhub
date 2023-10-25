@@ -4,7 +4,7 @@
 
 .mui-14pbd99-MuiFormLabel-root-MuiInputLabel-root {
   background-color: white;
-  padding: 5px 10px!important;
+  padding: 5px 10px !important;
   border-radius: 123px;
 }
 
@@ -13,5 +13,4 @@
     flex-direction: column;
     gap: 20px !important;
   }
-
 }

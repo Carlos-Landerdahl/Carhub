@@ -3,7 +3,13 @@ import { Box } from '@mui/material';
 import Footer from '@/components/global/Footer';
 import Navbar from '@/components/global/Navbar';
 import ThemeRegistry from './ThemeRegistry';
-const inter = Inter({ subsets: ['latin'] });
+import { Roboto } from 'next/font/google';
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '700', '900'],
+});
 
 export const metadata = {
   title: 'Alugue seu carro - promoções ativas',
@@ -16,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <Box>
           <Navbar />
           <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>

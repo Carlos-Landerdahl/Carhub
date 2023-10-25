@@ -79,10 +79,19 @@ export default function Home() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: '80px',
         background: 'linear-gradient(90deg, #0a2239 0%, #4b6a90 100%)',
       }}
     >
-      <Card sx={{ padding: 2, maxWidth: 400 }}>
+      <Box
+        sx={{
+          padding: '16px',
+          maxWidth: '400px',
+          margin: '10px',
+          background: 'white',
+          borderRadius: '4px',
+        }}
+      >
         <Typography sx={{ mb: '20px' }} variant="h5" gutterBottom>
           Criar conta
         </Typography>
@@ -163,7 +172,7 @@ export default function Home() {
             Iniciar sessão
           </Button>
         </Typography>
-      </Card>
+      </Box>
     </Box>
   );
 }
