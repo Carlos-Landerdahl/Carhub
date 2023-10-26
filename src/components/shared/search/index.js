@@ -122,6 +122,7 @@ function SearchBlock() {
             style={{
               backgroundColor: theme.palette.background.button,
               color: theme.palette.default.primary,
+              height: '56px',
             }}
           >
             Filtrar

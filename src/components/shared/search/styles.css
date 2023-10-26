@@ -1,11 +1,6 @@
-.MuiTextField-root {
-  border-radius: 8px;
-}
-
-.mui-14pbd99-MuiFormLabel-root-MuiInputLabel-root {
-  background-color: white;
-  padding: 5px 10px !important;
-  border-radius: 123px;
+.formContainer {
+  display: flex;
+  justify-content: row;
 }
 
 @media (max-width: 768px) {
