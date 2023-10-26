@@ -3,7 +3,6 @@ import Footer from '@/components/global/Footer';
 import Navbar from '@/components/global/Navbar';
 import ThemeRegistry from '../components/ThemeRegistry/ThemeRegistry';
 import { Roboto } from 'next/font/google';
-import { ThemeMuiProvider } from '@/components/ThemeRegistry/ThemeMuiProvider';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -23,15 +22,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <body>
-        <ThemeMuiProvider>
+        <ThemeRegistry>
           <Box>
             <Navbar />
-            <ThemeRegistry className={roboto.className} options={{ key: 'mui' }}>
-              {children}
-            </ThemeRegistry>
+            {children}
             <Footer />
           </Box>
-        </ThemeMuiProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );
