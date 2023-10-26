@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from '@mui/material/styles';
-import { Box, Typography, Link } from '@mui/material';
+import { Box } from '@mui/material';
 import SearchBlock from '@/components/shared/search';
 
 export default function Home() {

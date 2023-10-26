@@ -1,54 +1,44 @@
 import { useState } from 'react';
-import {
-  TextField,
-  Button,
-  InputLabel,
-  FormControl,
-  Input,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from '@mui/material';
+import { TextField, Button, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import './styles.css';
 import { Tune } from '@mui/icons-material';
+import './styles.css';
 
 function SearchBlock() {
-  const [cidade, setCidade] = useState('');
-  const [dataInicio, setDataInicio] = useState('');
-  const [dataFim, setDataFim] = useState('');
-  const [erroCidade, setErroCidade] = useState('');
-  const [erroDataInicio, setErroDataInicio] = useState('');
-  const [erroDataFim, setErroDataFim] = useState('');
+  const [city, setCity] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [cityError, setCityError] = useState('');
+  const [startDateError, setStartDateError] = useState('');
+  const [endDateError, setEndDateError] = useState('');
 
-  const handleBuscar = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
 
-    let temErro = false;
+    let hasError = false;
 
-    if (!cidade) {
-      setErroCidade('Por favor, insira uma cidade.');
-      temErro = true;
+    if (!city) {
+      setCityError('Por favor, insira uma cidade.');
+      hasError = true;
     } else {
-      setErroCidade('');
+      setCityError('');
     }
 
-    if (!dataInicio) {
-      setErroDataInicio('Selecione uma data de início.');
-      temErro = true;
+    if (!startDate) {
+      setStartDateError('Selecione uma data de início.');
+      hasError = true;
     } else {
-      setErroDataInicio('');
+      setStartDateError('');
     }
 
-    if (!dataFim) {
-      setErroDataFim('Selecione uma data de término.');
-      temErro = true;
+    if (!endDate) {
+      setEndDateError('Selecione uma data de término.');
+      hasError = true;
     } else {
-      setErroDataFim('');
+      setEndDateError('');
     }
 
-    if (!temErro) {
+    if (!hasError) {
       alert('Buscando...');
     }
   };
@@ -67,7 +57,7 @@ function SearchBlock() {
         id="panel1a-header"
         sx={{ color: 'white', textAlign: 'center' }}
       >
-        <Tune sx={{ marginRight: '10px' }} /> Filtro de busca
+        <Tune sx={{ marginRight: '10px' }} /> Search Filter
       </AccordionSummary>
       <AccordionDetails
         style={{
@@ -78,7 +68,7 @@ function SearchBlock() {
         }}
       >
         <form
-          onSubmit={handleBuscar}
+          onSubmit={handleSearch}
           className="formContainer"
           style={{
             backgroundColor: 'transparent',
@@ -91,12 +81,12 @@ function SearchBlock() {
           <TextField
             fullWidth
             type="search"
-            label="Busque sua cidade"
+            label="Selecione sua cidade"
             variant="outlined"
-            value={cidade}
-            onChange={(e) => setCidade(e.target.value)}
-            error={!!erroCidade}
-            helperText={erroCidade}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            error={!!cityError}
+            helperText={cityError}
             sx={{ background: 'white', fontFamily: 'Roboto' }}
           />
           <TextField
@@ -104,22 +94,22 @@ function SearchBlock() {
             type="date"
             label="Data ínicio"
             variant="outlined"
-            value={dataInicio}
-            onChange={(e) => setDataInicio(e.target.value)}
-            error={!!erroDataInicio}
-            helperText={erroDataInicio}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            error={!!startDateError}
+            helperText={startDateError}
             InputLabelProps={{ shrink: true }}
             sx={{ background: 'white', fontFamily: 'Roboto' }}
           />
           <TextField
             fullWidth
             type="date"
-            label="Data final"
+            label="Data de devolução"
             variant="outlined"
-            value={dataFim}
-            onChange={(e) => setDataFim(e.target.value)}
-            error={!!erroDataFim}
-            helperText={erroDataFim}
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            error={!!endDateError}
+            helperText={endDateError}
             InputLabelProps={{ shrink: true }}
             sx={{ background: 'white', fontFamily: 'Roboto' }}
           />
