@@ -19,7 +19,7 @@ function Footer() {
       }}
     >
       <Typography>@2023 CarHub RentalCar</Typography>
-      <Box sx={{ display: 'flex', gap: '30px' }}>
+      <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '30px'} }}>
         <FacebookRounded fontSize="large" />
         <LinkedIn fontSize="large" />
         <Twitter fontSize="large" />

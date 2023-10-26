@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import Image from 'next/image';
 import Logo from '/public/img/logo.svg';
 import Link from 'next/link';
+import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
 import { ThemeProvider } from '@emotion/react';
 import theme from '@/styles/theme';
 
@@ -113,6 +114,12 @@ function Navbar(props) {
           }}
         >
           {mobile}
+          <Box sx={{display: 'flex', gap:'17px', justifyContent:'flex-end', padding:'0 15px 29px 0', background: theme.palette.background.main, color: theme.palette.default.primary}}>
+            <FacebookRounded fontSize="medium" />
+            <LinkedIn fontSize="medium" />
+            <Twitter fontSize="medium" />
+            <Instagram fontSize="medium" />
+          </Box>
         </Drawer>
       </nav>
     </Box>
