@@ -1,15 +1,17 @@
 'use client';
 
-import { Box, Button, Card, TextField, Typography } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
+import theme from '@/styles/theme';
 
 const validateEmail = (email) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(String(email).toLowerCase());
 };
 
-export default function Home() {
+export default function Register() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -73,106 +75,108 @@ export default function Home() {
   };
 
   return (
-    <Box
-      sx={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '80px',
-        background: 'linear-gradient(90deg, #0a2239 0%, #4b6a90 100%)',
-      }}
-    >
+    <ThemeProvider theme={theme}>
       <Box
         sx={{
-          padding: '16px',
-          maxWidth: '400px',
-          margin: '10px',
-          background: 'white',
-          borderRadius: '4px',
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '80px',
+          background: theme.palette.background.gradient,
         }}
       >
-        <Typography sx={{ mb: '20px' }} variant="h5" gutterBottom>
-          Criar conta
-        </Typography>
-        <TextField
-          name="firstName"
-          label="Nome"
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-          value={formData.firstName}
-          onChange={handleInputChange}
-          error={!!formErrors.firstName}
-          helperText={formErrors.firstName}
-        />
-        <TextField
-          name="lastName"
-          label="Sobrenome"
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-          value={formData.lastName}
-          onChange={handleInputChange}
-          error={!!formErrors.lastName}
-          helperText={formErrors.lastName}
-        />
-        <TextField
-          name="email"
-          label="Email"
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-          value={formData.email}
-          onChange={handleInputChange}
-          error={!!formErrors.email}
-          helperText={formErrors.email}
-        />
-        <TextField
-          name="password"
-          label="Senha"
-          variant="outlined"
-          type="password"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-          value={formData.password}
-          onChange={handleInputChange}
-          error={!!formErrors.password}
-          helperText={formErrors.password}
-        />
-        <TextField
-          name="confirmPassword"
-          label="Confirme a senha"
-          variant="outlined"
-          type="password"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-          value={formData.confirmPassword}
-          onChange={handleInputChange}
-          error={!!formErrors.confirmPassword}
-          helperText={formErrors.confirmPassword}
-        />
-        <Button variant="contained" color="primary" fullWidth>
-          Criar conta
-        </Button>
-        <Typography sx={{ mt: 2, textAlign: 'center' }}>
-          Já tem uma conta?
-          <Button
-            component={Link}
-            sx={{
-              textTransform: 'none',
-              '&:hover': {
-                backgroundColor: 'transparent',
-              },
-            }}
-            href={`/login`}
-            variant="text"
-            color="primary"
-          >
-            Iniciar sessão
+        <Box
+          sx={{
+            padding: '16px',
+            maxWidth: '400px',
+            margin: '10px',
+            background: theme.palette.default.primary,
+            borderRadius: '4px',
+          }}
+        >
+          <Typography sx={{ mb: '20px' }} variant="h5" gutterBottom>
+            Criar conta
+          </Typography>
+          <TextField
+            name="firstName"
+            label="Nome"
+            variant="outlined"
+            fullWidth
+            sx={{ marginBottom: 2 }}
+            value={formData.firstName}
+            onChange={handleInputChange}
+            error={!!formErrors.firstName}
+            helperText={formErrors.firstName}
+          />
+          <TextField
+            name="lastName"
+            label="Sobrenome"
+            variant="outlined"
+            fullWidth
+            sx={{ marginBottom: 2 }}
+            value={formData.lastName}
+            onChange={handleInputChange}
+            error={!!formErrors.lastName}
+            helperText={formErrors.lastName}
+          />
+          <TextField
+            name="email"
+            label="Email"
+            variant="outlined"
+            fullWidth
+            sx={{ marginBottom: 2 }}
+            value={formData.email}
+            onChange={handleInputChange}
+            error={!!formErrors.email}
+            helperText={formErrors.email}
+          />
+          <TextField
+            name="password"
+            label="Senha"
+            variant="outlined"
+            type="password"
+            fullWidth
+            sx={{ marginBottom: 2 }}
+            value={formData.password}
+            onChange={handleInputChange}
+            error={!!formErrors.password}
+            helperText={formErrors.password}
+          />
+          <TextField
+            name="confirmPassword"
+            label="Confirme a senha"
+            variant="outlined"
+            type="password"
+            fullWidth
+            sx={{ marginBottom: 2 }}
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            error={!!formErrors.confirmPassword}
+            helperText={formErrors.confirmPassword}
+          />
+          <Button variant="contained" color="primary" fullWidth>
+            Criar conta
           </Button>
-        </Typography>
+          <Typography sx={{ mt: 2, textAlign: 'center' }}>
+            Já tem uma conta?
+            <Button
+              component={Link}
+              sx={{
+                textTransform: 'none',
+                '&:hover': {
+                  backgroundColor: 'transparent',
+                },
+              }}
+              href={`/login`}
+              variant="text"
+              color="primary"
+            >
+              Iniciar sessão
+            </Button>
+          </Typography>
+        </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 }

@@ -1,4 +1,3 @@
-import { Inter } from 'next/font/google';
 import { Box } from '@mui/material';
 import Footer from '@/components/global/Footer';
 import Navbar from '@/components/global/Navbar';
@@ -22,10 +21,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <body className={roboto.className}>
+      <body>
         <Box>
           <Navbar />
-          <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
+          <ThemeRegistry className={roboto.className} options={{ key: 'mui' }}>
+            {children}
+          </ThemeRegistry>
           <Footer />
         </Box>
       </body>
