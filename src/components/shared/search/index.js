@@ -3,7 +3,6 @@ import { TextField, Button, Accordion, AccordionSummary, AccordionDetails } from
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Tune } from '@mui/icons-material';
 import './styles.css';
-import { ThemeProvider } from '@emotion/react';
 import theme from '@/styles/theme';
 
 function SearchBlock() {
@@ -46,92 +45,90 @@ function SearchBlock() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Accordion
+    <Accordion
+      style={{
+        backgroundColor: theme.palette.background.secondary,
+        borderTopLeftRadius: '0px',
+        borderTopRightRadius: '0px',
+      }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon sx={{ color: theme.palette.default.primary }} />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+        sx={{ color: theme.palette.default.primary, textAlign: 'center' }}
+      >
+        <Tune sx={{ marginRight: '10px' }} /> Filtro de busca
+      </AccordionSummary>
+      <AccordionDetails
         style={{
-          backgroundColor: theme.palette.background.secondary,
-          borderTopLeftRadius: '0px',
-          borderTopRightRadius: '0px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
         }}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: theme.palette.default.primary }} />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-          sx={{ color: theme.palette.default.primary, textAlign: 'center' }}
-        >
-          <Tune sx={{ marginRight: '10px' }} /> Filtro de busca
-        </AccordionSummary>
-        <AccordionDetails
+        <form
+          onSubmit={handleSearch}
+          className="formContainer"
           style={{
+            backgroundColor: 'transparent',
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            gap: '10px',
             width: '100%',
+            maxWidth: '1200px',
           }}
         >
-          <form
-            onSubmit={handleSearch}
-            className="formContainer"
+          <TextField
+            fullWidth
+            type="search"
+            label="Selecione sua cidade"
+            variant="filled"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            error={!!cityError}
+            helperText={cityError}
+            sx={{ background: theme.palette.default.primary }}
+          />
+          <TextField
+            fullWidth
+            type="date"
+            label="Data ínicio"
+            variant="filled"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            error={!!startDateError}
+            helperText={startDateError}
+            InputLabelProps={{ shrink: true }}
+            sx={{ background: theme.palette.default.primary }}
+          />
+          <TextField
+            fullWidth
+            type="date"
+            label="Data de devolução"
+            variant="filled"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            error={!!endDateError}
+            helperText={endDateError}
+            InputLabelProps={{ shrink: true }}
+            sx={{ background: theme.palette.default.primary }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullWidth
             style={{
-              backgroundColor: 'transparent',
-              display: 'flex',
-              gap: '10px',
-              width: '100%',
-              maxWidth: '1200px',
+              backgroundColor: theme.palette.background.button,
+              color: theme.palette.default.primary,
             }}
           >
-            <TextField
-              fullWidth
-              type="search"
-              label="Selecione sua cidade"
-              variant="filled"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              error={!!cityError}
-              helperText={cityError}
-              sx={{ background: theme.palette.default.primary }}
-            />
-            <TextField
-              fullWidth
-              type="date"
-              label="Data ínicio"
-              variant="filled"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              error={!!startDateError}
-              helperText={startDateError}
-              InputLabelProps={{ shrink: true }}
-              sx={{ background: theme.palette.default.primary }}
-            />
-            <TextField
-              fullWidth
-              type="date"
-              label="Data de devolução"
-              variant="filled"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              error={!!endDateError}
-              helperText={endDateError}
-              InputLabelProps={{ shrink: true }}
-              sx={{ background: theme.palette.default.primary }}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              fullWidth
-              style={{
-                backgroundColor: theme.palette.background.button,
-                color: theme.palette.default.primary,
-              }}
-            >
-              Filtrar
-            </Button>
-          </form>
-        </AccordionDetails>
-      </Accordion>
-    </ThemeProvider>
+            Filtrar
+          </Button>
+        </form>
+      </AccordionDetails>
+    </Accordion>
   );
 }
 

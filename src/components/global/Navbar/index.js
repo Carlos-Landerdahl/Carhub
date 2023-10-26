@@ -61,63 +61,61 @@ function Navbar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex' }}>
-        <AppBar
-          component="nav"
+    <Box sx={{ display: 'flex' }}>
+      <AppBar
+        component="nav"
+        sx={{
+          height: '80px',
+          background: theme.palette.background.navbar,
+          justifyContent: 'center',
+        }}
+      >
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <IconButton
+            color="dark"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon sx={{ color: theme.palette.default.primary }} />
+          </IconButton>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
+          >
+            <Link href="/" passHref>
+              <Image src={Logo} width={300} height={80} alt="Logo" priority />
+            </Link>
+          </Box>
+          <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px' } }}>
+            {navItems.map((item, index) => (
+              <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
+                <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
+                  {item}
+                </Button>
+              </Link>
+            ))}
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <nav>
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
           sx={{
-            height: '80px',
-            background: theme.palette.background.navbar,
-            justifyContent: 'center',
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
-          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <IconButton
-              color="dark"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
-            >
-              <MenuIcon sx={{ color: theme.palette.default.primary }} />
-            </IconButton>
-            <Box
-              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
-            >
-              <Link href="/" passHref>
-                <Image src={Logo} width={300} height={80} alt="Logo" priority />
-              </Link>
-            </Box>
-            <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px' } }}>
-              {navItems.map((item, index) => (
-                <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
-                  <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
-                    {item}
-                  </Button>
-                </Link>
-              ))}
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <nav>
-          <Drawer
-            container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true,
-            }}
-            sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-            }}
-          >
-            {mobile}
-          </Drawer>
-        </nav>
-      </Box>
-    </ThemeProvider>
+          {mobile}
+        </Drawer>
+      </nav>
+    </Box>
   );
 }
 

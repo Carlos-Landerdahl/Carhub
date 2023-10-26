@@ -1,6 +1,5 @@
 'use client';
 
-import { ThemeProvider } from '@emotion/react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -75,108 +74,106 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <Box
+      sx={{
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '80px',
+        background: theme.palette.background.gradient,
+      }}
+    >
       <Box
         sx={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '80px',
-          background: theme.palette.background.gradient,
+          padding: '16px',
+          maxWidth: '400px',
+          margin: '10px',
+          background: theme.palette.default.primary,
+          borderRadius: '4px',
         }}
       >
-        <Box
-          sx={{
-            padding: '16px',
-            maxWidth: '400px',
-            margin: '10px',
-            background: theme.palette.default.primary,
-            borderRadius: '4px',
-          }}
-        >
-          <Typography sx={{ mb: '20px' }} variant="h5" gutterBottom>
-            Criar conta
-          </Typography>
-          <TextField
-            name="firstName"
-            label="Nome"
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-            value={formData.firstName}
-            onChange={handleInputChange}
-            error={!!formErrors.firstName}
-            helperText={formErrors.firstName}
-          />
-          <TextField
-            name="lastName"
-            label="Sobrenome"
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-            value={formData.lastName}
-            onChange={handleInputChange}
-            error={!!formErrors.lastName}
-            helperText={formErrors.lastName}
-          />
-          <TextField
-            name="email"
-            label="Email"
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-            value={formData.email}
-            onChange={handleInputChange}
-            error={!!formErrors.email}
-            helperText={formErrors.email}
-          />
-          <TextField
-            name="password"
-            label="Senha"
-            variant="outlined"
-            type="password"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-            value={formData.password}
-            onChange={handleInputChange}
-            error={!!formErrors.password}
-            helperText={formErrors.password}
-          />
-          <TextField
-            name="confirmPassword"
-            label="Confirme a senha"
-            variant="outlined"
-            type="password"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-            value={formData.confirmPassword}
-            onChange={handleInputChange}
-            error={!!formErrors.confirmPassword}
-            helperText={formErrors.confirmPassword}
-          />
-          <Button variant="contained" color="primary" fullWidth>
-            Criar conta
+        <Typography sx={{ mb: '20px' }} variant="h5" gutterBottom>
+          Criar conta
+        </Typography>
+        <TextField
+          name="firstName"
+          label="Nome"
+          variant="outlined"
+          fullWidth
+          sx={{ marginBottom: 2 }}
+          value={formData.firstName}
+          onChange={handleInputChange}
+          error={!!formErrors.firstName}
+          helperText={formErrors.firstName}
+        />
+        <TextField
+          name="lastName"
+          label="Sobrenome"
+          variant="outlined"
+          fullWidth
+          sx={{ marginBottom: 2 }}
+          value={formData.lastName}
+          onChange={handleInputChange}
+          error={!!formErrors.lastName}
+          helperText={formErrors.lastName}
+        />
+        <TextField
+          name="email"
+          label="Email"
+          variant="outlined"
+          fullWidth
+          sx={{ marginBottom: 2 }}
+          value={formData.email}
+          onChange={handleInputChange}
+          error={!!formErrors.email}
+          helperText={formErrors.email}
+        />
+        <TextField
+          name="password"
+          label="Senha"
+          variant="outlined"
+          type="password"
+          fullWidth
+          sx={{ marginBottom: 2 }}
+          value={formData.password}
+          onChange={handleInputChange}
+          error={!!formErrors.password}
+          helperText={formErrors.password}
+        />
+        <TextField
+          name="confirmPassword"
+          label="Confirme a senha"
+          variant="outlined"
+          type="password"
+          fullWidth
+          sx={{ marginBottom: 2 }}
+          value={formData.confirmPassword}
+          onChange={handleInputChange}
+          error={!!formErrors.confirmPassword}
+          helperText={formErrors.confirmPassword}
+        />
+        <Button variant="contained" color="primary" fullWidth>
+          Criar conta
+        </Button>
+        <Typography sx={{ mt: 2, textAlign: 'center' }}>
+          Já tem uma conta?
+          <Button
+            component={Link}
+            sx={{
+              textTransform: 'none',
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+            }}
+            href={`/login`}
+            variant="text"
+            color="primary"
+          >
+            Iniciar sessão
           </Button>
-          <Typography sx={{ mt: 2, textAlign: 'center' }}>
-            Já tem uma conta?
-            <Button
-              component={Link}
-              sx={{
-                textTransform: 'none',
-                '&:hover': {
-                  backgroundColor: 'transparent',
-                },
-              }}
-              href={`/login`}
-              variant="text"
-              color="primary"
-            >
-              Iniciar sessão
-            </Button>
-          </Typography>
-        </Box>
+        </Typography>
       </Box>
-    </ThemeProvider>
+    </Box>
   );
 }
