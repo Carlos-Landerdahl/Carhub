@@ -1,14 +1,8 @@
 import { Box } from '@mui/material';
 import Footer from '@/components/global/Footer';
 import Navbar from '@/components/global/Navbar';
-import ThemeRegistry from '../components/ThemeRegistry/ThemeRegistry';
-import { Roboto } from 'next/font/google';
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['300', '400', '500', '700', '900'],
-});
+import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
+// const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Alugue seu carro - promoções ativas',
