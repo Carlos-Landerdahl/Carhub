@@ -114,7 +114,16 @@ function Navbar(props) {
           }}
         >
           {mobile}
-          <Box sx={{display: 'flex', gap:'17px', justifyContent:'flex-end', padding:'0 15px 29px 0', background: theme.palette.background.main, color: theme.palette.default.primary}}>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '17px',
+              justifyContent: 'flex-end',
+              padding: '0 15px 29px 0',
+              background: theme.palette.background.main,
+              color: theme.palette.default.primary,
+            }}
+          >
             <FacebookRounded fontSize="medium" />
             <LinkedIn fontSize="medium" />
             <Twitter fontSize="medium" />
