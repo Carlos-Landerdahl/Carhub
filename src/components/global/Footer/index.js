@@ -15,11 +15,11 @@ function Footer() {
         background: theme.palette.background.navbar,
         color: theme.palette.default.primary,
         height: '80px',
-        padding: '0 50px 0 50px'
+        padding: '0 50px 0 50px',
       }}
     >
       <Typography>@2023 CarHub RentalCar</Typography>
-      <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '30px'} }}>
+      <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '30px' } }}>
         <FacebookRounded fontSize="large" />
         <LinkedIn fontSize="large" />
         <Twitter fontSize="large" />
