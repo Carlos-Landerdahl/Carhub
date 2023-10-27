@@ -4,7 +4,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -14,15 +13,18 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
+import Image from 'next/image';
+import Logo from '/public/img/logo.svg';
+import Link from 'next/link';
+import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
+import { ThemeProvider } from '@emotion/react';
+import theme from '@/styles/theme';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Carros', 'Login'];
+const navItems = ['Criar conta', 'Iniciar sessão'];
 
 function Navbar(props) {
-  const theme = useTheme();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -31,18 +33,27 @@ function Navbar(props) {
   };
 
   const mobile = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Carros
-      </Typography>
-      <Divider />
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{ textAlign: 'center', height: '100vh', background: theme.palette.background.main }}
+    >
+      <Image src={Logo} style={{ flexGrow: '1', width: '100%', height: '80px' }} alt="Logo" />
+      <Divider sx={{ background: theme.palette.default.primary, mt: '10px' }} />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
+          <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={item} passHref>
+            <ListItem disablePadding>
+              <ListItemButton
+                sx={{
+                  textAlign: 'center',
+                  color: theme.palette.default.primary,
+                  borderBottom: '1px solid #595959',
+                }}
+              >
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Box>
@@ -56,28 +67,34 @@ function Navbar(props) {
         component="nav"
         sx={{
           height: '80px',
-          background: '#595959',
+          background: theme.palette.background.navbar,
           justifyContent: 'center',
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <IconButton
-            color="inherit"
+            color="dark"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: theme.palette.default.primary }} />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Carros
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
+          >
+            <Link href="/" passHref>
+              <Image src={Logo} width={300} height={80} alt="Logo" priority />
+            </Link>
+          </Box>
+          <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px' } }}>
+            {navItems.map((item, index) => (
+              <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
+                <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
+                  {item}
+                </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>
@@ -97,6 +114,12 @@ function Navbar(props) {
           }}
         >
           {mobile}
+          <Box sx={{display: 'flex', gap:'17px', justifyContent:'flex-end', padding:'0 15px 29px 0', background: theme.palette.background.main, color: theme.palette.default.primary}}>
+            <FacebookRounded fontSize="medium" />
+            <LinkedIn fontSize="medium" />
+            <Twitter fontSize="medium" />
+            <Instagram fontSize="medium" />
+          </Box>
         </Drawer>
       </nav>
     </Box>

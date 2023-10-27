@@ -4,22 +4,22 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
-    primary: {
-      main: '#708090',
+    default: {
+      primary: '#fff',
+    },
+    text: {
+      main: '#595959',
       text: '#fff',
     },
     background: {
       main: '#333333',
       secondary: '#595959',
+      navbar: '#202125',
+      button: '#5E8FCE',
+      gradient: 'linear-gradient(90deg, #0a2239 0%, #4b6a90 100%)',
     },
   },
-  typography: {
-    h1: {
-      fontFamily: 'Arial, sans-serif',
-      fontSize: '2rem',
-      fontWeight: 'bold',
-    },
-  },
+  typography: { fontFamily: 'Roboto, sans-serif' },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -27,6 +27,10 @@ const theme = createTheme({
           margin: 0,
           padding: 0,
           boxSizing: 'border-box',
+        },
+        body: {
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
         },
         'h1, h2, h3, h4, h5, h6': {
           margin: '0 0 1rem 0',
@@ -36,6 +40,15 @@ const theme = createTheme({
         },
         a: {
           textDecoration: 'none',
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          '&.Mui-error': {
+            backgroundColor: 'transparent',
+          },
         },
       },
     },

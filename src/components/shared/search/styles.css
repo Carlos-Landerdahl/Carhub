@@ -1,0 +1,11 @@
+.formContainer {
+  display: flex;
+  justify-content: row;
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    flex-direction: column;
+    gap: 20px !important;
+  }
+}
