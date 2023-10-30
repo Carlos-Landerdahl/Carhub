@@ -13,17 +13,17 @@ function CategoryCard({ name, carCount, imageSrc }) {
         backgroundColor: '#fff',
         borderRadius: '10px',
         border: '1px solid #F3F1ED',
-        boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+        boxShadow: '0 4px 4px 0 rgba(0, 0, 0, 0.25)',
         flexShrink: '0',
         display: 'flex',
         flexDirection: 'column',
-        p: 0, // Remove a margem do Box
+        p: 0, 
     }}>
         <Image style={{
         width: '100%',
         maxHeight: '75%',
         objectFit: 'contain',
-          m: 0, // Remove a margem da imagem
+        m: 0,
         }} src={imageSrc} alt={name} />
         <h2 style={{ margin: '0', marginLeft: '5px' }}>{name}</h2>
         <p style={{ margin: '0', marginLeft: '5px' }}>{carCount} carros</p>

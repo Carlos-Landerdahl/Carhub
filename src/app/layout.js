@@ -4,6 +4,9 @@ import Navbar from '@/components/global/Navbar';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 // const inter = Inter({ subsets: ['latin'] });
 
+
+
+
 export const metadata = {
   title: 'Alugue seu carro - promoções ativas',
   description: 'Faça o aluguel do seu carro - Dirija seus sonhos',

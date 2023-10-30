@@ -10,7 +10,7 @@ import carro2 from '/public/img/carro2.jpg';
 function MainBody () {
     return (
         <Box sx={{
-            backgroundColor: '#fcba03',
+            background: theme.palette.background.gradient,
             width: '100%',
             height: '100%',
             display: 'flex',
