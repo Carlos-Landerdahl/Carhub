@@ -2,15 +2,15 @@
 
 import React from 'react';
 import { Box } from '@mui/material';
-// import styled from 'styled-components';
 import CategoryCard from '@/components/global/card';
 import carro2 from '/public/img/carro2.jpg';
+import theme from '@/styles/theme';
 
 
 function MainBody () {
     return (
         <Box sx={{
-            backgroundColor: '#fcba03',
+            background: theme.palette.background.gradient,
             width: '100%',
             height: '100%',
             display: 'flex',
