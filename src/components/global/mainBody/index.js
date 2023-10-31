@@ -5,6 +5,7 @@ import { Box } from '@mui/material';
 // import styled from 'styled-components';
 import CategoryCard from '@/components/global/card';
 import carro2 from '/public/img/carro2.jpg';
+import theme from '@/styles/theme';
 
 
 function MainBody () {
@@ -17,6 +18,7 @@ function MainBody () {
             alignItems: 'center',
             justifyContent: 'center',
         }}>
+        
         <CategoryCard name="Sedans" carCount={807105} imageSrc={carro2} />
         </Box>
     );
