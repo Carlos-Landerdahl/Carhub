@@ -14,7 +14,15 @@ export default function Home() {
       }}
     >
       <SearchBlock />
+      <Box 
+      sx={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex',
+        marginTop: '200px',
+      }}>
       <ProductCard /> {/* componente adicionado só para visualização do layout, apagar depois  */}
+      </Box>
     </Box>
   );
 }
