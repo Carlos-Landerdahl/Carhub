@@ -19,7 +19,29 @@ const theme = createTheme({
       gradient: 'linear-gradient(90deg, #0a2239 0%, #4b6a90 100%)',
     },
   },
-  typography: { fontFamily: 'Roboto, sans-serif' },
+  typography: {
+    fontFamily: 'Roboto, sans-serif',
+    heading: {
+      fontSize: "1.5rem",
+      fontStyle: "normal",
+      fontWeight: "700",
+      lineHeight: "normal"
+    },
+    paragraph: {
+      fontSize: "1.25rem",
+      fontStyle: "normal",
+      fontWeight: "700",
+      lineHeight: "normal"
+    },
+    label: {
+      fontFamily: "Quicksand, sans-serif",
+      fontSize: ".875rem",
+      fontStyle: "normal",
+      fontWeight: "700",
+      lineHeight: "normal",
+      opacity: "0.5"
+    }
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
