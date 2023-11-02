@@ -41,6 +41,9 @@ const theme = createTheme({
         a: {
           textDecoration: 'none',
         },
+        '.custom-toast': {
+          zIndex: '1100 !important',
+        },
       },
     },
     MuiFormHelperText: {

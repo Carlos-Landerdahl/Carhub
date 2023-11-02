@@ -35,7 +35,11 @@ function Navbar(props) {
   const mobile = (
     <Box
       onClick={handleDrawerToggle}
-      sx={{ textAlign: 'center', height: '100vh', background: theme.palette.background.main }}
+      sx={{
+        textAlign: 'center',
+        height: '100vh',
+        background: theme.palette.background.main,
+      }}
     >
       <Image src={Logo} style={{ flexGrow: '1', width: '100%', height: '80px' }} alt="Logo" />
       <Divider sx={{ background: theme.palette.default.primary, mt: '10px' }} />
