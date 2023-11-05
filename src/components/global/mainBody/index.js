@@ -12,8 +12,6 @@ function MainBody() {
   const filterCategoryData = dataJson.categories.map((category) => category);
   const filterRecommendData = dataJson.recommends.map((recommended) => recommended);
 
-  console.log(filterRecommendData);
-
   return (
     <Container
       maxWidth="xl"
@@ -50,7 +48,7 @@ function MainBody() {
         </Typography>
         <Grid container spacing={2}>
           {filterRecommendData.map((recommended) => (
-            <RecommendCard key={recommended.brand} {...recommended} />
+            <RecommendCard key={recommended.id} {...recommended} />
           ))}
         </Grid>
       </Box>

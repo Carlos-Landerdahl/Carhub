@@ -111,6 +111,7 @@
   ],
   "recommends": [
     {
+      "id": 9,
       "brand": "Ferrari",
       "model": "488 GTB",
       "category": "Esportivos",
@@ -120,6 +121,7 @@
       "available": true
     },
     {
+      "id": 10,
       "brand": "Toyota",
       "model": "Camry",
       "category": "Sedan",
@@ -129,6 +131,7 @@
       "available": true
     },
     {
+      "id": 11,
       "brand": "Jeep",
       "model": "Wrangler",
       "category": "Útilitarios",
@@ -138,6 +141,7 @@
       "available": true
     },
     {
+      "id": 12,
       "brand": "Toyota",
       "model": "Prius",
       "category": "Híbridos",
