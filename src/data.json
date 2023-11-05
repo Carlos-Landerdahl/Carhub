@@ -1,0 +1,150 @@
+{
+  "categories": [
+    {
+      "category_name": "Carros Esportivos",
+      "image": "https://cdn.motor1.com/images/mgl/ZnKvO2/s1/2023-porsche-911-carrera-t-in-gulf-blue.webp",
+      "description": "Os supercarros esportivos mais incrívels para entusiastas de alta velocidade.",
+      "cars": [
+        {
+          "id": 1,
+          "brand": "Ferrari",
+          "model": "488 GTB",
+          "year": 2020,
+          "image": "https://cdn.ferrari.com/cms/network/media/img/resize/5ea6af534668ba0b6c37bbdc-05_ferrari-195_inter_touring_coup_488_gtb_esterni?width=750&height=550",
+          "description": "Os supercarros esportivos mais incrívels para entusiastas de alta velocidade.",
+          "price_per_day": 800.0,
+          "available": true
+        },
+        {
+          "id": 2,
+          "brand": "Porsche",
+          "model": "911 Carrera",
+          "year": 2021,
+          "image": "https://cdn.motor1.com/images/mgl/ZnKvO2/s1/2023-porsche-911-carrera-t-in-gulf-blue.webp",
+          "description": "Um icônico esportivo alemão com desempenho excepcional.",
+          "price_per_day": 750.0,
+          "available": true
+        }
+      ]
+    },
+    {
+      "category_name": "Carros Sedan",
+      "image": "https://pictures.dealer.com/b/bryanhonda/0987/59dd9179311d4f1203be0b20cb4dbe4ex.jpg",
+      "description": "Um sedan confortável e econômico para viagens em família.",
+      "cars": [
+        {
+          "id": 3,
+          "brand": "Toyota",
+          "model": "Camry",
+          "year": 2022,
+          "image": "https://www.cnet.com/a/img/resize/4476006d1312ec379ee616af256b7596321b3742/hub/2021/08/20/257caf0a-f3a2-45db-9c70-d6ed50a85e6f/2021-toyota-camry-trd-ogi-1.jpg?auto=webp&fit=crop&height=900&width=1200",
+          "description": "Um sedan confortável e econômico para viagens em família.",
+          "price_per_day": 400.0,
+          "available": true
+        },
+        {
+          "id": 4,
+          "brand": "Honda",
+          "model": "Accord",
+          "year": 2023,
+          "image": "https://pictures.dealer.com/b/bryanhonda/0987/59dd9179311d4f1203be0b20cb4dbe4ex.jpg",
+          "description": "Um sedan confiável com recursos avançados de segurança.",
+          "price_per_day": 420.0,
+          "available": true
+        }
+      ]
+    },
+    {
+      "category_name": "Carros Utilitários",
+      "image": "https://www.cnet.com/a/img/resize/66bfcd0063aa957ff51f41ee65ad596973e58045/hub/2022/04/18/41ef8b2c-5eaa-4208-abe3-37a492de43c5/ogi1-2022-ford-explorer-timberline-001.jpg?auto=webp&fit=crop&height=675&width=1200",
+      "description": "Os Utilitários mais robusto para viagens e aventuras em qualquer ambiente.",
+      "cars": [
+        {
+          "id": 5,
+          "brand": "Jeep",
+          "model": "Wrangler",
+          "year": 2022,
+          "image": "https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/90cd7865-0dd7-43b7-9aa2-ae440ca71ef6/bb6e65a3-8cfe-46e2-855b-43a6bb694cab.png",
+          "description": "Um SUV robusto e aventureiro para explorar trilhas off-road.",
+          "price_per_day": 550.0,
+          "available": true
+        },
+        {
+          "id": 6,
+          "brand": "Ford",
+          "model": "Explorer",
+          "year": 2021,
+          "image": "https://www.cnet.com/a/img/resize/66bfcd0063aa957ff51f41ee65ad596973e58045/hub/2022/04/18/41ef8b2c-5eaa-4208-abe3-37a492de43c5/ogi1-2022-ford-explorer-timberline-001.jpg?auto=webp&fit=crop&height=675&width=1200",
+          "description": "Um utilitário esportivo espaçoso e versátil para viagens em família.",
+          "price_per_day": 500.0,
+          "available": true
+        }
+      ]
+    },
+    {
+      "category_name": "Carros Híbridos",
+      "image": "https://t.ctcdn.com.br/vLSd5WV6Ge6llJ-lmK1W6Wbs-6M=/640x360/smart/i648473.jpeg",
+      "description": "Carros híbridos, econômicos e ecológicos com baixos consumos de combustível.",
+      "cars": [
+        {
+          "id": 7,
+          "brand": "Toyota",
+          "model": "Prius",
+          "year": 2023,
+          "image": "https://t.ctcdn.com.br/vLSd5WV6Ge6llJ-lmK1W6Wbs-6M=/640x360/smart/i648473.jpeg",
+          "description": "Um carro híbrido econômico e ecológico com baixo consumo de combustível.",
+          "price_per_day": 450.0,
+          "available": true
+        },
+        {
+          "id": 8,
+          "brand": "Honda",
+          "model": "Insight",
+          "year": 2022,
+          "image": "https://media.ed.edmunds-media.com/honda/insight/2019/oem/2019_honda_insight_sedan_touring_fq_oem_1_1600.jpg",
+          "description": "Um híbrido compacto com design aerodinâmico e tecnologia avançada.",
+          "price_per_day": 470.0,
+          "available": true
+        }
+      ]
+    }
+  ],
+  "recommends": [
+    {
+      "brand": "Ferrari",
+      "model": "488 GTB",
+      "category": "Esportivos",
+      "image": "https://cdn.ferrari.com/cms/network/media/img/resize/5ea6af534668ba0b6c37bbdc-05_ferrari-195_inter_touring_coup_488_gtb_esterni?width=750&height=550",
+      "description": "Os supercarros esportivos mais incrívels para entusiastas de alta velocidade.",
+      "price_per_day": 800.0,
+      "available": true
+    },
+    {
+      "brand": "Toyota",
+      "model": "Camry",
+      "category": "Sedan",
+      "image": "https://www.cnet.com/a/img/resize/4476006d1312ec379ee616af256b7596321b3742/hub/2021/08/20/257caf0a-f3a2-45db-9c70-d6ed50a85e6f/2021-toyota-camry-trd-ogi-1.jpg?auto=webp&fit=crop&height=900&width=1200",
+      "description": "Um sedan confortável e econômico para viagens em família.",
+      "price_per_day": 400.0,
+      "available": true
+    },
+    {
+      "brand": "Jeep",
+      "model": "Wrangler",
+      "category": "Útilitarios",
+      "image": "https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/90cd7865-0dd7-43b7-9aa2-ae440ca71ef6/bb6e65a3-8cfe-46e2-855b-43a6bb694cab.png",
+      "description": "Um SUV robusto e aventureiro para explorar trilhas off-road.",
+      "price_per_day": 550.0,
+      "available": true
+    },
+    {
+      "brand": "Toyota",
+      "model": "Prius",
+      "category": "Híbridos",
+      "image": "https://t.ctcdn.com.br/vLSd5WV6Ge6llJ-lmK1W6Wbs-6M=/640x360/smart/i648473.jpeg",
+      "description": "Um carro híbrido econômico e ecológico com baixo consumo de combustível.",
+      "price_per_day": 450.0,
+      "available": true
+    }
+  ]
+}

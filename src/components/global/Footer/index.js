@@ -8,14 +8,15 @@ import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-materi
 function Footer() {
   return (
     <Box
+      component="footer"
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         background: theme.palette.background.navbar,
         color: theme.palette.default.primary,
-        height: '80px',
-        padding: '0 50px 0 50px',
+        height: '100%',
+        padding: '19px 50px 23px 50px',
       }}
     >
       <Typography>@2023 CarHub RentalCar</Typography>
