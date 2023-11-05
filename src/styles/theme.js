@@ -10,7 +10,7 @@ const theme = createTheme({
     text: {
       main: '#595959',
       text: '#fff',
-      paragraph: "#383B58"
+      paragraph: '#383B58',
     },
     background: {
       main: '#333333',
@@ -23,25 +23,25 @@ const theme = createTheme({
   typography: {
     fontFamily: 'Roboto, sans-serif',
     heading: {
-      fontSize: "1.5rem",
-      fontStyle: "normal",
-      fontWeight: "bold",
-      lineHeight: "normal"
+      fontSize: '1.5rem',
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+      lineHeight: 'normal',
     },
     paragraph: {
-      fontSize: "1.25rem",
-      fontStyle: "normal",
-      fontWeight: "700",
-      lineHeight: "normal"
+      fontSize: '1.25rem',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      lineHeight: 'normal',
     },
     label: {
-      fontFamily: "Quicksand, sans-serif",
-      fontSize: ".875rem",
-      fontStyle: "normal",
-      fontWeight: "700",
-      lineHeight: "normal",
-      opacity: "0.5"
-    }
+      fontFamily: 'Quicksand, sans-serif',
+      fontSize: '.875rem',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      lineHeight: 'normal',
+      opacity: '0.5',
+    },
   },
   components: {
     MuiCssBaseline: {

@@ -16,7 +16,7 @@ export default function Home() {
       }}
     >
       <SearchBlock />
-      <MainBody/>
+      <MainBody />
     </Box>
   );
 }

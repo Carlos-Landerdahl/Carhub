@@ -15,7 +15,7 @@ function Footer() {
         alignItems: 'center',
         background: theme.palette.background.navbar,
         color: theme.palette.default.primary,
-        height: "100%",
+        height: '100%',
         padding: '19px 50px 23px 50px',
       }}
     >

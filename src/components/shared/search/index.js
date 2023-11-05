@@ -50,7 +50,7 @@ function SearchBlock() {
         backgroundColor: theme.palette.background.secondary,
         borderTopLeftRadius: '0px',
         borderTopRightRadius: '0px',
-        margin:"0",
+        margin: '0',
       }}
     >
       <AccordionSummary
