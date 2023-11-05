@@ -1,18 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import {
-  Box,
-  Card,
-  CardContent,
-  Button,
-  CardMedia,
-  CardActionArea,
-  Typography,
-  Grid,
-  Container,
-  CardActions,
-} from '@mui/material';
+import { Box, Typography, Grid, Container } from '@mui/material';
 import CategoryCard from '@/components/Cards/CategoryCard';
 Container;
 import theme from '@/styles/theme';

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Container, Typography, Link, Box, Button } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import theme from '@/styles/theme';
 import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
 

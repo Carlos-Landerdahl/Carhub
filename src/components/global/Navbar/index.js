@@ -18,7 +18,6 @@ import Image from 'next/image';
 import Logo from '/public/img/logo.svg';
 import Link from 'next/link';
 import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
-import { ThemeProvider } from '@emotion/react';
 import theme from '@/styles/theme';
 
 const drawerWidth = 240;
