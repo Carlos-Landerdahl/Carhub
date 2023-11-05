@@ -2,76 +2,46 @@
 
 import { Box, Button, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
-import { useState } from 'react';
 import theme from '@/styles/theme';
-
-const validateEmail = (email) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-};
+import { useRouter } from 'next/navigation';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { Toast } from '@/components/shared/toasts/toastForm';
 
 export default function Register() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+  const router = useRouter();
+
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .required('O campo nome é obrigatório')
+      .min(3, 'O campo nome deve conter pelo menos 3 letras'),
+    lastName: Yup.string()
+      .required('O campo sobrenome é obrigatório')
+      .min(3, 'O campo sobrenome deve conter pelo menos 3 letras'),
+    email: Yup.string().email('Email inválido').required('O campo email é obrigatório'),
+    password: Yup.string().required('O campo senha é obrigatório'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'As senhas não coincidem')
+      .required('O campo confirme a senha é obrigatório'),
   });
 
-  const [formErrors, setFormErrors] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      Toast.fire({
+        icon: 'success',
+        title: 'Conta criada com sucesso',
+      });
+      router.push('/login');
+    },
   });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    switch (name) {
-      case 'firstName':
-        setFormErrors({
-          ...formErrors,
-          firstName: value.length >= 5 ? '' : 'Nome deve conter pelo menos 5 letras',
-        });
-        break;
-      case 'lastName':
-        setFormErrors({
-          ...formErrors,
-          lastName: value.length >= 3 ? '' : 'Sobrenome deve conter pelo menos 3 letras',
-        });
-        break;
-      case 'email':
-        setFormErrors({
-          ...formErrors,
-          email: validateEmail(value) ? '' : 'Email não é válido',
-        });
-        break;
-      case 'password':
-        setFormErrors({
-          ...formErrors,
-          password:
-            value.match(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/g) && value.length >= 3
-              ? ''
-              : 'Senha deve conter pelo menos 3 letras e um número',
-        });
-        break;
-      case 'confirmPassword':
-        setFormErrors({
-          ...formErrors,
-          confirmPassword: value === formData.password ? '' : 'As senhas não correspondem',
-        });
-        break;
-      default:
-        break;
-    }
-  };
 
   return (
     <Box
@@ -102,10 +72,10 @@ export default function Register() {
           variant="outlined"
           fullWidth
           sx={{ marginBottom: 2 }}
-          value={formData.firstName}
-          onChange={handleInputChange}
-          error={!!formErrors.firstName}
-          helperText={formErrors.firstName}
+          value={formik.values.firstName}
+          onChange={formik.handleChange}
+          error={formik.touched.firstName && !!formik.errors.firstName}
+          helperText={formik.touched.firstName && formik.errors.firstName}
         />
         <TextField
           name="lastName"
@@ -113,10 +83,10 @@ export default function Register() {
           variant="outlined"
           fullWidth
           sx={{ marginBottom: 2 }}
-          value={formData.lastName}
-          onChange={handleInputChange}
-          error={!!formErrors.lastName}
-          helperText={formErrors.lastName}
+          value={formik.values.lastName}
+          onChange={formik.handleChange}
+          error={formik.touched.lastName && !!formik.errors.lastName}
+          helperText={formik.touched.lastName && formik.errors.lastName}
         />
         <TextField
           name="email"
@@ -124,10 +94,10 @@ export default function Register() {
           variant="outlined"
           fullWidth
           sx={{ marginBottom: 2 }}
-          value={formData.email}
-          onChange={handleInputChange}
-          error={!!formErrors.email}
-          helperText={formErrors.email}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && !!formik.errors.email}
+          helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
           name="password"
@@ -136,10 +106,10 @@ export default function Register() {
           type="password"
           fullWidth
           sx={{ marginBottom: 2 }}
-          value={formData.password}
-          onChange={handleInputChange}
-          error={!!formErrors.password}
-          helperText={formErrors.password}
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && !!formik.errors.password}
+          helperText={formik.touched.password && formik.errors.password}
         />
         <TextField
           name="confirmPassword"
@@ -148,12 +118,12 @@ export default function Register() {
           type="password"
           fullWidth
           sx={{ marginBottom: 2 }}
-          value={formData.confirmPassword}
-          onChange={handleInputChange}
-          error={!!formErrors.confirmPassword}
-          helperText={formErrors.confirmPassword}
+          value={formik.values.confirmPassword}
+          onChange={formik.handleChange}
+          error={formik.touched.confirmPassword && !!formik.errors.confirmPassword}
+          helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
         />
-        <Button variant="contained" color="primary" fullWidth>
+        <Button variant="contained" color="primary" fullWidth onClick={formik.handleSubmit}>
           Criar conta
         </Button>
         <Typography sx={{ mt: 2, textAlign: 'center' }}>

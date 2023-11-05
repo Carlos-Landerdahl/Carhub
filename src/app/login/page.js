@@ -5,30 +5,38 @@ import Link from 'next/link';
 import { useState } from 'react';
 import './styles.css';
 import theme from '@/styles/theme';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { Toast } from '@/components/shared/toasts/toastForm';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const router = useRouter();
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-    validatePassword(event.target.value);
-  };
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Email inválido')
+      .min(3, 'O email deve ter pelo menos 3 caracteres')
+      .required('O campo email é obrigatório.'),
+    password: Yup.string()
+      .min(3, 'A senha deve ter pelo menos 3 caracteres')
+      .required('O campo senha é obrigatório.'),
+  });
 
-  const validatePassword = (value) => {
-    setPasswordError(value.length >= 3 ? '' : 'A senha deve ter pelo menos 3 caracteres');
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-    validateEmail(event.target.value);
-  };
-
-  const validateEmail = () => {
-    setEmailError(email.length >= 3 ? '' : 'O email deve ter pelo menos 3 caracteres');
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      Toast.fire({
+        icon: 'success',
+        title: 'Login feito com sucesso',
+      });
+      router.push('/');
+    },
+  });
 
   return (
     <Box
@@ -47,27 +55,28 @@ export default function Home() {
         </Typography>
         <TextField
           label="Email"
+          name="email"
           variant="outlined"
           fullWidth
           sx={{ marginBottom: 2 }}
-          value={email}
-          onChange={handleEmailChange}
-          onBlur={validateEmail}
-          error={!!emailError}
-          helperText={emailError}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && !!formik.errors.email}
+          helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
           label="Senha"
+          name="password"
           variant="outlined"
           type="password"
           fullWidth
           sx={{ marginBottom: 2 }}
-          value={password}
-          onChange={handlePasswordChange}
-          error={!!passwordError}
-          helperText={passwordError}
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && !!formik.errors.password}
+          helperText={formik.touched.password && formik.errors.password}
         />
-        <Button variant="contained" color="primary" fullWidth>
+        <Button variant="contained" color="primary" fullWidth onClick={formik.handleSubmit}>
           Entrar
         </Button>
         <Button
