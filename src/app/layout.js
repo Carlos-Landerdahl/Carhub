@@ -2,10 +2,7 @@ import { Box } from '@mui/material';
 import Footer from '@/components/global/Footer';
 import Navbar from '@/components/global/Navbar';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
-// const inter = Inter({ subsets: ['latin'] });
-
-
-
+import theme from '@/styles/theme';
 
 export const metadata = {
   title: 'Alugue seu carro - promoções ativas',

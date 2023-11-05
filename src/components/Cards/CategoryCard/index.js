@@ -2,19 +2,36 @@
 
 import React from 'react';
 import theme from '@/styles/theme';
-import { Box, Card, CardContent, Typography, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Grid, CardMedia, CardActionArea } from '@mui/material';
 
-function CategoryCard({image, brand, description, category, price }) {
+function CategoryCard({ image, description, category_name }) {
     return (
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Card>
-                <img src={image} alt={brand} style={{ width: '100%', objectFit: "contain", height: "100%" }} />
-                <CardContent>
-                    <Typography variant="h6" sx={{ color: "#000" }}>{brand}</Typography>
-                    <Typography variant="subtitle1">{category}</Typography>
-                    <Typography variant="body2">{price}</Typography>
-                    <Typography variant="body2">{description}</Typography>
-                </CardContent>
+        <Grid item  lg={3} md={6} sm={12} xs={12}>
+            <Card
+                sx={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 4px 0 rgb(0, 0, 0, 0.25)"
+                }}
+            >
+                <CardActionArea
+                >
+                    <CardMedia
+                        component="img"
+                        height={183}
+                        image={image}
+                        alt={category_name}
+                    />
+                    <CardContent>
+                        <Typography style={{ color: theme.palette.text.paragraph }} sx={theme.typography.paragraph}>
+                            {category_name}
+                        </Typography>
+                        <Typography sx={theme.typography.label}>
+                            {description}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
             </Card>
         </Grid>
     );

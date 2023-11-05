@@ -10,6 +10,7 @@ const theme = createTheme({
     text: {
       main: '#595959',
       text: '#fff',
+      paragraph: "#383B58"
     },
     background: {
       main: '#333333',
@@ -24,7 +25,7 @@ const theme = createTheme({
     heading: {
       fontSize: "1.5rem",
       fontStyle: "normal",
-      fontWeight: "700",
+      fontWeight: "bold",
       lineHeight: "normal"
     },
     paragraph: {

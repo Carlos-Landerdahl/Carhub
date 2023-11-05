@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from '@mui/material/styles';
-import { Box, Typography, Link } from '@mui/material';
+import { Typography, Link, Container, Box } from '@mui/material';
 import MainBody from '@/components/global/MainBody';
 import theme from '@/styles/theme';
 import ProductCard from '@/components/Cards/RecommendCard';
@@ -12,7 +12,6 @@ export default function Home() {
     <Box
       sx={{
         background: theme.palette.background.gradient,
-        height: '100vh',
         mt: '80px',
       }}
     >
