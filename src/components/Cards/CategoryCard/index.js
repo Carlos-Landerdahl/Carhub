@@ -6,7 +6,7 @@ import { Card, CardContent, Typography, Grid, CardMedia, CardActionArea } from '
 
 function CategoryCard({ image, description, category_name }) {
   return (
-    <Grid item lg={3} md={6} sm={12} xs={12}>
+    <Grid item lg={3} md={6} sm={6} xs={12}>
       <Card
         sx={{
           width: '100%',
