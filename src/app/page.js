@@ -1,11 +1,9 @@
 'use client';
 
-import { useTheme } from '@mui/material/styles';
-import { Typography, Link, Container, Box } from '@mui/material';
-import MainBody from '@/components/global/MainBody';
+import { Box } from '@mui/material';
 import theme from '@/styles/theme';
-import ProductCard from '@/components/Cards/RecommendCard';
 import SearchBlock from '@/components/shared/search/index.js';
+import MainBody from '@/components/global/mainBody';
 
 export default function Home() {
   return (

@@ -2,8 +2,6 @@
 
 import { Box, Button, Card, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
-import { useState } from 'react';
-import './styles.css';
 import theme from '@/styles/theme';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
