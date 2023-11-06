@@ -1,17 +1,10 @@
 'use client';
 
 import theme from '@/styles/theme';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  CardMedia,
-  CardActions,
-} from '@mui/material';
-function RecommendCard({ brand, description, category, image, model }) {
+import { Card, CardContent, Typography, Grid, CardMedia, CardActions } from '@mui/material';
+import Link from 'next/link';
+
+function RecommendCard({ id, brand, description, category, image, model }) {
   return (
     <Grid item lg={3} md={6} sm={6} xs={12}>
       <Card
@@ -35,7 +28,7 @@ function RecommendCard({ brand, description, category, image, model }) {
           <Typography sx={theme.typography.label}>{description}</Typography>
         </CardContent>
         <CardActions sx={theme.typography.button}>
-          <Button size="small">Saiba mais</Button>
+          <Link href={`/detail/${id}`}>Saiba mais</Link>
         </CardActions>
       </Card>
     </Grid>
