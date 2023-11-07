@@ -16,7 +16,7 @@ function MainBody() {
     <Container
       maxWidth="xl"
       sx={{
-        p: '23px 0 23px 0',
+        p: '23px 12px 23px 12px',
       }}
     >
       <Box
@@ -27,7 +27,7 @@ function MainBody() {
         }}
       >
         <Typography sx={theme.typography.heading} color={theme.palette.text.text}>
-          Buscar por tipos de automóveis
+          Buscar por categoria
         </Typography>
         <Grid container spacing={2}>
           {filterCategoryData.map((category) => (
