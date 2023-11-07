@@ -17,6 +17,7 @@ function MainBody() {
       maxWidth="xl"
       sx={{
         p: '23px 12px 23px 12px',
+        minHeight: "100vh"
       }}
     >
       <Box

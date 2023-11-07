@@ -2,8 +2,8 @@
 
 import React from 'react';
 import dataJson from '@/data.json';
-import { Box, Button, Container, Typography, Grid } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Box, Button, Container, Typography, Grid, Card, CardMedia, CardContent, ButtonBase, Paper } from '@mui/material';
+import {ArrowBackIos, CarRental} from '@mui/icons-material';
 import Link from 'next/link';
 import theme from '@/styles/theme';
 
@@ -20,21 +20,32 @@ export default function DetailCar({ params }) {
   }
 
   return (
-    <Box sx={{ background: theme.palette.background.gradient, height: '100vh' }}>
-      <Container
-        maxWidth="xl"
-        sx={{
-          p: '23px 0',
-          marginTop: '80px',
-        }}
+    <Box
+      component="div"
+      sx={{
+        background: theme.palette.background.gradient,
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
       >
-        <Box
+      <Container
+        maxWidth="lg"
+      >
+        <Typography
+          variant="h5"
           sx={{
-            width: '100%',
-            mb: 4,
-            height: '100%',
+            color: theme.palette.text.text,
+            fontWeight: 'bold',
+          }} gutterBottom>
+          Detalhes do Carro - {carDetails.brand} {carDetails.model}
+        </Typography>
+        <Paper
+          elevation={3}
+          sx={{
             background: theme.palette.background.light,
-            borderRadius: '10px',
+            borderRadius: '14px',
           }}
         >
           <Link
@@ -57,44 +68,52 @@ export default function DetailCar({ params }) {
                 fontWeight: 'bold',
               }}
             >
-              {carDetails.category}
+              Categoria: {carDetails.category}
             </Typography>
             <Button
-              startIcon={<ArrowBackIosIcon />}
+              startIcon={<ArrowBackIos/>}
               sx={{ color: theme.palette.background.button, fontWeight: 'bold' }}
             >
               Voltar
             </Button>
           </Link>
-          <Grid container spacing={2} alignItems="start">
-            <Grid item xs={12} md={6}>
-              <img
-                src={carDetails.image}
-                alt={carDetails.model}
-                style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                  borderBottomLeftRadius: '10px',
-                  borderBottomRightRadius: '10px',
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 2 }}>
-                {carDetails.brand} - {carDetails.model}
-              </Typography>
-              <Typography variant="body1">{carDetails.description}</Typography>
-            </Grid>
-          </Grid>
-          <Box
-            sx={{
+          <Card sx={{ display:"flex", borderRadius: "0"}}>
+            <CardMedia
+              component="img"
+              alt={`${carDetails.brand} ${carDetails.model}`}
+              height="auto"
+              image={carDetails.image}
+            />
+            <CardContent sx={{
               display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              mt: 4,
-            }}
-          ></Box>
-        </Box>
+              flexDirection: "column",
+              justifyContent: "space-between"
+            }}>
+              <Box component="div">
+                <Typography variant="h6" gutterBottom>
+                  Descrição
+                </Typography>
+                <Typography variant="body1">
+                  {carDetails.description}
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  Ano: {carDetails.year}
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  Preço por Dia:  R$ {carDetails.price_per_day.toFixed(2)}
+                </Typography>
+              </Box>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                startIcon={<CarRental/>} 
+                disabled={!carDetails.available}
+              >
+                {carDetails.available ? "Alugar Agora" : "Indisponível"}
+              </Button>
+            </CardContent>
+          </Card>
+        </Paper>
       </Container>
     </Box>
   );
