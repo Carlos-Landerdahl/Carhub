@@ -15,6 +15,7 @@ const theme = createTheme({
     background: {
       main: '#333333',
       secondary: '#595959',
+      light: '#E2E2E2',
       navbar: '#202125',
       button: '#5E8FCE',
       gradient: 'linear-gradient(90deg, #0a2239 0%, #4b6a90 100%)',
