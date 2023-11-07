@@ -19,8 +19,21 @@ export default function DetailCar({ params }) {
   }
 
   return (
-    <Container maxWidth="xl" sx={{ p: '23px 0', marginTop: '80px' }}>
-      <Box sx={{ width: '100%', mb: 4 }}>
+    <Container maxWidth="xl"
+      sx={{
+        p: '23px 0',
+        marginTop: '80px'
+      }}>
+      <Typography variant="h5">{carDetails.category}</Typography>
+      <Box sx={{
+        width: '100%', mb: 4
+      }}>
+        <Link href="/" passHref style={{
+          display: "flex",
+          justifyContent: "flex-end"
+        }}>
+          <Button startIcon={<ArrowBackIosIcon />}>Voltar</Button>
+        </Link>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} md={6}>
             <img
@@ -45,10 +58,6 @@ export default function DetailCar({ params }) {
             mt: 4,
           }}
         >
-          <Typography variant="h5">{carDetails.category}</Typography>
-          <Link href="/" passHref>
-            <Button startIcon={<ArrowBackIosIcon />}>Voltar</Button>
-          </Link>
         </Box>
       </Box>
     </Container>
