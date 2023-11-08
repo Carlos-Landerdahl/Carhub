@@ -5,7 +5,7 @@ export const metadata = {
   title: 'Alugue seu carro - promoções ativas',
   description: 'Faça o aluguel do seu carro - Dirija seus sonhos',
   icons: {
-    icon: ['/favicon.svg'],
+    icon: ['/favicon.ico'],
   },
 };
 
