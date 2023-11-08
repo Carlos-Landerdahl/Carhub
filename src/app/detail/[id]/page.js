@@ -24,20 +24,7 @@ import {
 } from '@mui/icons-material';
 import theme from '@/styles/theme';
 import dataJson from '@/data.json';
-
-const infoCardStyle = {
-  color: theme.palette.text.main,
-  background: theme.palette.background.lightBlue,
-  border: `1px solid ${theme.palette.background.button}`,
-  borderRadius: '8px',
-  p: '5px',
-  mt: '8px',
-  maxWidth: '150px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'start',
-  gap: '5px',
-};
+import { backLink, container, infoCardStyle, pricePerDay } from './styles';
 
 const InfoCard = ({ icon, children }) => (
   <Typography variant="body2" sx={infoCardStyle}>
@@ -46,8 +33,8 @@ const InfoCard = ({ icon, children }) => (
   </Typography>
 );
 
-export default function DetailCar({ params: { carId } }) {
-  const carDetails = dataJson.recommends.find((car) => car.id === parseInt(carId, 10));
+export default function DetailCar({ params: { id } }) {
+  const carDetails = dataJson.recommends.find((car) => car.id === parseInt(id, 10));
 
   if (!carDetails) {
     return (
@@ -58,16 +45,7 @@ export default function DetailCar({ params: { carId } }) {
   }
 
   return (
-    <Box
-      component="div"
-      sx={{
-        background: theme.palette.background.gradient,
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <Box component="div" sx={container}>
       <Container maxWidth="lg">
         <Paper
           elevation={3}
@@ -76,19 +54,7 @@ export default function DetailCar({ params: { carId } }) {
             borderRadius: '14px',
           }}
         >
-          <Link
-            href="/"
-            passHref
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              background: theme.palette.background.secondary,
-              borderTopLeftRadius: '10px',
-              borderTopRightRadius: '10px',
-              padding: 10,
-            }}
-          >
+          <Link href="/" passHref style={backLink}>
             <Typography
               variant="h5"
               sx={{
@@ -132,20 +98,7 @@ export default function DetailCar({ params: { carId } }) {
                   <InfoCard icon={<Speed />}>Quilometragem ilimitada</InfoCard>
                 </Box>
                 <Divider sx={{ background: theme.palette.background.secondary, opacity: '0.6' }} />
-                <Typography
-                  variant="body1"
-                  gutterBottom
-                  align="center"
-                  sx={{
-                    color: theme.palette.text.price,
-                    background: theme.palette.background.lightGreen,
-                    border: '1px solid #0a8526',
-                    borderRadius: '8px',
-                    p: '5px',
-                    mt: '8px',
-                    maxWidth: '200px',
-                  }}
-                >
+                <Typography variant="body1" gutterBottom align="center" sx={pricePerDay}>
                   Preço por Dia: <strong>R$ {carDetails.price_per_day.toFixed(2)}</strong>
                 </Typography>
               </Box>

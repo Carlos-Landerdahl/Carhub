@@ -1,14 +1,13 @@
 'use client';
 
 import { Box, Typography, Grid, Container } from '@mui/material';
-import CategoryCard from '@/components/Cards/CategoryCard';
 Container;
 import theme from '@/styles/theme';
 import dataJson from '@/data.json';
-import RecommendCard from '@/components/Cards/RecommendCard';
+import CategoryCard from '../cards/categoryCard';
+import RecommendCard from '../cards/recommendCard';
 
-function MainBody() {
-  // Filter categoryData
+function Content() {
   const filterCategoryData = dataJson.categories.map((category) => category);
   const filterRecommendData = dataJson.recommends.map((recommended) => recommended);
 
@@ -17,7 +16,7 @@ function MainBody() {
       maxWidth="xl"
       sx={{
         p: '23px 12px 23px 12px',
-        minHeight: "100vh"
+        minHeight: '100vh',
       }}
     >
       <Box
@@ -57,4 +56,4 @@ function MainBody() {
   );
 }
 
-export default MainBody;
+export default Content;

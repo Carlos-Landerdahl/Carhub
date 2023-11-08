@@ -5,7 +5,7 @@ import { Tune } from '@mui/icons-material';
 import './styles.css';
 import theme from '@/styles/theme';
 
-function SearchBlock() {
+function SearchFilter() {
   const [city, setCity] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -134,4 +134,4 @@ function SearchBlock() {
   );
 }
 
-export default SearchBlock;
+export default SearchFilter;
