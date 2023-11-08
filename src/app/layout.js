@@ -1,7 +1,5 @@
-import { Box } from '@mui/material';
-import Footer from '@/components/global/Footer';
-import Navbar from '@/components/global/Navbar';
-import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
+import Providers from '@/Providers/Providers';
+import { Layout } from '@/components/layout';
 
 export const metadata = {
   title: 'Alugue seu carro - promoções ativas',
@@ -15,13 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <body>
-        <ThemeRegistry>
-          <Box>
-            <Navbar />
-            {children}
-            <Footer />
-          </Box>
-        </ThemeRegistry>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );
