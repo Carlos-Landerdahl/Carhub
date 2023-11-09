@@ -66,12 +66,9 @@ export default function DetailCar({ params: { carId } }) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        
       }}
     >
-      <Container style={{
-        paddingBottom: '2%',
-      }} maxWidth="lg" sx={{paddingTop:{xs: '20%', sm:'15%', md:'10%'}}}>
+      <Container maxWidth="lg">
         <Paper
           elevation={3}
           sx={{
@@ -108,13 +105,11 @@ export default function DetailCar({ params: { carId } }) {
               Voltar
             </Button>
           </Link>
-          <Card sx={{ display: 'flex', borderRadius: '0', flexDirection: {xs:'column', sm: 'column', md: 'column', lg: 'row'}, }}>
+          <Card sx={{ display: 'flex', borderRadius: '0' }}>
             <CardMedia
               component="img"
               alt={`${carDetails.brand} ${carDetails.model}`}
-              maxheight="50vh"
-              maxWidth="50%"
-              objectFit="cover"
+              height="auto"
               image={carDetails.image}
             />
             <CardContent
@@ -129,11 +124,7 @@ export default function DetailCar({ params: { carId } }) {
                   Descrição - {carDetails.brand} {carDetails.model}
                 </Typography>
                 <Typography variant="body1">{carDetails.description}</Typography>
-                <Box sx={{ mb: '8px',
-                  display: 'grid',
-                  gridTemplateColumns: {xs: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(2, 1fr)'},
-                  columnGap: '10px',
-                }}>
+                <Box sx={{ mb: '8px' }}>
                   <InfoCard icon={<Beenhere />}>Ano: {carDetails.year}</InfoCard>
                   <InfoCard icon={<AirlineSeatReclineExtraIcon />}>2 lugares</InfoCard>
                   <InfoCard icon={<DirectionsCarIcon />}>Automático</InfoCard>
@@ -152,9 +143,7 @@ export default function DetailCar({ params: { carId } }) {
                     borderRadius: '8px',
                     p: '5px',
                     mt: '8px',
-                    margin: {xs: '10px 10px 10px 0'},
                     maxWidth: '200px',
-                    
                   }}
                 >
                   Preço por Dia: <strong>R$ {carDetails.price_per_day.toFixed(2)}</strong>

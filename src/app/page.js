@@ -2,8 +2,8 @@
 
 import { Box } from '@mui/material';
 import theme from '@/styles/theme';
-import SearchBlock from '@/components/shared/search/index.js';
-import MainBody from '@/components/global/mainBody';
+import SearchFilter from '@/components/shared/search/index.js';
+import Content from '@/components/pages/home/content';
 
 export default function Home() {
   return (
@@ -13,8 +13,8 @@ export default function Home() {
         mt: '80px',
       }}
     >
-      <SearchBlock />
-      <MainBody />
+      <SearchFilter />
+      <Content />
     </Box>
   );
 }
