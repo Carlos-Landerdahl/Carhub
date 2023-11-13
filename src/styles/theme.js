@@ -47,6 +47,15 @@ const theme = createTheme({
       opacity: '0.5',
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1100,
+      xl: 1536,
+    },
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -81,15 +90,6 @@ const theme = createTheme({
           },
         },
       },
-    },
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 900,
-      lg: 1100,
-      xl: 1536,
     },
   },
 });

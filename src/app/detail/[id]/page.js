@@ -24,6 +24,7 @@ import {
 } from '@mui/icons-material';
 import theme from '@/styles/theme';
 import dataJson from '@/data.json';
+import { Location } from '@/components/pages/detail/location';
 
 const infoCardStyle = {
   color: theme.palette.text.main,
@@ -57,126 +58,141 @@ export default function DetailCar({ params: { id } }) {
   }
 
   return (
-    <Box
-      component="div"
-      sx={{
-        background: theme.palette.background.gradient,
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-
-      }}
-    >
-      <Container
+    <>
+      <Location />
+      <Box
         component="div"
-        maxWidth="lg"
         sx={{
-          paddingTop: { xs: '20%', sm: '15%', md: '10%' },
-          paddingBottom: '2%',
+          background: theme.palette.background.gradient,
+          minHeight: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <Paper
-          elevation={3}
+        <Container
+          component="div"
+          maxWidth="lg"
           sx={{
-            background: theme.palette.background.light,
-            borderRadius: '14px',
+            paddingTop: '5%',
+            paddingBottom: '5%',
           }}
         >
-          <Link
-            href="/"
-            passHref
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              background: theme.palette.background.secondary,
-              borderTopLeftRadius: '10px',
-              borderTopRightRadius: '10px',
-              padding: 10,
+          <Paper
+            elevation={3}
+            sx={{
+              background: theme.palette.background.light,
+              borderRadius: '14px',
             }}
           >
-            <Typography
-              variant="h5"
-              sx={{
-                color: theme.palette.text.text,
-                fontWeight: 'bold',
+            <Link
+              href="/"
+              passHref
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: theme.palette.background.secondary,
+                borderTopLeftRadius: '10px',
+                borderTopRightRadius: '10px',
+                padding: 10,
               }}
             >
-              {carDetails.category}
-            </Typography>
-            <Button
-              startIcon={<ArrowBackIos />}
-              sx={{ color: theme.palette.background.button, fontWeight: 'bold' }}
-            >
-              Voltar
-            </Button>
-          </Link>
-          <Card sx={{ display: 'flex', borderRadius: '0', flexDirection: { xs: 'column', sm: 'column', md: 'column', lg: 'row' }, }}>
-            <CardMedia
-              component="img"
-              alt={`${carDetails.brand} ${carDetails.model}`}
-              maxheight="50vh"
-              maxWidth="50%"
-              objectFit="cover"
-              image={carDetails.image}
-            />
-            <CardContent
+              <Typography
+                variant="h5"
+                sx={{
+                  color: theme.palette.text.text,
+                  fontWeight: 'bold',
+                }}
+              >
+                {carDetails.category}
+              </Typography>
+              <Button
+                startIcon={<ArrowBackIos />}
+                sx={{ color: theme.palette.background.button, fontWeight: 'bold' }}
+              >
+                Voltar
+              </Button>
+            </Link>
+            <Card
               sx={{
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
+                borderRadius: '0',
+                height: { lg: '500px', md: '100%' },
+                flexDirection: { xs: 'column', sm: 'column', md: 'column', lg: 'row' },
               }}
             >
-              <Box component="div">
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
-                  {carDetails.brand} {carDetails.model}
-                </Typography>
-                <Typography variant="body1">{carDetails.description}</Typography>
-                <Box component="div" sx={{
-                  mb: '8px',
+              <CardMedia
+                component="img"
+                alt={`${carDetails.brand} ${carDetails.model}`}
+                image={carDetails.image}
+                sx={{
+                  maxWidth: { xl: '60%', lg: '50%', md: '100%' },
+                  objectFit: 'cover',
+                }}
+              />
+              <CardContent
+                sx={{
                   display: 'flex',
-                  flexWrap: "wrap",
-                  gap: "10px",
-                  width: "100%"
-                }}>
-                  <InfoCard icon={<Beenhere />}>Ano: {carDetails.year}</InfoCard>
-                  <InfoCard icon={<AirlineSeatReclineExtraIcon />}>2 lugares</InfoCard>
-                  <InfoCard icon={<DirectionsCarIcon />}>Automático</InfoCard>
-                  <InfoCard icon={<Luggage />}>mala pequena</InfoCard>
-                  <InfoCard icon={<Speed />}>Quilometragem ilimitada</InfoCard>
-                </Box>
-                <Divider sx={{ background: theme.palette.background.secondary, opacity: '0.6' }} />
-                <Typography
-                  variant="body1"
-                  gutterBottom
-                  align="center"
-                  sx={{
-                    color: theme.palette.text.price,
-                    background: theme.palette.background.lightGreen,
-                    border: '1px solid #0a8526',
-                    borderRadius: '8px',
-                    p: '5px',
-                    mt: '8px',
-                    margin: { xs: '10px 10px 10px 0' },
-                    maxWidth: '200px',
-                  }}
-                >
-                  Preço por Dia: <strong>R$ {carDetails.price_per_day.toFixed(2)}</strong>
-                </Typography>
-              </Box>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<CarRental />}
-                disabled={!carDetails.available}
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}
               >
-                {carDetails.available ? 'Alugar Agora' : 'Indisponível'}
-              </Button>
-            </CardContent>
-          </Card>
-        </Paper>
-      </Container>
-    </Box>
+                <Box component="div">
+                  <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+                    {carDetails.brand} {carDetails.model}
+                  </Typography>
+                  <Typography variant="body1">{carDetails.description}</Typography>
+                  <Box
+                    component="div"
+                    sx={{
+                      mb: '8px',
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '10px',
+                      width: '100%',
+                    }}
+                  >
+                    <InfoCard icon={<Beenhere />}>Ano: {carDetails.year}</InfoCard>
+                    <InfoCard icon={<AirlineSeatReclineExtraIcon />}>2 lugares</InfoCard>
+                    <InfoCard icon={<DirectionsCarIcon />}>Automático</InfoCard>
+                    <InfoCard icon={<Luggage />}>mala pequena</InfoCard>
+                    <InfoCard icon={<Speed />}>Quilometragem ilimitada</InfoCard>
+                  </Box>
+                  <Divider
+                    sx={{ background: theme.palette.background.secondary, opacity: '0.6' }}
+                  />
+                  <Typography
+                    variant="body1"
+                    gutterBottom
+                    align="center"
+                    sx={{
+                      color: theme.palette.text.price,
+                      background: theme.palette.background.lightGreen,
+                      border: '1px solid #0a8526',
+                      borderRadius: '8px',
+                      p: '5px',
+                      mt: '8px',
+                      margin: { xs: '10px 10px 10px 0' },
+                      maxWidth: '200px',
+                    }}
+                  >
+                    Preço por Dia: <strong>R$ {carDetails.price_per_day.toFixed(2)}</strong>
+                  </Typography>
+                </Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<CarRental />}
+                  disabled={!carDetails.available}
+                >
+                  {carDetails.available ? 'Alugar Agora' : 'Indisponível'}
+                </Button>
+              </CardContent>
+            </Card>
+          </Paper>
+        </Container>
+      </Box>
+    </>
   );
 }
