@@ -32,7 +32,6 @@ const infoCardStyle = {
   borderRadius: '8px',
   p: '5px',
   mt: '8px',
-  maxWidth: '150px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'start',
@@ -46,8 +45,8 @@ const InfoCard = ({ icon, children }) => (
   </Typography>
 );
 
-export default function DetailCar({ params: { carId } }) {
-  const carDetails = dataJson.recommends.find((car) => car.id === parseInt(carId, 10));
+export default function DetailCar({ params: { id } }) {
+  const carDetails = dataJson.recommends.find((car) => car.id === parseInt(id, 10));
 
   if (!carDetails) {
     return (
@@ -66,9 +65,17 @@ export default function DetailCar({ params: { carId } }) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+
       }}
     >
-      <Container maxWidth="lg">
+      <Container
+        component="div"
+        maxWidth="lg"
+        sx={{
+          paddingTop: { xs: '20%', sm: '15%', md: '10%' },
+          paddingBottom: '2%',
+        }}
+      >
         <Paper
           elevation={3}
           sx={{
@@ -96,7 +103,7 @@ export default function DetailCar({ params: { carId } }) {
                 fontWeight: 'bold',
               }}
             >
-              Categoria: {carDetails.category}
+              {carDetails.category}
             </Typography>
             <Button
               startIcon={<ArrowBackIos />}
@@ -105,11 +112,13 @@ export default function DetailCar({ params: { carId } }) {
               Voltar
             </Button>
           </Link>
-          <Card sx={{ display: 'flex', borderRadius: '0' }}>
+          <Card sx={{ display: 'flex', borderRadius: '0', flexDirection: { xs: 'column', sm: 'column', md: 'column', lg: 'row' }, }}>
             <CardMedia
               component="img"
               alt={`${carDetails.brand} ${carDetails.model}`}
-              height="auto"
+              maxheight="50vh"
+              maxWidth="50%"
+              objectFit="cover"
               image={carDetails.image}
             />
             <CardContent
@@ -121,10 +130,16 @@ export default function DetailCar({ params: { carId } }) {
             >
               <Box component="div">
                 <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
-                  Descrição - {carDetails.brand} {carDetails.model}
+                  {carDetails.brand} {carDetails.model}
                 </Typography>
                 <Typography variant="body1">{carDetails.description}</Typography>
-                <Box sx={{ mb: '8px' }}>
+                <Box component="div" sx={{
+                  mb: '8px',
+                  display: 'flex',
+                  flexWrap: "wrap",
+                  gap: "10px",
+                  width: "100%"
+                }}>
                   <InfoCard icon={<Beenhere />}>Ano: {carDetails.year}</InfoCard>
                   <InfoCard icon={<AirlineSeatReclineExtraIcon />}>2 lugares</InfoCard>
                   <InfoCard icon={<DirectionsCarIcon />}>Automático</InfoCard>
@@ -143,6 +158,7 @@ export default function DetailCar({ params: { carId } }) {
                     borderRadius: '8px',
                     p: '5px',
                     mt: '8px',
+                    margin: { xs: '10px 10px 10px 0' },
                     maxWidth: '200px',
                   }}
                 >
