@@ -11,10 +11,14 @@ const theme = createTheme({
       main: '#595959',
       text: '#fff',
       paragraph: '#383B58',
+      price: '#068323',
     },
     background: {
       main: '#333333',
       secondary: '#595959',
+      light: '#E2E2E2',
+      lightGreen: '#e9ffef',
+      lightBlue: '#E8F3FF',
       navbar: '#202125',
       button: '#5E8FCE',
       gradient: 'linear-gradient(90deg, #0a2239 0%, #4b6a90 100%)',
@@ -41,6 +45,15 @@ const theme = createTheme({
       fontWeight: '700',
       lineHeight: 'normal',
       opacity: '0.5',
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1100,
+      xl: 1536,
     },
   },
   components: {
