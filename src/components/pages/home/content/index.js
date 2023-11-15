@@ -6,10 +6,38 @@ import theme from '@/styles/theme';
 import dataJson from '@/data.json';
 import CategoryCard from '../cards/categoryCard';
 import RecommendCard from '../cards/recommendCard';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import styles from './styles.css';
 
 function Content() {
   const filterCategoryData = dataJson.categories.map((category) => category);
   const filterRecommendData = dataJson.recommends.map((recommended) => recommended);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <Container
@@ -21,19 +49,18 @@ function Content() {
     >
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '9px',
+          display: 'block',
+          padding: '18px',
         }}
       >
         <Typography sx={theme.typography.heading} color={theme.palette.text.text}>
           Buscar por categoria
         </Typography>
-        <Grid container spacing={2}>
+        <Slider {...settings} className="slickTrackCustom">
           {filterCategoryData.map((category) => (
             <CategoryCard key={category.category_name} {...category} />
           ))}
-        </Grid>
+        </Slider>
       </Box>
       <Box
         sx={{

@@ -1,0 +1,9 @@
+.slick-track {
+  display: flex;
+  gap: 10px;
+}
+
+.slick-dots li button:before {
+  font-size: 9px;
+  color: #1f2022 !important;
+}
