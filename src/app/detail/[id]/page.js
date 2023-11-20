@@ -183,7 +183,7 @@ export default function DetailCar({ params: { id } }) {
                   </Typography>
                   <RentalPolicy />
                 </Box>
-                <RentButton carDetails={carDetails}/>
+                <RentButton carDetails={carDetails} />
                 {/* <Button
                   variant="contained"
                   color="primary"

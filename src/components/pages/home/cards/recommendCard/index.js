@@ -30,7 +30,7 @@ function RecommendCard({ id, brand, description, category, image, model }) {
           </Typography>
           <Typography sx={theme.typography.label}>{description}</Typography>
         </CardContent>
-        <CardActions sx={{ m: '5px'}}>
+        <CardActions sx={{ m: '5px' }}>
           <Link href={`/detail/${id}`} passHref>
             <Button
               sx={{
