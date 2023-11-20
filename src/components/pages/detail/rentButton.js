@@ -3,19 +3,32 @@
 import React from 'react';
 import { CarRental } from '@mui/icons-material';
 import { Button, Box, Typography } from '@mui/material';
-import { BasePopup, PopupBody } from '@/components/base/popup';
-// import { Unstable_Popup as Popup } from '@mui/base/Unstable_Popup';
+import { DateRangeCalendar } from '@mui/lab';
+import AdapterDayjs from '@mui/lab/AdapterDayjs';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import Popper from '@mui/material/Popper';
+
 
 export default function RentButton({ carDetails }) {
     
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    // const [open, setOpen] = React.useState(false);
+    // const handleOpen = () => setOpen(true);
+    // const handleClose = () => setOpen(false);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popper' : undefined;
+
 
     return (
-        <Box>
+        <div>
             <Button
-                onClick={open}
+                onClick={handleClick}
                 variant="contained"
                 color="primary"
                 startIcon={<CarRental />}
@@ -29,10 +42,14 @@ export default function RentButton({ carDetails }) {
                 >
                 {carDetails.available ? 'Alugar Agora' : 'Indisponível'}
             </Button>
+                
+            <Popper id={id} open={open} anchorEl={anchorEl}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DateRangeCalendar />
+                    </LocalizationProvider>  
+            </Popper>
+        </div>
 
-            <BasePopup id={id} open={open} anchor={anchor}>
-                <PopupBody>The content of the Popup.</PopupBody>
-            </BasePopup>
-        </Box>
+        
     );
 }

@@ -84,11 +84,11 @@ export default function RentalPolicy() {
                     }}>
                         <AddCardOutlinedIcon sx={{mr: '3px' }} />
                         <Typography sx={{width:'30%', fontWeight: 'bold', fontSize: '12px'}}>
-                        Depósito caução - € 2.700,00
+                        Depósito caução - R$2.700,00
                         </Typography>
                         <Typography sx={{fontSize:'10px', width:'50%'}}>
                         Na retirada, o condutor principal deverá deixar um depósito caução reembolsável <br/>
-                        de € 2.700,00 em seu cartão de crédito. <br/>
+                        de R$2.700,00 em seu cartão de crédito. <br/>
                         Cartões de débito e dinheiro não são aceitos. A equipe do balcão irá confirmar o valor.
 
                         </Typography>
@@ -109,7 +109,7 @@ export default function RentalPolicy() {
                         </Typography>
                         <Typography sx={{fontSize:'10px', width:'50%'}}>
                         Se a carroceria do carro for danificada, o máximo que você pagará pelos reparos<br/>
-                        cobertos pela Isenção de Danos por Colisão é a Franquia de danos (€ 2.500,00).<br/>
+                        cobertos pela Isenção de Danos por Colisão é a Franquia de danos (R$2.500,00).<br/>
                         Essa cobertura só é válida se você cumprir os termos do acordo de locação. <br/>
                         Ela não cobre outras partes do carro (por exemplo, janelas, rodas, interior ou chassi)<br/>
                         ou outras taxas (por exemplo, de reboque ou indisponibilidade), ou qualquer coisa no carro<br/> 
