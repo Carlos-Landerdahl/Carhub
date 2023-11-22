@@ -84,114 +84,116 @@ export default function RentalPolicy() {
               },
             }}
           >
-          <Box
-            sx={{
-              mt: '5px',
-              border: '1px solid',
-              borderColor: 'black',
-              borderRadius: '12px',
-              padding: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              justifyContent: 'center',
-              gap: '5px',
-            }}
-          >
-            <Typography
-              sx={{ fontWeight: 'bold', fontSize: '12px', display: 'flex', alignItems: 'end' }}
+            <Box
+              sx={{
+                mt: '5px',
+                border: '1px solid',
+                borderColor: 'black',
+                borderRadius: '12px',
+                padding: '10px',
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                justifyContent: 'center',
+                gap: '5px',
+              }}
             >
-              <Man4OutlinedIcon /> Condutores
-            </Typography>
-            <Typography sx={{ fontSize: '10px' }}>
-              Ao retirar o carro, você precisará apresentar:
-              <br />
-              - Passaporte ou documento nacional de identidade;
-              <br />
-              - Carteira de habilitação;
-              <br />- Cartão de crédito;
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              mt: '2px',
-              border: '1px solid',
-              borderColor: 'black',
-              borderRadius: '12px',
-              padding: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              gap: '5px',
-            }}
-          >
-            <Typography
-              sx={{ fontWeight: 'bold', fontSize: '12px', display: 'flex', alignItems: 'end' }}
+              <Typography
+                sx={{ fontWeight: 'bold', fontSize: '12px', display: 'flex', alignItems: 'end' }}
+              >
+                <Man4OutlinedIcon /> Condutores
+              </Typography>
+              <Typography sx={{ fontSize: '10px' }}>
+                Ao retirar o carro, você precisará apresentar:
+                <br />
+                - Passaporte ou documento nacional de identidade;
+                <br />
+                - Carteira de habilitação;
+                <br />- Cartão de crédito;
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                mt: '2px',
+                border: '1px solid',
+                borderColor: 'black',
+                borderRadius: '12px',
+                padding: '10px',
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                gap: '5px',
+              }}
             >
-              <AddCardOutlinedIcon sx={{ mr: '5px' }} /> Caução
-            </Typography>
-            <Typography sx={{ fontSize: '10px' }}>
-              Na retirada, o condutor principal deverá deixar um depósito caução reembolsável <br />
-              de R$2.700,00 em seu cartão de crédito. <br />
-              Cartões de débito e dinheiro não são aceitos. A equipe do balcão irá confirmar o
-              valor.
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              mt: '2px',
-              border: '1px solid',
-              borderColor: 'black',
-              borderRadius: '12px',
-              padding: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              gap: '5px',
-            }}
-          >
-            <Typography
-              sx={{ fontWeight: 'bold', fontSize: '12px', display: 'flex', alignItems: 'end' }}
+              <Typography
+                sx={{ fontWeight: 'bold', fontSize: '12px', display: 'flex', alignItems: 'end' }}
+              >
+                <AddCardOutlinedIcon sx={{ mr: '5px' }} /> Caução
+              </Typography>
+              <Typography sx={{ fontSize: '10px' }}>
+                Na retirada, o condutor principal deverá deixar um depósito caução reembolsável{' '}
+                <br />
+                de R$2.700,00 em seu cartão de crédito. <br />
+                Cartões de débito e dinheiro não são aceitos. A equipe do balcão irá confirmar o
+                valor.
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                mt: '2px',
+                border: '1px solid',
+                borderColor: 'black',
+                borderRadius: '12px',
+                padding: '10px',
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                gap: '5px',
+              }}
             >
-              <CarCrashOutlinedIcon sx={{ mr: '5px' }} /> Franquia
-            </Typography>
-            <Typography sx={{ fontSize: '10px' }}>
-              Se a carroceria do carro for danificada, o máximo que você pagará pelos reparos
-              <br />
-              cobertos pela Isenção de Danos por Colisão é a Franquia de danos (R$2.500,00).
-              <br />
-              Essa cobertura só é válida se você cumprir os termos do acordo de locação. <br />
-              Ela não cobre outras partes do carro (por exemplo, janelas, rodas, interior ou chassi)
-              <br />
-              ou outras taxas (por exemplo, de reboque ou indisponibilidade), ou qualquer coisa no
-              carro
-              <br />
-              (por exemplo, cadeirinha infantil, GPS ou pertences pessoais).
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              mt: '2px',
-              border: '1px solid',
-              borderColor: 'black',
-              borderRadius: '12px',
-              padding: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              gap: '5px',
-            }}
-          >
-            <Typography
-              sx={{ fontWeight: 'bold', fontSize: '12px', display: 'flex', alignItems: 'end' }}
+              <Typography
+                sx={{ fontWeight: 'bold', fontSize: '12px', display: 'flex', alignItems: 'end' }}
+              >
+                <CarCrashOutlinedIcon sx={{ mr: '5px' }} /> Franquia
+              </Typography>
+              <Typography sx={{ fontSize: '10px' }}>
+                Se a carroceria do carro for danificada, o máximo que você pagará pelos reparos
+                <br />
+                cobertos pela Isenção de Danos por Colisão é a Franquia de danos (R$2.500,00).
+                <br />
+                Essa cobertura só é válida se você cumprir os termos do acordo de locação. <br />
+                Ela não cobre outras partes do carro (por exemplo, janelas, rodas, interior ou
+                chassi)
+                <br />
+                ou outras taxas (por exemplo, de reboque ou indisponibilidade), ou qualquer coisa no
+                carro
+                <br />
+                (por exemplo, cadeirinha infantil, GPS ou pertences pessoais).
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                mt: '2px',
+                border: '1px solid',
+                borderColor: 'black',
+                borderRadius: '12px',
+                padding: '10px',
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                gap: '5px',
+              }}
             >
-              <RouteOutlinedIcon sx={{ mr: '5px' }} /> Distância
-            </Typography>
-            <Typography sx={{ fontSize: '10px' }}>
-              Seu aluguel inclui quilômetro grátis livres.
-            </Typography>
+              <Typography
+                sx={{ fontWeight: 'bold', fontSize: '12px', display: 'flex', alignItems: 'end' }}
+              >
+                <RouteOutlinedIcon sx={{ mr: '5px' }} /> Distância
+              </Typography>
+              <Typography sx={{ fontSize: '10px' }}>
+                Seu aluguel inclui quilômetro grátis livres.
+              </Typography>
+            </Box>
           </Box>
-        </Box>
         </Box>
       </Modal>
     </div>
