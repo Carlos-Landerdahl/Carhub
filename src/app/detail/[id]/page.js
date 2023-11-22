@@ -26,7 +26,6 @@ import theme from '@/styles/theme';
 import dataJson from '@/data.json';
 import { Location } from '@/components/pages/detail/location';
 import RentalPolicy from '@/components/pages/detail/policy';
-import RentButton from '@/components/pages/detail/rentButton';
 
 const infoCardStyle = {
   color: theme.palette.text.main,
@@ -183,15 +182,14 @@ export default function DetailCar({ params: { id } }) {
                   </Typography>
                   <RentalPolicy />
                 </Box>
-                <RentButton carDetails={carDetails} />
-                {/* <Button
+                <Button
                   variant="contained"
                   color="primary"
                   startIcon={<CarRental />}
                   disabled={!carDetails.available}
                 >
                   {carDetails.available ? 'Alugar Agora' : 'Indisponível'}
-                </Button> */}
+                </Button>
               </CardContent>
             </Card>
           </Paper>

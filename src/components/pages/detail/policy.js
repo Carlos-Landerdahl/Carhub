@@ -53,7 +53,7 @@ export default function RentalPolicy() {
             overflow: 'auto',
           }}
         >
-          <box>
+          <Box>
             <Typography variant="h1" component="h1" sx={{ fontSize: '24px', textAlign: 'center' }}>
               Políticas de uso
             </Typography>
@@ -61,8 +61,29 @@ export default function RentalPolicy() {
               onClick={handleClose}
               sx={{ position: 'absolute', right: '10px', top: '10px', cursor: 'pointer' }}
             />
-          </box>
-
+          </Box>
+          <Box
+            sx={{
+              width: '100%',
+              maxHeight: '100%',
+              overflowY: 'auto',
+              '&::-webkit-scrollbar': {
+                width: '5px',
+              },
+              padding: '10px',
+              '&::-webkit-scrollbar-track': {
+                background: '#f0f0f0',
+                borderRadius: '10px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                backgroundColor: '#a0a0a0',
+                borderRadius: '10px',
+                '&:hover': {
+                  backgroundColor: '#909090',
+                },
+              },
+            }}
+          >
           <Box
             sx={{
               mt: '5px',
@@ -170,6 +191,7 @@ export default function RentalPolicy() {
               Seu aluguel inclui quilômetro grátis livres.
             </Typography>
           </Box>
+        </Box>
         </Box>
       </Modal>
     </div>
