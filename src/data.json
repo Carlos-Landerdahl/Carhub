@@ -1,7 +1,7 @@
 {
   "categories": [
     {
-      "category_name": "Carros Esportivos",
+      "category_name": "Esportivos",
       "image": "https://cdn.motor1.com/images/mgl/ZnKvO2/s1/2023-porsche-911-carrera-t-in-gulf-blue.webp",
       "description": "Os supercarros esportivos mais incrívels para entusiastas de alta velocidade.",
       "cars": [
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "category_name": "Carros Sedan",
+      "category_name": "Sedan",
       "image": "https://pictures.dealer.com/b/bryanhonda/0987/59dd9179311d4f1203be0b20cb4dbe4ex.jpg",
       "description": "Um sedan confortável e econômico para viagens em família.",
       "cars": [
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "category_name": "Carros Utilitários",
+      "category_name": "Utilitários",
       "image": "https://www.cnet.com/a/img/resize/66bfcd0063aa957ff51f41ee65ad596973e58045/hub/2022/04/18/41ef8b2c-5eaa-4208-abe3-37a492de43c5/ogi1-2022-ford-explorer-timberline-001.jpg?auto=webp&fit=crop&height=675&width=1200",
       "description": "Os Utilitários mais robusto para viagens e aventuras em qualquer ambiente.",
       "cars": [
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "category_name": "Carros Híbridos",
+      "category_name": "Híbridos",
       "image": "https://t.ctcdn.com.br/vLSd5WV6Ge6llJ-lmK1W6Wbs-6M=/640x360/smart/i648473.jpeg",
       "description": "Carros híbridos, econômicos e ecológicos com baixos consumos de combustível.",
       "cars": [

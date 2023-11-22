@@ -13,6 +13,9 @@ function RecommendCard({ id, brand, description, category, image, model }) {
           height: '100%',
           borderRadius: '10px',
           boxShadow: '0 4px 4px 0 rgb(0, 0, 0, 0.25)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
         }}
       >
         <CardMedia component="img" alt={brand} height="231" image={image} />

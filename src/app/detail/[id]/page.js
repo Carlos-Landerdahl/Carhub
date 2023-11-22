@@ -25,6 +25,7 @@ import {
 import theme from '@/styles/theme';
 import dataJson from '@/data.json';
 import { Location } from '@/components/pages/detail/location';
+import RentalPolicy from '@/components/pages/detail/policy';
 
 const infoCardStyle = {
   color: theme.palette.text.main,
@@ -156,7 +157,7 @@ export default function DetailCar({ params: { id } }) {
                     <InfoCard icon={<Beenhere />}>Ano: {carDetails.year}</InfoCard>
                     <InfoCard icon={<AirlineSeatReclineExtraIcon />}>2 lugares</InfoCard>
                     <InfoCard icon={<DirectionsCarIcon />}>Automático</InfoCard>
-                    <InfoCard icon={<Luggage />}>mala pequena</InfoCard>
+                    <InfoCard icon={<Luggage />}>Mala pequena</InfoCard>
                     <InfoCard icon={<Speed />}>Quilometragem ilimitada</InfoCard>
                   </Box>
                   <Divider
@@ -179,6 +180,7 @@ export default function DetailCar({ params: { id } }) {
                   >
                     Preço por Dia: <strong>R$ {carDetails.price_per_day.toFixed(2)}</strong>
                   </Typography>
+                  <RentalPolicy />
                 </Box>
                 <Button
                   variant="contained"
