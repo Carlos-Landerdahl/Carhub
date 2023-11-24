@@ -10,34 +10,45 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import styles from './styles.css';
+import { fetchCategories } from '../../../../services/api';
+import { useEffect, useState } from 'react';
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
 
 function Content() {
-  const filterCategoryData = dataJson.categories.map((category) => category);
+  const [categories, setCategories] = useState([]);
   const filterRecommendData = dataJson.recommends.map((recommended) => recommended);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  useEffect(() => {
+    const loadCategories = async () => {
+      const categoryData = await fetchCategories();
+      setCategories(categoryData);
+    };
+
+    loadCategories();
+  }, []);
 
   return (
     <Container
@@ -57,8 +68,13 @@ function Content() {
           Buscar por categoria
         </Typography>
         <Slider {...settings} className="slickTrackCustom">
-          {filterCategoryData.map((category) => (
-            <CategoryCard key={category.category_name} {...category} />
+          {categories.map((category) => (
+            <CategoryCard
+              key={category.id}
+              name={category.name}
+              imageUrl={category.imageUrl}
+              description={category.description}
+            />
           ))}
         </Slider>
       </Box>

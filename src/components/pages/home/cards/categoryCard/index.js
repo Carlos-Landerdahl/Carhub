@@ -2,9 +2,9 @@
 
 import React from 'react';
 import theme from '@/styles/theme';
-import { Card, CardContent, Typography, Grid, CardMedia, CardActionArea, Box } from '@mui/material';
+import { Card, CardContent, Typography, CardMedia, CardActionArea, Box } from '@mui/material';
 
-function CategoryCard({ image, description, category_name }) {
+function CategoryCard({ imageUrl, description, name }) {
   return (
     <Card
       sx={{
@@ -16,7 +16,7 @@ function CategoryCard({ image, description, category_name }) {
       }}
     >
       <CardActionArea>
-        <CardMedia component="img" height={183} image={image} alt={category_name} />
+        <CardMedia component="img" height={183} image={imageUrl} alt={name} />
         <CardContent
           sx={{
             height: '100vh',
@@ -30,7 +30,7 @@ function CategoryCard({ image, description, category_name }) {
             style={{ color: theme.palette.text.paragraph }}
             sx={theme.typography.paragraph}
           >
-            {category_name}
+            {name}
           </Typography>
           <Typography sx={theme.typography.label}>{description}</Typography>
         </CardContent>
