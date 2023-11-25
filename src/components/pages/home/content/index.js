@@ -42,7 +42,7 @@ function Content() {
   const [recommendedCars, setRecommendedCars] = useState([]);
   const [activeCategory, setActiveCategory] = useState(null);
   const filteredRecommendedCars = activeCategory
-    ? recommendedCars.filter((car) => car.categoryId === activeCategory)
+    ? recommendedCars.filter((car) => car.category.id === activeCategory)
     : recommendedCars;
 
   useEffect(() => {
@@ -84,7 +84,9 @@ function Content() {
               name={category.name}
               imageUrl={category.imageUrl}
               description={category.description}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => {
+                setActiveCategory(category.id);
+              }}
             />
           ))}
         </Slider>

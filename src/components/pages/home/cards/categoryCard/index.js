@@ -4,7 +4,7 @@ import React from 'react';
 import theme from '@/styles/theme';
 import { Card, CardContent, Typography, CardMedia, CardActionArea, Box } from '@mui/material';
 
-function CategoryCard({ imageUrl, description, name }) {
+function CategoryCard({ imageUrl, description, name, onClick }) {
   return (
     <Card
       sx={{
@@ -15,7 +15,7 @@ function CategoryCard({ imageUrl, description, name }) {
         mt: '16px',
       }}
     >
-      <CardActionArea>
+      <CardActionArea onClick={onClick}>
         <CardMedia component="img" height={183} image={imageUrl} alt={name} />
         <CardContent
           sx={{
