@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import styles from './styles.css';
-import { fetchCategories } from '../../../../services/api';
+import { fetchCategories, fetchRecommendedCars } from '../../../../services/api';
 import { useEffect, useState } from 'react';
 
 const settings = {
@@ -39,15 +39,25 @@ const settings = {
 
 function Content() {
   const [categories, setCategories] = useState([]);
-  const filterRecommendData = dataJson.recommends.map((recommended) => recommended);
+  const [recommendedCars, setRecommendedCars] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const filteredRecommendedCars = activeCategory
+    ? recommendedCars.filter((car) => car.categoryId === activeCategory)
+    : recommendedCars;
 
   useEffect(() => {
+    const loadRecommendedCars = async () => {
+      const carsData = await fetchRecommendedCars();
+      setRecommendedCars(carsData);
+    };
+
     const loadCategories = async () => {
       const categoryData = await fetchCategories();
       setCategories(categoryData);
     };
 
     loadCategories();
+    loadRecommendedCars();
   }, []);
 
   return (
@@ -74,6 +84,7 @@ function Content() {
               name={category.name}
               imageUrl={category.imageUrl}
               description={category.description}
+              onClick={() => setActiveCategory(category.id)}
             />
           ))}
         </Slider>
@@ -90,8 +101,8 @@ function Content() {
           Recomendações
         </Typography>
         <Grid container spacing={2}>
-          {filterRecommendData.map((recommended) => (
-            <RecommendCard key={recommended.id} {...recommended} />
+          {filteredRecommendedCars.map((car) => (
+            <RecommendCard key={car.id} {...car} />
           ))}
         </Grid>
       </Box>

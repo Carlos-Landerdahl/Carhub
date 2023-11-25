@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Box,
@@ -23,9 +23,9 @@ import {
   DirectionsCar as DirectionsCarIcon,
 } from '@mui/icons-material';
 import theme from '@/styles/theme';
-import dataJson from '@/data.json';
 import { Location } from '@/components/pages/detail/location';
 import RentalPolicy from '@/components/pages/detail/policy';
+import { fetchCarDetails } from '@/services/api';
 
 const infoCardStyle = {
   color: theme.palette.text.main,
@@ -48,14 +48,31 @@ const InfoCard = ({ icon, children }) => (
 );
 
 export default function DetailCar({ params: { id } }) {
-  const carDetails = dataJson.recommends.find((car) => car.id === parseInt(id, 10));
+  const [carDetails, setCarDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!carDetails) {
-    return (
-      <Typography sx={{ height: '100vh', marginTop: '80px', color: 'black' }}>
-        Carro não encontrado.
-      </Typography>
-    );
+  useEffect(() => {
+    const loadCarDetails = async () => {
+      try {
+        const details = await fetchCarDetails(id);
+        setCarDetails(details);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    loadCarDetails();
+  }, [id]);
+
+  if (loading) {
+    return <Typography>Carregando...</Typography>;
+  }
+
+  if (error || !carDetails) {
+    return <Typography>Carro não encontrado.</Typography>;
   }
 
   return (
@@ -106,7 +123,7 @@ export default function DetailCar({ params: { id } }) {
                   fontWeight: 'bold',
                 }}
               >
-                {carDetails.category}
+                {carDetails.category.name}
               </Typography>
               <Button
                 startIcon={<ArrowBackIos />}
@@ -126,7 +143,7 @@ export default function DetailCar({ params: { id } }) {
               <CardMedia
                 component="img"
                 alt={`${carDetails.brand} ${carDetails.model}`}
-                image={carDetails.image}
+                image={carDetails.imageUrl}
                 sx={{
                   maxWidth: { xl: '60%', lg: '50%', md: '100%' },
                   objectFit: 'cover',
@@ -154,10 +171,12 @@ export default function DetailCar({ params: { id } }) {
                       width: '100%',
                     }}
                   >
-                    <InfoCard icon={<Beenhere />}>Ano: {carDetails.year}</InfoCard>
-                    <InfoCard icon={<AirlineSeatReclineExtraIcon />}>2 lugares</InfoCard>
+                    <InfoCard icon={<Beenhere />}>Ano: {carDetails.carYear}</InfoCard>
+                    <InfoCard icon={<AirlineSeatReclineExtraIcon />}>
+                      {carDetails.characteristic[0].seats}
+                    </InfoCard>
                     <InfoCard icon={<DirectionsCarIcon />}>Automático</InfoCard>
-                    <InfoCard icon={<Luggage />}>Mala pequena</InfoCard>
+                    <InfoCard icon={<Luggage />}>{carDetails.characteristic[0].trunk}</InfoCard>
                     <InfoCard icon={<Speed />}>Quilometragem ilimitada</InfoCard>
                   </Box>
                   <Divider
@@ -178,7 +197,7 @@ export default function DetailCar({ params: { id } }) {
                       maxWidth: '200px',
                     }}
                   >
-                    Preço por Dia: <strong>R$ {carDetails.price_per_day.toFixed(2)}</strong>
+                    Preço por Dia: <strong>R$ {carDetails.pricePerDay}</strong>
                   </Typography>
                   <RentalPolicy />
                 </Box>
@@ -186,9 +205,9 @@ export default function DetailCar({ params: { id } }) {
                   variant="contained"
                   color="primary"
                   startIcon={<CarRental />}
-                  disabled={!carDetails.available}
+                  disabled={!carDetails.isAvailable}
                 >
-                  {carDetails.available ? 'Alugar Agora' : 'Indisponível'}
+                  {carDetails.isAvailable ? 'Alugar Agora' : 'Indisponível'}
                 </Button>
               </CardContent>
             </Card>

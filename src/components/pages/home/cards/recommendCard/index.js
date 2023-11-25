@@ -4,7 +4,7 @@ import theme from '@/styles/theme';
 import { Card, CardContent, Typography, Grid, CardMedia, CardActions, Button } from '@mui/material';
 import Link from 'next/link';
 
-function RecommendCard({ id, brand, description, category, image, model }) {
+function RecommendCard({ id, brand, description, imageUrl, model }) {
   return (
     <Grid item lg={3} md={6} sm={6} xs={12}>
       <Card
@@ -18,7 +18,7 @@ function RecommendCard({ id, brand, description, category, image, model }) {
           justifyContent: 'space-between',
         }}
       >
-        <CardMedia component="img" alt={brand} height="231" image={image} />
+        <CardMedia component="img" alt={brand} height="231" image={imageUrl} />
         <CardContent>
           <Typography
             gutterBottom
