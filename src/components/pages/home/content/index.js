@@ -1,17 +1,19 @@
 'use client';
 
-import { Box, Typography, Grid, Container } from '@mui/material';
+import { Box, Typography, Grid, Container, Button } from '@mui/material';
 Container;
 import theme from '@/styles/theme';
-import dataJson from '@/data.json';
 import CategoryCard from '../cards/categoryCard';
 import RecommendCard from '../cards/recommendCard';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import styles from './styles.css';
-import { fetchCategories, fetchRecommendedCars } from '../../../../services/api';
-import { useEffect, useState } from 'react';
+import { fetchCategories, fetchRecommendedCars, fetchCarsByCity } from '../../../../services/api';
+import { useEffect, useState, useContext } from 'react';
+import { CarContext } from '@/context/CarContext';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 
 const settings = {
   dots: true,
@@ -41,24 +43,36 @@ function Content() {
   const [categories, setCategories] = useState([]);
   const [recommendedCars, setRecommendedCars] = useState([]);
   const [activeCategory, setActiveCategory] = useState(null);
+  const { selectedCity } = useContext(CarContext);
   const filteredRecommendedCars = activeCategory
     ? recommendedCars.filter((car) => car.category.id === activeCategory)
     : recommendedCars;
+  const hasCars = filteredRecommendedCars.length > 0;
+
+  const handleRemoveFilters = () => {
+    setActiveCategory(null);
+  };
 
   useEffect(() => {
-    const loadRecommendedCars = async () => {
-      const carsData = await fetchRecommendedCars();
-      setRecommendedCars(carsData);
-    };
-
     const loadCategories = async () => {
       const categoryData = await fetchCategories();
       setCategories(categoryData);
     };
 
+    const loadCars = async () => {
+      try {
+        const carsData = selectedCity
+          ? await fetchCarsByCity(selectedCity)
+          : await fetchRecommendedCars();
+        setRecommendedCars(carsData);
+      } catch (error) {
+        console.error('Erro ao buscar carros:', error);
+      }
+    };
+
     loadCategories();
-    loadRecommendedCars();
-  }, []);
+    loadCars();
+  }, [selectedCity]);
 
   return (
     <Container
@@ -74,9 +88,36 @@ function Content() {
           padding: '18px',
         }}
       >
-        <Typography sx={theme.typography.heading} color={theme.palette.text.text}>
-          Buscar por categoria
-        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'start',
+            gap: '10px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Typography sx={theme.typography.heading} color={theme.palette.text.text}>
+            Buscar por categoria
+          </Typography>
+          {activeCategory && (
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleRemoveFilters}
+              style={{
+                borderRadius: '8px',
+                border: `2px solid ${theme.palette.text.danger}`,
+                color: theme.palette.text.light,
+                display: 'flex',
+                gap: '5px',
+              }}
+            >
+              <FilterListOffIcon />
+              Remover filtros
+            </Button>
+          )}
+        </Box>
         <Slider {...settings} className="slickTrackCustom">
           {categories.map((category) => (
             <CategoryCard
@@ -103,11 +144,37 @@ function Content() {
         <Typography sx={theme.typography.heading} color={theme.palette.text.text}>
           Recomendações
         </Typography>
-        <Grid container spacing={2}>
-          {filteredRecommendedCars.map((car) => (
-            <RecommendCard key={car.id} {...car} />
-          ))}
-        </Grid>
+        {!hasCars ? (
+          <Box sx={{ textAlign: 'center', padding: '20px' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: `${theme.palette.text.light}`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '10px',
+              }}
+            >
+              <ErrorOutlineIcon sx={{ color: `${theme.palette.text.danger}` }} />
+              Infelizmente, não temos carros disponíveis nesta categoria no momento.
+            </Typography>
+          </Box>
+        ) : (
+          <Grid container spacing={2}>
+            {filteredRecommendedCars.map((car) => (
+              <RecommendCard
+                key={car.id}
+                id={car.id}
+                brand={car.brand}
+                description={car.description}
+                imageUrl={car.imageUrl}
+                model={car.model}
+                cityName={car.rentalCompany.city.name}
+              />
+            ))}
+          </Grid>
+        )}
       </Box>
     </Container>
   );

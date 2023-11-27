@@ -29,3 +29,13 @@ export const fetchCarDetails = async (id) => {
     throw error;
   }
 };
+
+export const fetchCarsByCity = async (city) => {
+  try {
+    const response = await axios.get(`/api/cars/city?city=${encodeURIComponent(city)}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar carros pela cidade:', error);
+    throw error;
+  }
+};

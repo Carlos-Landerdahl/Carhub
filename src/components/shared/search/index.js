@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { TextField, Button, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Tune } from '@mui/icons-material';
 import './styles.css';
 import theme from '@/styles/theme';
+import { CarContext } from '@/context/CarContext';
+import { Toast } from '@/components/shared/toasts/toastForm';
 
 function SearchFilter() {
   const [city, setCity] = useState('');
@@ -12,6 +14,7 @@ function SearchFilter() {
   const [cityError, setCityError] = useState('');
   const [startDateError, setStartDateError] = useState('');
   const [endDateError, setEndDateError] = useState('');
+  const { setSelectedCity } = useContext(CarContext);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -40,7 +43,11 @@ function SearchFilter() {
     }
 
     if (!hasError) {
-      alert('Buscando...');
+      Toast.fire({
+        icon: 'info',
+        title: 'Cidade buscada com sucesso',
+      });
+      setSelectedCity(city);
     }
   };
 

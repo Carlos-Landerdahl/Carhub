@@ -10,8 +10,10 @@ const theme = createTheme({
     text: {
       main: '#595959',
       text: '#fff',
+      light: '#E2E2E2',
       paragraph: '#383B58',
       price: '#068323',
+      danger: '#C83737',
     },
     background: {
       main: '#333333',
