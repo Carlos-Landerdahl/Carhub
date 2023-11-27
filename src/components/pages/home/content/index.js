@@ -84,6 +84,7 @@ function Content() {
               name={category.name}
               imageUrl={category.imageUrl}
               description={category.description}
+              isActive={category.id === activeCategory}
               onClick={() => {
                 setActiveCategory(category.id);
               }}
