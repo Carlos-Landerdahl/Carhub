@@ -3,7 +3,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import theme from '@/styles/theme';
 import { useState } from 'react';
 
-export function Location() {
+export function Location({ city }) {
   const [star, setStar] = useState(4);
   return (
     <Box
@@ -23,7 +23,7 @@ export function Location() {
           fontWeight: 'bold',
         }}
       >
-        <PlaceIcon /> Uberlândia - MG
+        <PlaceIcon /> {city}
       </Typography>
       <Box
         sx={{

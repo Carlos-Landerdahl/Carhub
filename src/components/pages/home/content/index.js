@@ -9,7 +9,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import styles from './styles.css';
-import { fetchCategories, fetchRecommendedCars, fetchCarsByCity } from '../../../../services/api';
+import { fetchCategories, fetchAllCars, fetchCarsByCity } from '../../../../services/api';
 import { useEffect, useState, useContext } from 'react';
 import { CarContext } from '@/context/CarContext';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
@@ -63,7 +63,7 @@ function Content() {
       try {
         const carsData = selectedCity
           ? await fetchCarsByCity(selectedCity)
-          : await fetchRecommendedCars();
+          : await fetchAllCars();
         setRecommendedCars(carsData);
       } catch (error) {
         console.error('Erro ao buscar carros:', error);

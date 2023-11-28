@@ -40,7 +40,12 @@ function Navbar(props) {
         background: theme.palette.background.main,
       }}
     >
-      <Image src={Logo} style={{ flexGrow: '1', width: '100%', height: '80px' }} alt="Logo" />
+      <Image
+        priority
+        src={Logo}
+        style={{ flexGrow: '1', width: '100%', height: '80px' }}
+        alt="Logo"
+      />
       <Divider sx={{ background: theme.palette.default.primary, mt: '10px' }} />
       <List>
         {navItems.map((item) => (

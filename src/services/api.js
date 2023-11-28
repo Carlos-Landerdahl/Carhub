@@ -10,7 +10,7 @@ export const fetchCategories = async () => {
   }
 };
 
-export const fetchRecommendedCars = async () => {
+export const fetchAllCars = async () => {
   try {
     const response = await axios.get('/api/cars');
     return response.data;
@@ -20,7 +20,7 @@ export const fetchRecommendedCars = async () => {
   }
 };
 
-export const fetchCarDetails = async (id) => {
+export const fetchCarById = async (id) => {
   try {
     const response = await axios.get(`/api/cars/${id}`);
     return response.data;
