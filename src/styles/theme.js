@@ -17,8 +17,9 @@ const theme = createTheme({
     },
     background: {
       main: '#333333',
+      default: '#fff',
       secondary: '#595959',
-      light: '#E2E2E2',
+      light: '#EFEFEF',
       lightGreen: '#e9ffef',
       lightBlue: '#E8F3FF',
       navbar: '#202125',

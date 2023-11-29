@@ -39,3 +39,13 @@ export const fetchCarsByCity = async (city) => {
     throw error;
   }
 };
+
+export const fetchCities = async () => {
+  try {
+    const response = await axios.get('/api/cities');
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar cidades:', error);
+    throw error;
+  }
+};

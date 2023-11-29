@@ -1,7 +1,5 @@
 import { useContext, useState } from 'react';
-import { TextField, Button, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Tune } from '@mui/icons-material';
+import { TextField, Button, Box, useMediaQuery, Grid } from '@mui/material';
 import './styles.css';
 import theme from '@/styles/theme';
 import { CarContext } from '@/context/CarContext';
@@ -15,6 +13,7 @@ function SearchFilter() {
   const [startDateError, setStartDateError] = useState('');
   const [endDateError, setEndDateError] = useState('');
   const { setSelectedCity } = useContext(CarContext);
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -52,92 +51,88 @@ function SearchFilter() {
   };
 
   return (
-    <Accordion
-      style={{
-        backgroundColor: theme.palette.background.secondary,
-        borderTopLeftRadius: '0px',
-        borderTopRightRadius: '0px',
-        margin: '0',
+    <Box
+      component="form"
+      onSubmit={handleSearch}
+      noValidate
+      autoComplete="off"
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: theme.spacing(1),
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        p: theme.spacing(3),
+        backgroundColor: theme.palette.background.light,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        boxShadow: theme.shadows[1],
       }}
     >
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon sx={{ color: theme.palette.default.primary }} />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-        sx={{ color: theme.palette.default.primary, textAlign: 'center' }}
-      >
-        <Tune sx={{ marginRight: '10px' }} /> Filtro de busca
-      </AccordionSummary>
-      <AccordionDetails
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        <form
-          onSubmit={handleSearch}
-          className="formContainer"
-          style={{
-            backgroundColor: 'transparent',
-            display: 'flex',
-            gap: '10px',
-            width: '100%',
-            maxWidth: '1200px',
-          }}
-        >
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={3}>
           <TextField
             fullWidth
             type="search"
-            label="Selecione sua cidade"
-            variant="filled"
+            label="Local de retirada"
+            variant="outlined"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             error={!!cityError}
             helperText={cityError}
-            sx={{ background: theme.palette.default.primary }}
           />
+        </Grid>
+        <Grid item xs={6} sm={2}>
           <TextField
             fullWidth
             type="date"
-            label="Data ínicio"
-            variant="filled"
+            label="Data de retirada"
+            variant="outlined"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             error={!!startDateError}
             helperText={startDateError}
             InputLabelProps={{ shrink: true }}
-            sx={{ background: theme.palette.default.primary }}
           />
+        </Grid>
+        <Grid item xs={6} sm={2}>
+          <TextField
+            fullWidth
+            type="time"
+            label="Horário"
+            variant="outlined"
+            // Aqui você colocaria o estado e a função de manipulação para o horário de retirada
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={6} sm={2}>
           <TextField
             fullWidth
             type="date"
             label="Data de devolução"
-            variant="filled"
+            variant="outlined"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             error={!!endDateError}
             helperText={endDateError}
             InputLabelProps={{ shrink: true }}
-            sx={{ background: theme.palette.default.primary }}
           />
+        </Grid>
+        <Grid item xs={6} sm={2}>
           <Button
             variant="contained"
             color="primary"
             type="submit"
-            fullWidth
-            style={{
-              backgroundColor: theme.palette.background.button,
-              color: theme.palette.default.primary,
+            sx={{
               height: '56px',
+              width: '100%', // O botão ocupa toda a largura disponível
             }}
           >
-            Filtrar
+            Pesquisar
           </Button>
-        </form>
-      </AccordionDetails>
-    </Accordion>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

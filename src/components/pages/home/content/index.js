@@ -14,6 +14,7 @@ import { useEffect, useState, useContext } from 'react';
 import { CarContext } from '@/context/CarContext';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
+import GlobalLoader from '@/components/global/loader/GlobalLoader';
 
 const settings = {
   dots: true,
@@ -42,6 +43,8 @@ const settings = {
 function Content() {
   const [categories, setCategories] = useState([]);
   const [recommendedCars, setRecommendedCars] = useState([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [loadingCars, setLoadingCars] = useState(true);
   const [activeCategory, setActiveCategory] = useState(null);
   const { selectedCity } = useContext(CarContext);
   const filteredRecommendedCars = activeCategory
@@ -57,14 +60,14 @@ function Content() {
     const loadCategories = async () => {
       const categoryData = await fetchCategories();
       setCategories(categoryData);
+      setLoadingCategories(false);
     };
 
     const loadCars = async () => {
       try {
-        const carsData = selectedCity
-          ? await fetchCarsByCity(selectedCity)
-          : await fetchAllCars();
+        const carsData = selectedCity ? await fetchCarsByCity(selectedCity) : await fetchAllCars();
         setRecommendedCars(carsData);
+        setLoadingCars(false);
       } catch (error) {
         console.error('Erro ao buscar carros:', error);
       }
@@ -118,20 +121,24 @@ function Content() {
             </Button>
           )}
         </Box>
-        <Slider {...settings} className="slickTrackCustom">
-          {categories.map((category) => (
-            <CategoryCard
-              key={category.id}
-              name={category.name}
-              imageUrl={category.imageUrl}
-              description={category.description}
-              isActive={category.id === activeCategory}
-              onClick={() => {
-                setActiveCategory(category.id);
-              }}
-            />
-          ))}
-        </Slider>
+        {loadingCategories ? (
+          <GlobalLoader />
+        ) : (
+          <Slider {...settings}>
+            {categories.map((category) => (
+              <CategoryCard
+                key={category.id}
+                name={category.name}
+                imageUrl={category.imageUrl}
+                description={category.description}
+                isActive={category.id === activeCategory}
+                onClick={() => {
+                  setActiveCategory(category.id);
+                }}
+              />
+            ))}
+          </Slider>
+        )}
       </Box>
       <Box
         sx={{
@@ -144,7 +151,9 @@ function Content() {
         <Typography sx={theme.typography.heading} color={theme.palette.text.text}>
           Recomendações
         </Typography>
-        {!hasCars ? (
+        {loadingCars ? (
+          <GlobalLoader />
+        ) : !hasCars ? (
           <Box sx={{ textAlign: 'center', padding: '20px' }}>
             <Typography
               variant="h6"

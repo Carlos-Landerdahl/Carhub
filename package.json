@@ -21,6 +21,7 @@
     "next": "13.5.6",
     "react": "^18",
     "react-dom": "^18",
+    "react-loader-spinner": "^5.4.5",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.9.0",
