@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { TextField, Button, Box, useMediaQuery, Grid } from '@mui/material';
+import { TextField, Button, Box, Grid } from '@mui/material';
 import './styles.css';
 import theme from '@/styles/theme';
 import { CarContext } from '@/context/CarContext';
@@ -13,7 +13,6 @@ function SearchFilter() {
   const [startDateError, setStartDateError] = useState('');
   const [endDateError, setEndDateError] = useState('');
   const { setSelectedCity } = useContext(CarContext);
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -101,7 +100,6 @@ function SearchFilter() {
             type="time"
             label="Horário"
             variant="outlined"
-            // Aqui você colocaria o estado e a função de manipulação para o horário de retirada
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -125,7 +123,7 @@ function SearchFilter() {
             type="submit"
             sx={{
               height: '56px',
-              width: '100%', // O botão ocupa toda a largura disponível
+              width: '100%',
             }}
           >
             Pesquisar
