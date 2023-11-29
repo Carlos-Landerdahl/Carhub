@@ -4,7 +4,7 @@ import theme from '@/styles/theme';
 import { Card, CardContent, Typography, Grid, CardMedia, CardActions, Button } from '@mui/material';
 import Link from 'next/link';
 
-function RecommendCard({ id, brand, description, imageUrl, model, cityName }) {
+function RecommendCard({ id, brand, description, imageUrl, model, cityName, state }) {
   return (
     <Grid item lg={3} md={6} sm={6} xs={12}>
       <Card
@@ -35,7 +35,7 @@ function RecommendCard({ id, brand, description, imageUrl, model, cityName }) {
               mb: '4px',
             }}
           >
-            Cidade - {cityName}
+            Cidade - {cityName} {state}
           </Typography>
           <Typography sx={theme.typography.label}>{description}</Typography>
         </CardContent>

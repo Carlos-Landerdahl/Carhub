@@ -67,6 +67,9 @@ export default function RentalPolicy() {
               width: '100%',
               maxHeight: '100%',
               overflowY: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
               '&::-webkit-scrollbar': {
                 width: '5px',
               },

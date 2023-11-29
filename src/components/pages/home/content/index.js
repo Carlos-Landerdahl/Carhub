@@ -180,6 +180,7 @@ function Content() {
                 imageUrl={car.imageUrl}
                 model={car.model}
                 cityName={car.rentalCompany.city.name}
+                state={car.rentalCompany.city.state}
               />
             ))}
           </Grid>
