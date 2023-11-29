@@ -68,7 +68,7 @@ function SearchFilter() {
         boxShadow: theme.shadows[1],
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ maxWidth: '1200px' }}>
         <Grid item xs={12} sm={3}>
           <TextField
             fullWidth
@@ -116,7 +116,7 @@ function SearchFilter() {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={6} sm={2}>
+        <Grid item xs={6} sm={3}>
           <Button
             variant="contained"
             color="primary"
