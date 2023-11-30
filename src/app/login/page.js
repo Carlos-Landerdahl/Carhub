@@ -27,14 +27,17 @@ export default function Home() {
       password: '',
     },
     validationSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      login(values).catch(() => {
-        setSubmitting(false);
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        await login(values);
+      } catch (error) {
         Toast.fire({
           icon: 'error',
           title: 'Usuário não encontrado',
         });
-      });
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -76,8 +79,14 @@ export default function Home() {
           error={formik.touched.password && !!formik.errors.password}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button variant="contained" color="primary" fullWidth onClick={formik.handleSubmit}>
-          Entrar
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={formik.handleSubmit}
+          disabled={formik.isSubmitting}
+        >
+          {formik.isSubmitting ? 'Entrando...' : 'Entrar'}
         </Button>
         <Button
           component={Link}
