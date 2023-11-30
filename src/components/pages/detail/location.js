@@ -3,7 +3,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import theme from '@/styles/theme';
 import { useState } from 'react';
 
-export function Location({ city }) {
+export function Location({ city, state }) {
   const [star, setStar] = useState(4);
   return (
     <Box
@@ -23,7 +23,7 @@ export function Location({ city }) {
           fontWeight: 'bold',
         }}
       >
-        <PlaceIcon /> {city}
+        <PlaceIcon /> {city} - {state}
       </Typography>
       <Box
         sx={{

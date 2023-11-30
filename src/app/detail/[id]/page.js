@@ -51,7 +51,10 @@ export default function DetailCar({ params: { id } }) {
 
   return (
     <>
-      <Location city={carDetails.rentalCompany.city.name} />
+      <Location
+        city={carDetails.rentalCompany.city.name}
+        state={carDetails.rentalCompany.city.state}
+      />
       <Box
         component="div"
         sx={{
