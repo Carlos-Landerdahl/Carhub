@@ -6,10 +6,10 @@ import theme from '@/styles/theme';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Toast } from '@/components/shared/toasts/toastForm';
-import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Home() {
-  const router = useRouter();
+  const { login } = useAuth();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -27,12 +27,14 @@ export default function Home() {
       password: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      Toast.fire({
-        icon: 'success',
-        title: 'Login feito com sucesso',
+    onSubmit: (values, { setSubmitting }) => {
+      login(values).catch(() => {
+        setSubmitting(false);
+        Toast.fire({
+          icon: 'error',
+          title: 'Usuário não encontrado',
+        });
       });
-      router.push('/');
     },
   });
 

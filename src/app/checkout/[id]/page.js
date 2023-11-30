@@ -11,8 +11,9 @@ import { fetchCarById } from '@/services/api';
 
 export default function Checkout({ params: { id } }) {
   const [car, setCar] = useState(null);
-  const [rentalDate, setRentalDate] = useState(null);
-  const [returnDate, setReturnDate] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const today = new Date();
 
   useEffect(() => {
     const loadCarDetails = async () => {
@@ -114,19 +115,20 @@ export default function Checkout({ params: { id } }) {
                     gap: '10px',
                   }}
                 >
-                  <TextField required id="firstName" label="Nome" fullWidth />
-                  <TextField required id="lastName" label="Sobrenome" fullWidth />
+                  <TextField required id="fullname" label="Nome" fullWidth />
                   <TextField required id="email" label="Email" fullWidth />
                   <DatePicker
                     label="Data de Aluguel"
-                    value={rentalDate}
-                    onChange={setRentalDate}
+                    minDate={today}
+                    value={startDate}
+                    onChange={setStartDate}
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
                   <DatePicker
                     label="Data de Devolução"
-                    value={returnDate}
-                    onChange={setReturnDate}
+                    value={endDate}
+                    onChange={setEndDate}
+                    minDate={startDate || today}
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
                   <Button variant="contained" color="primary" sx={{ height: '50px' }}>

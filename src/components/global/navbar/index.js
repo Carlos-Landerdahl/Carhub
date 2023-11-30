@@ -19,16 +19,36 @@ import Logo from '/public/img/logo.svg';
 import Link from 'next/link';
 import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
 import theme from '@/styles/theme';
+import { useAuth } from '@/context/AuthContext';
+import Swal from 'sweetalert2';
 
 const drawerWidth = 240;
 const navItems = ['Criar conta', 'Iniciar sessão'];
 
 function Navbar(props) {
+  const { user, logout } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const handleLogout = async () => {
+    const result = await Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Você deseja sair da sua conta?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, sair!',
+      cancelButtonText: 'Cancelar',
+    });
+
+    if (result.isConfirmed) {
+      logout();
+    }
   };
 
   const mobile = (
@@ -48,21 +68,49 @@ function Navbar(props) {
       />
       <Divider sx={{ background: theme.palette.default.primary, mt: '10px' }} />
       <List>
-        {navItems.map((item) => (
-          <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={item} passHref>
+        {user ? (
+          <>
             <ListItem disablePadding>
               <ListItemButton
+                sx={{
+                  textAlign: 'center',
+                  color: theme.palette.default.primary,
+                }}
+              >
+                <ListItemText primary={`Olá, ${user.fullName}`} />
+              </ListItemButton>
+            </ListItem>
+            <Divider sx={{ background: 'white', opacity: '0.5' }} />
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={handleLogout}
                 sx={{
                   textAlign: 'center',
                   color: theme.palette.default.primary,
                   borderBottom: '1px solid #595959',
                 }}
               >
-                <ListItemText primary={item} />
+                <ListItemText primary="Logout" />
               </ListItemButton>
             </ListItem>
-          </Link>
-        ))}
+          </>
+        ) : (
+          navItems.map((item) => (
+            <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={item} passHref>
+              <ListItem disablePadding>
+                <ListItemButton
+                  sx={{
+                    textAlign: 'center',
+                    color: theme.palette.default.primary,
+                    borderBottom: '1px solid #595959',
+                  }}
+                >
+                  <ListItemText primary={item} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          ))
+        )}
       </List>
     </Box>
   );
@@ -96,14 +144,27 @@ function Navbar(props) {
               <Image src={Logo} width={300} height={80} alt="Logo" priority />
             </Link>
           </Box>
-          <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px' } }}>
-            {navItems.map((item, index) => (
-              <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
-                <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
-                  {item}
+          <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px', alignItems: 'center' } }}>
+            {user ? (
+              <>
+                <span>Olá, {user.fullName}</span>
+                <Button
+                  onClick={handleLogout}
+                  variant="outlined"
+                  sx={{ color: theme.palette.default.primary }}
+                >
+                  Logout
                 </Button>
-              </Link>
-            ))}
+              </>
+            ) : (
+              navItems.map((item, index) => (
+                <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
+                  <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
+                    {item}
+                  </Button>
+                </Link>
+              ))
+            )}
           </Box>
         </Toolbar>
       </AppBar>
@@ -127,7 +188,7 @@ function Navbar(props) {
               display: 'flex',
               gap: '17px',
               justifyContent: 'flex-end',
-              padding: '0 15px 29px 0',
+              padding: '10px',
               background: theme.palette.background.main,
               color: theme.palette.default.primary,
             }}

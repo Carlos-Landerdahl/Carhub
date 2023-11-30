@@ -12,6 +12,7 @@ const theme = createTheme(
       text: {
         main: '#595959',
         text: '#fff',
+        dark: '#333333',
         light: '#E2E2E2',
         paragraph: '#383B58',
         price: '#068323',

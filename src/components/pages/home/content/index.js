@@ -181,6 +181,7 @@ function Content() {
                 model={car.model}
                 cityName={car.rentalCompany.city.name}
                 state={car.rentalCompany.city.state}
+                pricePerDay={car.pricePerDay}
               />
             ))}
           </Grid>

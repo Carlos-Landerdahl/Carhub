@@ -1,10 +1,20 @@
 'use client';
 
 import theme from '@/styles/theme';
-import { Card, CardContent, Typography, Grid, CardMedia, CardActions, Button } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+  CardMedia,
+  CardActions,
+  Button,
+  Box,
+} from '@mui/material';
 import Link from 'next/link';
+import DoneIcon from '@mui/icons-material/Done';
 
-function RecommendCard({ id, brand, description, imageUrl, model, cityName, state }) {
+function RecommendCard({ id, brand, description, imageUrl, model, cityName, state, pricePerDay }) {
   return (
     <Grid item lg={3} md={6} sm={6} xs={12}>
       <Card
@@ -39,7 +49,7 @@ function RecommendCard({ id, brand, description, imageUrl, model, cityName, stat
           </Typography>
           <Typography sx={theme.typography.label}>{description}</Typography>
         </CardContent>
-        <CardActions sx={{ m: '5px' }}>
+        <CardActions sx={{ m: '5px', display: 'flex', justifyContent: 'space-between' }}>
           <Link href={`/detail/${id}`} passHref>
             <Button
               sx={{
@@ -50,15 +60,57 @@ function RecommendCard({ id, brand, description, imageUrl, model, cityName, stat
                 filter: 'brightness(100%)',
                 display: 'flex',
                 alignItems: 'center',
+                height: '50px',
                 '&:hover': {
                   gap: '5px',
                   background: '#4b6a90',
                 },
               }}
             >
-              Saiba mais
+              Ver oferta
             </Button>
           </Link>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'end',
+            }}
+          >
+            <Typography
+              sx={{
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: '5px',
+                fontWeight: 'bold',
+                fontSize: '1.3rem',
+                height: '25px',
+                color: theme.palette.text.dark,
+              }}
+            >
+              <span
+                style={{
+                  fontSize: '12px',
+                }}
+              >
+                preço por dia:
+              </span>
+              R${pricePerDay}
+            </Typography>
+            <Typography
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '3px',
+                fontWeight: 'bold',
+                fontSize: '13px',
+                color: theme.palette.text.price,
+              }}
+            >
+              <DoneIcon />
+              Cancelamento grátis
+            </Typography>
+          </Box>
         </CardActions>
       </Card>
     </Grid>

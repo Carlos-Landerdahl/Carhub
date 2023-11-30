@@ -17,6 +17,7 @@ function SearchFilter() {
   const [startDateError, setStartDateError] = useState('');
   const [endDateError, setEndDateError] = useState('');
   const { setSelectedCity } = useContext(CarContext);
+  const today = new Date();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -91,8 +92,11 @@ function SearchFilter() {
               label="Retirada"
               value={startDate}
               onChange={setStartDate}
+              minDate={today}
               fullWidth
               inputFormat="dd/MM/yyyy"
+              openTo="month"
+              views={['year', 'month', 'day']}
               slotProps={{
                 textField: {
                   helperText: startDateError,
@@ -118,6 +122,7 @@ function SearchFilter() {
               onChange={setEndDate}
               fullWidth
               openTo="month"
+              minDate={startDate || today}
               views={['year', 'month', 'day']}
               slotProps={{
                 textField: {
