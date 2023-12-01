@@ -20,12 +20,6 @@ export default function DetailCar({ params: { id } }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const handleRentCarClick = () => {
-    if (carDetails.isAvailable) {
-      router.push(`/checkout/${id}`);
-    }
-  };
-
   useEffect(() => {
     const loadCarDetails = async () => {
       try {
@@ -114,11 +108,7 @@ export default function DetailCar({ params: { id } }) {
                 <Divider sx={{ background: theme.palette.background.secondary, opacity: '0.6' }} />
                 <CarRentalInfo pricePerDay={carDetails.pricePerDay} />
                 <RentalPolicy />
-                <RentButton
-                  isAvailable={carDetails.isAvailable}
-                  onClick={handleRentCarClick}
-                  id={carDetails.id}
-                />
+                <RentButton isAvailable={carDetails.isAvailable} id={carDetails.id} />
               </CardContent>
             </Card>
           </Paper>

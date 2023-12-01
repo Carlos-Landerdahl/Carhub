@@ -10,15 +10,15 @@ import { AuthProvider } from '@/context/AuthContext';
 
 export default function Providers({ children }) {
   return (
-    <AuthProvider>
-      <NextAppDirEmotionCacheProvider options={{ key: 'mui' }}>
+    <NextAppDirEmotionCacheProvider options={{ key: 'mui' }}>
+      <AuthProvider>
         <CarProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
             {children}
           </ThemeProvider>
         </CarProvider>
-      </NextAppDirEmotionCacheProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </NextAppDirEmotionCacheProvider>
   );
 }

@@ -2,36 +2,41 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
+import {
+  AppBar,
+  Box,
+  CircularProgress,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Button,
+} from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
 import Image from 'next/image';
 import Logo from '/public/img/logo.svg';
 import Link from 'next/link';
-import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import theme from '@/styles/theme';
 import { useAuth } from '@/context/AuthContext';
 import Swal from 'sweetalert2';
+import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
 
 const drawerWidth = 240;
 const navItems = ['Criar conta', 'Iniciar sessão'];
 
-function Navbar(props) {
-  const { user, logout } = useAuth();
+export default function Navbar(props) {
+  const { user, logout, loading } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+    setMobileOpen(!mobileOpen);
   };
 
   const handleLogout = async () => {
@@ -115,8 +120,6 @@ function Navbar(props) {
     </Box>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
-
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar
@@ -127,79 +130,98 @@ function Navbar(props) {
           justifyContent: 'center',
         }}
       >
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <IconButton
-            color="dark"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon sx={{ color: theme.palette.default.primary }} />
-          </IconButton>
+        <Toolbar
+          sx={{
+            display: 'flex',
+            justifyContent: isMobile ? 'space-between' : 'flex-end',
+          }}
+        >
+          {isMobile && (
+            <IconButton
+              color="dark"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'none' } }}
+            >
+              <MenuIcon sx={{ color: theme.palette.default.primary }} />
+            </IconButton>
+          )}
           <Box
-            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}
+            sx={{
+              display: 'flex',
+              width: '100%',
+              justifyContent: isMobile ? 'center' : 'space-between',
+              alignItems: 'center',
+              gap: isMobile ? '0' : '10px',
+            }}
           >
             <Link href="/" passHref>
               <Image src={Logo} width={300} height={80} alt="Logo" priority />
             </Link>
-          </Box>
-          <Box sx={{ display: { xs: 'none', sm: 'flex', gap: '10px', alignItems: 'center' } }}>
-            {user ? (
-              <>
-                <span>Olá, {user.fullName}</span>
-                <Button
-                  onClick={handleLogout}
-                  variant="outlined"
-                  sx={{ color: theme.palette.default.primary }}
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              navItems.map((item, index) => (
-                <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
-                  <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
-                    {item}
+            <Box
+              sx={{ display: 'flex', gap: '10px', justifyContent: 'center', alignItems: 'center' }}
+            >
+              {!isMobile && !loading && user && (
+                <>
+                  <span>Olá, {user.fullName}</span>
+                  <Button
+                    onClick={handleLogout}
+                    variant="outlined"
+                    sx={{ color: theme.palette.default.primary }}
+                  >
+                    Logout
                   </Button>
-                </Link>
-              ))
-            )}
+                </>
+              )}
+              {!isMobile && !loading && !user && (
+                <>
+                  {navItems.map((item, index) => (
+                    <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
+                      <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
+                        {item}
+                      </Button>
+                    </Link>
+                  ))}
+                </>
+              )}
+              {isMobile && (
+                <Drawer
+                  container={window}
+                  variant="temporary"
+                  open={mobileOpen}
+                  onClose={handleDrawerToggle}
+                  ModalProps={{
+                    keepMounted: true,
+                  }}
+                  sx={{
+                    display: { xs: 'block', sm: 'none' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                  }}
+                >
+                  {mobile}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      gap: '17px',
+                      justifyContent: 'flex-end',
+                      padding: '10px',
+                      background: theme.palette.background.main,
+                      color: theme.palette.default.primary,
+                    }}
+                  >
+                    <FacebookRounded fontSize="medium" />
+                    <LinkedIn fontSize="medium" />
+                    <Twitter fontSize="medium" />
+                    <Instagram fontSize="medium" />
+                  </Box>
+                </Drawer>
+              )}
+            </Box>
           </Box>
+          {isMobile && loading && <CircularProgress />}
         </Toolbar>
       </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {mobile}
-          <Box
-            sx={{
-              display: 'flex',
-              gap: '17px',
-              justifyContent: 'flex-end',
-              padding: '10px',
-              background: theme.palette.background.main,
-              color: theme.palette.default.primary,
-            }}
-          >
-            <FacebookRounded fontSize="medium" />
-            <LinkedIn fontSize="medium" />
-            <Twitter fontSize="medium" />
-            <Instagram fontSize="medium" />
-          </Box>
-        </Drawer>
-      </nav>
     </Box>
   );
 }
@@ -207,5 +229,3 @@ function Navbar(props) {
 Navbar.propTypes = {
   window: PropTypes.func,
 };
-
-export default Navbar;

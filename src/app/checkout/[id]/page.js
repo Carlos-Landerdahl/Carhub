@@ -122,14 +122,12 @@ export default function Checkout({ params: { id } }) {
                     minDate={today}
                     value={startDate}
                     onChange={setStartDate}
-                    renderInput={(params) => <TextField {...params} fullWidth />}
                   />
                   <DatePicker
                     label="Data de Devolução"
                     value={endDate}
                     onChange={setEndDate}
                     minDate={startDate || today}
-                    renderInput={(params) => <TextField {...params} fullWidth />}
                   />
                   <Button variant="contained" color="primary" sx={{ height: '50px' }}>
                     Concluir Reserva

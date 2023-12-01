@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
 export function middleware(request) {
-  const token = request.cookies.get('accessToken');
+  const cookieStore = cookies();
+  const token = cookieStore.get('accessToken');
   const pathname = request.nextUrl.pathname;
+  // console.log(token);
 
   // Se o token existir e o usuário estiver acessando rotas de login/register, redirecione para a home
   if (token && (pathname === '/login' || pathname === '/register')) {
