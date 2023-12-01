@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from '../services/axios';
 import { useRouter } from 'next/navigation';
@@ -13,7 +14,8 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = Cookies.get('accessToken');
+
     if (accessToken) {
       fetchUser(accessToken);
     }
@@ -29,7 +31,7 @@ export const AuthProvider = ({ children }) => {
       setUser(response.data);
     } catch (error) {
       console.error('Erro ao buscar informações do usuário:', error);
-      localStorage.removeItem('accessToken');
+      Cookies.remove('accessToken');
       setUser(null);
     }
   };
@@ -56,7 +58,8 @@ export const AuthProvider = ({ children }) => {
       );
 
       if (response.data.access_token) {
-        localStorage.setItem('accessToken', response.data.access_token);
+        Cookies.set('accessToken', response.data.access_token, { expires: 1 });
+
         await fetchUser(response.data.access_token);
         Toast.fire({
           icon: 'success',
@@ -74,7 +77,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('accessToken');
+    Cookies.remove('accessToken');
     setUser(null);
     router.push('/');
   };
