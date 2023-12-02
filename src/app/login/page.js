@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Card, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, TextField, Typography, CircularProgress } from '@mui/material';
 import Link from 'next/link';
 import theme from '@/styles/theme';
 import { useFormik } from 'formik';
@@ -9,7 +9,7 @@ import { Toast } from '@/components/shared/toasts/toastForm';
 import { useAuth } from '@/context/AuthContext';
 
 export default function Home() {
-  const { login } = useAuth();
+  const { onLogin } = useAuth();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -29,7 +29,11 @@ export default function Home() {
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        await login(values);
+        await onLogin(values);
+        Toast.fire({
+          icon: 'success',
+          title: 'Login feito com sucesso',
+        });
       } catch (error) {
         Toast.fire({
           icon: 'error',
@@ -85,8 +89,15 @@ export default function Home() {
           fullWidth
           onClick={formik.handleSubmit}
           disabled={formik.isSubmitting}
+          sx={{ height: '50px' }}
         >
-          {formik.isSubmitting ? 'Entrando...' : 'Entrar'}
+          {formik.isSubmitting ? (
+            <Box sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <CircularProgress size={20} />
+            </Box>
+          ) : (
+            'Entrar'
+          )}
         </Button>
         <Button
           component={Link}

@@ -15,6 +15,7 @@ import {
   ListItemText,
   Toolbar,
   Button,
+  Skeleton,
 } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import Image from 'next/image';
@@ -30,7 +31,7 @@ const drawerWidth = 240;
 const navItems = ['Criar conta', 'Iniciar sessão'];
 
 export default function Navbar(props) {
-  const { user, logout, loading } = useAuth();
+  const { user, onLogout, loading } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -52,7 +53,7 @@ export default function Navbar(props) {
     });
 
     if (result.isConfirmed) {
-      logout();
+      onLogout();
     }
   };
 
@@ -162,27 +163,30 @@ export default function Navbar(props) {
             <Box
               sx={{ display: 'flex', gap: '10px', justifyContent: 'center', alignItems: 'center' }}
             >
-              {!isMobile && !loading && user && (
+              {!isMobile && (
                 <>
-                  <span>Olá, {user.fullName}</span>
-                  <Button
-                    onClick={handleLogout}
-                    variant="outlined"
-                    sx={{ color: theme.palette.default.primary }}
-                  >
-                    Logout
-                  </Button>
-                </>
-              )}
-              {!isMobile && !loading && !user && (
-                <>
-                  {navItems.map((item, index) => (
-                    <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
-                      <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
-                        {item}
+                  {loading ? (
+                    <CircularProgress size={25} />
+                  ) : user ? (
+                    <>
+                      <span>Olá, {user.fullName}</span>
+                      <Button
+                        onClick={handleLogout}
+                        variant="outlined"
+                        sx={{ color: theme.palette.default.primary }}
+                      >
+                        Logout
                       </Button>
-                    </Link>
-                  ))}
+                    </>
+                  ) : (
+                    navItems.map((item, index) => (
+                      <Link href={item === 'Iniciar sessão' ? '/login' : '/register'} key={index}>
+                        <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
+                          {item}
+                        </Button>
+                      </Link>
+                    ))
+                  )}
                 </>
               )}
               {isMobile && (
@@ -219,7 +223,6 @@ export default function Navbar(props) {
               )}
             </Box>
           </Box>
-          {isMobile && loading && <CircularProgress />}
         </Toolbar>
       </AppBar>
     </Box>
