@@ -8,6 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ptBR from 'date-fns/locale/pt-BR';
 import theme from '@/styles/theme';
 import { fetchCarById } from '@/services/api';
+import CheckoutConfirmation from '@/components/pages/checkout/confirmation';
 
 export default function Checkout({ params: { id } }) {
   const [car, setCar] = useState(null);
@@ -129,9 +130,7 @@ export default function Checkout({ params: { id } }) {
                     onChange={setEndDate}
                     minDate={startDate || today}
                   />
-                  <Button variant="contained" color="primary" sx={{ height: '50px' }}>
-                    Concluir Reserva
-                  </Button>
+                  <CheckoutConfirmation />
                 </Box>
               </CardContent>
             </Card>
