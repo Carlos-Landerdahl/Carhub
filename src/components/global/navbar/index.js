@@ -15,7 +15,6 @@ import {
   ListItemText,
   Toolbar,
   Button,
-  Skeleton,
 } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import Image from 'next/image';

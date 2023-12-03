@@ -5,7 +5,6 @@ import Link from 'next/link';
 import theme from '@/styles/theme';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Toast } from '@/components/shared/toasts/toastForm';
 import { useAuth } from '@/context/AuthContext';
 
 export default function Home() {
@@ -28,20 +27,9 @@ export default function Home() {
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      try {
-        await onLogin(values);
-        Toast.fire({
-          icon: 'success',
-          title: 'Login feito com sucesso',
-        });
-      } catch (error) {
-        Toast.fire({
-          icon: 'error',
-          title: 'Usuário não encontrado',
-        });
-      } finally {
-        setSubmitting(false);
-      }
+      setSubmitting(true);
+      await onLogin(values);
+      setSubmitting(false);
     },
   });
 

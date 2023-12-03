@@ -1,14 +1,18 @@
 'use client';
 
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography, CircularProgress } from '@mui/material';
 import Link from 'next/link';
 import theme from '@/styles/theme';
 import { useRouter } from 'next/navigation';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { Toast } from '@/components/shared/toasts/toastForm';
+import { useState } from 'react';
+import { createUser } from '@/services/api';
 
 export default function Register() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
@@ -25,6 +29,11 @@ export default function Register() {
       .required('O campo confirme a senha é obrigatório'),
   });
 
+  const handleTrim = (e) => {
+    const { name, value } = e.target;
+    formik.setFieldValue(name, value.trim());
+  };
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -34,12 +43,27 @@ export default function Register() {
       confirmPassword: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      Toast.fire({
-        icon: 'success',
-        title: 'Conta criada com sucesso',
-      });
-      router.push('/login');
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        setSubmitting(true);
+        await createUser({
+          fullName: `${values.firstName} ${values.lastName}`,
+          email: values.email,
+          password: values.password,
+        });
+        Toast.fire({
+          icon: 'success',
+          title: 'Conta criada com sucesso',
+        });
+        router.push('/login');
+      } catch (error) {
+        Toast.fire({
+          icon: 'error',
+          title: error.response?.data?.message || 'Erro ao criar a conta',
+        });
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -71,6 +95,7 @@ export default function Register() {
           label="Nome"
           variant="outlined"
           fullWidth
+          onBlur={handleTrim}
           sx={{ marginBottom: 2 }}
           value={formik.values.firstName}
           onChange={formik.handleChange}
@@ -81,6 +106,7 @@ export default function Register() {
           name="lastName"
           label="Sobrenome"
           variant="outlined"
+          onBlur={handleTrim}
           fullWidth
           sx={{ marginBottom: 2 }}
           value={formik.values.lastName}
@@ -123,8 +149,15 @@ export default function Register() {
           error={formik.touched.confirmPassword && !!formik.errors.confirmPassword}
           helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
         />
-        <Button variant="contained" color="primary" fullWidth onClick={formik.handleSubmit}>
-          Criar conta
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={formik.handleSubmit}
+          disabled={isSubmitting}
+          sx={{ height: '50px' }}
+        >
+          {isSubmitting ? <CircularProgress size={20} /> : 'Criar conta'}
         </Button>
         <Typography sx={{ mt: 2, textAlign: 'center' }}>
           Já tem uma conta?

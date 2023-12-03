@@ -10,6 +10,18 @@ const get = async (url) => {
   }
 };
 
+const post = async (url, data) => {
+  try {
+    const response = await axios.post(url, data);
+    return response.data;
+  } catch (error) {
+    console.error(`Erro ao fazer a requisição POST para ${url}:`, error);
+    throw error;
+  }
+};
+
+export const createUser = (userData) => post('/api/users', userData);
+
 export const fetchCategories = () => get('/api/categories');
 export const fetchAllCars = () => get('/api/cars');
 export const fetchCarById = (id) => get(`/api/cars/${id}`);
