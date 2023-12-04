@@ -43,9 +43,9 @@ export default function Register() {
       confirmPassword: '',
     },
     validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values) => {
       try {
-        setSubmitting(true);
+        setIsSubmitting(true);
         await createUser({
           fullName: `${values.firstName} ${values.lastName}`,
           email: values.email,
@@ -62,7 +62,7 @@ export default function Register() {
           title: error.response?.data?.message || 'Erro ao criar a conta',
         });
       } finally {
-        setSubmitting(false);
+        setIsSubmitting(false);
       }
     },
   });
