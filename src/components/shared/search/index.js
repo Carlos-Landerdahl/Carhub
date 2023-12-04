@@ -6,8 +6,8 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import ptBR from 'date-fns/locale/pt-BR';
 import './styles.css';
 import theme from '@/styles/theme';
-import { CarContext } from '@/context/CarContext';
-import { Toast } from '@/components/shared/toasts/toastForm';
+import { CarContext } from '@/context/carContext';
+import Toast from '../toasts';
 
 function SearchFilter() {
   const [city, setCity] = useState('');

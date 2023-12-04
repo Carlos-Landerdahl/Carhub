@@ -1,7 +1,7 @@
 import axios from './axios';
 import qs from 'qs';
 import Cookies from 'js-cookie';
-import { Toast } from '@/components/shared/toasts/toastForm';
+import Toast from '@/components/shared/toasts';
 
 const authService = {
   login: async (credentials) => {

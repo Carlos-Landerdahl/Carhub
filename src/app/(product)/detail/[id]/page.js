@@ -5,7 +5,7 @@ import { Box, Container, Typography, Card, CardContent, Paper, Divider } from '@
 import theme from '@/styles/theme';
 import { Location } from '@/components/pages/detail/location';
 import RentalPolicy from '@/components/pages/detail/policy';
-import { fetchCarById } from '@/services/api';
+import { fetchCarById } from '@/services/apiService';
 import CarHeader from '@/components/pages/detail/carHeader';
 import CarMedia from '@/components/pages/detail/carMedia';
 import CarDetails from '@/components/pages/detail/carDetails';

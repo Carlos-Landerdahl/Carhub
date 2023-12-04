@@ -9,12 +9,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import styles from './styles.css';
-import { fetchCategories, fetchAllCars, fetchCarsByCity } from '../../../../services/api';
+import { fetchCategories, fetchAllCars, fetchCarsByCity } from '../../../../services/apiService';
 import { useEffect, useState, useContext } from 'react';
-import { CarContext } from '@/context/CarContext';
+import { CarContext } from '@/context/carContext';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
-import GlobalLoader from '@/components/global/loader/GlobalLoader';
+import GlobalLoader from '@/components/global/loader';
 
 const settings = {
   dots: true,

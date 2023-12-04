@@ -7,7 +7,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ptBR from 'date-fns/locale/pt-BR';
 import theme from '@/styles/theme';
-import { fetchCarById } from '@/services/api';
+import { fetchCarById } from '@/services/apiService';
 import CheckoutConfirmation from '@/components/pages/checkout/confirmation';
 
 export default function Checkout({ params: { id } }) {

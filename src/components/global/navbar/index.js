@@ -22,7 +22,7 @@ import Logo from '/public/img/logo.svg';
 import Link from 'next/link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import theme from '@/styles/theme';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/authContext';
 import Swal from 'sweetalert2';
 import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
 

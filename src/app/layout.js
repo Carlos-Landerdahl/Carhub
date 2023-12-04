@@ -1,4 +1,4 @@
-import Providers from '@/Providers/Providers';
+import Providers from '@/providers/providers';
 import { Layout } from '@/components/layout';
 
 export const metadata = {

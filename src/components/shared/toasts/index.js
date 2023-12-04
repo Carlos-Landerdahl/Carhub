@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-export const Toast = Swal.mixin({
+const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
@@ -14,3 +14,5 @@ export const Toast = Swal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer);
   },
 });
+
+export default Toast;

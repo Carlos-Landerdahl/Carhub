@@ -6,9 +6,9 @@ import theme from '@/styles/theme';
 import { useRouter } from 'next/navigation';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { Toast } from '@/components/shared/toasts/toastForm';
 import { useState } from 'react';
-import { createUser } from '@/services/api';
+import { createUser } from '@/services/apiService';
+import Toast from '@/components/shared/toasts';
 
 export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);

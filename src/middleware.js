@@ -9,12 +9,12 @@ export function middleware(request) {
 
   // Se o token existir e o usuário estiver acessando rotas de login/register, redirecione para a home
   if (token && (pathname === '/login' || pathname === '/register')) {
-    return NextResponse.redirect(new URL('/', request.nextUrl));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   // Se o token não existir e a rota for privada, redirecione para a página de login
   if (!token && pathname.startsWith('/checkout/')) {
-    return NextResponse.redirect(new URL('/login', request.nextUrl));
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
   return NextResponse.next();

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import theme from '@/styles/theme';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/authContext';
 
 export default function Home() {
   const { onLogin } = useAuth();

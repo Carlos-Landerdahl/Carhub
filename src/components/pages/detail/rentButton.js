@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button, Typography } from '@mui/material';
 import { CarRental } from '@mui/icons-material';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/authContext';
 import ErrorIcon from '@mui/icons-material/Error';
 
 export default function RentButton({ isAvailable, id }) {
