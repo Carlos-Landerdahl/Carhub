@@ -7,14 +7,67 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ptBR from 'date-fns/locale/pt-BR';
 import theme from '@/styles/theme';
-import { fetchCarById } from '@/services/apiService';
+import { checkout, fetchCarById } from '@/services/apiService';
 import CheckoutConfirmation from '@/components/pages/checkout/confirmation';
+import { useFormik } from 'formik';
+import { useAuth } from '@/context/authContext';
+import Toast from '@/components/shared/toasts';
+import * as Yup from 'yup';
+import { parseISO } from 'date-fns';
+import { format } from 'date-fns';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+
+const validationSchema = Yup.object({
+  bookingStart: Yup.string().required('O horário de início é obrigatório'),
+  bookingDate: Yup.date().required('A data de início é obrigatória'),
+  returnDate: Yup.date()
+    .required('A data de retorno é obrigatória')
+    .min(Yup.ref('bookingDate'), 'A data de retorno não pode ser anterior à data de início'),
+});
 
 export default function Checkout({ params: { id } }) {
+  const { user } = useAuth();
   const [car, setCar] = useState(null);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
   const today = new Date();
+
+  const formik = useFormik({
+    initialValues: {
+      bookingStart: '',
+      bookingDate: '',
+      returnDate: '',
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      const bookingData = {
+        carId: parseInt(id),
+        userId: user?.id,
+        bookingStart: format(values.bookingStart, 'HH:mm:ss'),
+        bookingDate: format(values.bookingDate, 'yyyy-MM-dd'),
+        returnDate: format(values.returnDate, 'yyyy-MM-dd'),
+      };
+
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        checkout(bookingData, token)
+          .then((response) => {
+            Toast.fire({
+              icon: 'success',
+              title: 'Reserva realizada',
+            });
+            console.log('Reserva criada com sucesso:', response);
+          })
+          .catch((error) => {
+            Toast.fire({
+              icon: 'error',
+              title: 'Você já possui uma reserva',
+            });
+            console.error('Erro ao criar reserva:', error);
+          });
+      } else {
+        console.error('Token de autenticação não encontrado');
+      }
+    },
+  });
 
   useEffect(() => {
     const loadCarDetails = async () => {
@@ -110,27 +163,72 @@ export default function Checkout({ params: { id } }) {
                   component="form"
                   noValidate
                   autoComplete="off"
+                  onSubmit={formik.handleSubmit}
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '10px',
                   }}
                 >
-                  <TextField required id="fullname" label="Nome" fullWidth />
-                  <TextField required id="email" label="Email" fullWidth />
-                  <DatePicker
-                    label="Data de Aluguel"
-                    minDate={today}
-                    value={startDate}
-                    onChange={setStartDate}
+                  <TextField
+                    id="fullname"
+                    fullWidth
+                    value={user ? user.fullName : 'Carregando informações'}
+                    disabled
+                  />
+                  <TextField
+                    id="email"
+                    value={user ? user.username : 'Carregando informações'}
+                    disabled
+                    fullWidth
                   />
                   <DatePicker
-                    label="Data de Devolução"
-                    value={endDate}
-                    onChange={setEndDate}
-                    minDate={startDate || today}
+                    label="Retirada"
+                    value={formik.values.bookingDate ? parseISO(formik.values.bookingDate) : null}
+                    inputFormat="dd/MM/yyyy"
+                    name="bookingDate"
+                    onChange={(value) => formik.setFieldValue('bookingDate', value)}
+                    fullWidth
+                    minDate={formik.bookingDate || today}
+                    slotProps={{
+                      textField: {
+                        helperText: formik.touched.bookingDate && formik.errors.bookingDate,
+                        error: formik.touched.bookingDate && Boolean(formik.errors.bookingDate),
+                      },
+                    }}
                   />
-                  <CheckoutConfirmation />
+                  <TimePicker
+                    label="Horário de Retirada"
+                    name="bookingStart"
+                    value={formik.values.bookingStart ? parseISO(formik.values.bookingStart) : null}
+                    onChange={(value) => formik.setFieldValue('bookingStart', value)}
+                    slotProps={{
+                      textField: {
+                        helperText: formik.touched.bookingStart && formik.errors.bookingStart,
+                        error: formik.touched.bookingStart && Boolean(formik.errors.bookingStart),
+                      },
+                    }}
+                    fullWidth
+                  />
+                  <DatePicker
+                    label="Devolução"
+                    name="returnDate"
+                    value={formik.values.returnDate ? parseISO(formik.values.returnDate) : null}
+                    inputFormat="dd/MM/yyyy"
+                    minDate={formik.returnDate || today}
+                    onChange={(value) => formik.setFieldValue('returnDate', value)}
+                    fullWidth
+                    slotProps={{
+                      textField: {
+                        helperText: formik.touched.returnDate && formik.errors.returnDate,
+                        error: formik.touched.returnDate && Boolean(formik.errors.returnDate),
+                      },
+                    }}
+                  />
+                  <Button variant="contained" type="submit" sx={{ height: '50px' }}>
+                    Reservar
+                  </Button>
+                  {/* <CheckoutConfirmation /> */}
                 </Box>
               </CardContent>
             </Card>

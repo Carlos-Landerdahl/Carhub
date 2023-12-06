@@ -20,7 +20,22 @@ const post = async (url, data) => {
   }
 };
 
+const postWithAuth = async (url, data, token) => {
+  try {
+    const response = await axios.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Erro ao fazer a requisição POST para ${url}:`, error);
+    throw error;
+  }
+};
+
 export const createUser = (userData) => post('/api/users', userData);
+export const checkout = (data, token) => postWithAuth('/api/bookings', data, token);
 
 export const fetchCategories = () => get('/api/categories');
 export const fetchAllCars = () => get('/api/cars');

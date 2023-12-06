@@ -131,15 +131,13 @@ export default function CheckoutConfirmation({}) {
               <Typography>Renaul Megane</Typography>
             </Box>
           </Box>
-          <Link href="/">
-            <Button
-              variant="contained"
-              sx={{ m: '10px', width: '100%', height: '50px' }}
-              onClick={handleClose}
-            >
-              Voltar para a Home
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            sx={{ m: '10px', width: '100%', height: '50px' }}
+            onClick={handleClose}
+          >
+            Voltar para a Home
+          </Button>
         </Box>
       </Modal>
     </div>
