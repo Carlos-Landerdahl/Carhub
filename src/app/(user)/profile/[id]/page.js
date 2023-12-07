@@ -7,7 +7,6 @@ import {
   Typography,
   Card,
   CardContent,
-  CircularProgress,
   Grid,
   Button,
   Box,
@@ -25,6 +24,7 @@ import theme from '@/styles/theme';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import Link from 'next/link';
+import GlobalLoader from '@/components/global/loader';
 
 export default function Profile() {
   const { user } = useAuth();
@@ -124,83 +124,87 @@ export default function Profile() {
         >
           Reservas do {user ? user.fullName : 'usuário'}
         </Typography>
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            justifyContent: 'center',
-          }}
-        >
-          {reservas.length > 0 ? (
-            reservas.map((reserva) => (
-              <Grid item xs={12} md={6} lg={4} key={reserva.id}>
-                <Card variant="outlined" sx={{ boxShadow: 3 }}>
-                  <CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                      <DirectionsCarFilledIcon sx={{ color: amber[800] }} />
-                      <Typography variant="h6" gutterBottom sx={{ mb: '0' }}>
-                        {reserva.carDetails.model || 'Modelo não disponível'}
+        {!loading ? (
+          <GlobalLoader />
+        ) : (
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              justifyContent: 'center',
+            }}
+          >
+            {reservas.length > 0 ? (
+              reservas.map((reserva) => (
+                <Grid item xs={12} md={6} lg={4} key={reserva.id}>
+                  <Card variant="outlined" sx={{ boxShadow: 3 }}>
+                    <CardContent>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        <DirectionsCarFilledIcon sx={{ color: amber[800] }} />
+                        <Typography variant="h6" gutterBottom sx={{ mb: '0' }}>
+                          {reserva.carDetails.model || 'Modelo não disponível'}
+                        </Typography>
+                      </Box>
+                      <Typography color="text.secondary">
+                        {reserva.carDetails.brand || 'Marca não disponível'}
                       </Typography>
-                    </Box>
-                    <Typography color="text.secondary">
-                      {reserva.carDetails.brand || 'Marca não disponível'}
-                    </Typography>
-                    <Typography color="text.secondary">{`Ano: ${
-                      reserva.carDetails.carYear || 'Ano não disponível'
-                    }`}</Typography>
-                    <Box display="flex" alignItems="center" my={1}>
-                      <AccessTimeIcon sx={{ mr: 1, color: teal[300] }} />
-                      <Typography variant="body2">
-                        {`Horário da retirada: ${reserva.bookingStart}`}
-                      </Typography>
-                    </Box>
-                    <Box display="flex" alignItems="center" my={1}>
-                      <EventIcon sx={{ mr: 1, color: teal[300] }} />
-                      <Typography variant="body2">
-                        {`Data da retirada: ${formatDate(reserva.bookingDate)}`}
-                      </Typography>
-                    </Box>
-                    <Box display="flex" alignItems="center" my={1}>
-                      <EventIcon sx={{ mr: 1, color: teal[300] }} />
-                      <Typography variant="body2">
-                        {`Data da devolução: ${formatDate(reserva.returnDate)}`}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))
-          ) : (
-            <Box
-              sx={{
-                textAlign: 'center',
-                p: theme.spacing(3),
-              }}
-            >
-              <DriveEtaIcon
+                      <Typography color="text.secondary">{`Ano: ${
+                        reserva.carDetails.carYear || 'Ano não disponível'
+                      }`}</Typography>
+                      <Box display="flex" alignItems="center" my={1}>
+                        <AccessTimeIcon sx={{ mr: 1, color: teal[300] }} />
+                        <Typography variant="body2">
+                          {`Horário da retirada: ${reserva.bookingStart}`}
+                        </Typography>
+                      </Box>
+                      <Box display="flex" alignItems="center" my={1}>
+                        <EventIcon sx={{ mr: 1, color: teal[300] }} />
+                        <Typography variant="body2">
+                          {`Data da retirada: ${formatDate(reserva.bookingDate)}`}
+                        </Typography>
+                      </Box>
+                      <Box display="flex" alignItems="center" my={1}>
+                        <EventIcon sx={{ mr: 1, color: teal[300] }} />
+                        <Typography variant="body2">
+                          {`Data da devolução: ${formatDate(reserva.returnDate)}`}
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))
+            ) : (
+              <Box
                 sx={{
-                  fontSize: 80,
-                  color: theme.palette.primary.main,
-                  mb: 2,
-                }}
-              />
-              <Typography
-                variant="body1"
-                sx={{
-                  color: theme.palette.text.text,
-                  mb: 3,
+                  textAlign: 'center',
+                  p: theme.spacing(3),
                 }}
               >
-                Não há reservas vinculadas ao perfil.
-              </Typography>
-              <Link href={'/'} passHref>
-                <Button variant="contained" color="primary" startIcon={<DriveEtaIcon />}>
-                  Reservar um carro
-                </Button>
-              </Link>
-            </Box>
-          )}
-        </Grid>
+                <DriveEtaIcon
+                  sx={{
+                    fontSize: 80,
+                    color: theme.palette.primary.main,
+                    mb: 2,
+                  }}
+                />
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: theme.palette.text.text,
+                    mb: 3,
+                  }}
+                >
+                  Não há reservas vinculadas ao perfil.
+                </Typography>
+                <Link href={'/'} passHref>
+                  <Button variant="contained" color="primary" startIcon={<DriveEtaIcon />}>
+                    Reservar um carro
+                  </Button>
+                </Link>
+              </Box>
+            )}
+          </Grid>
+        )}
       </Container>
     </Box>
   );
