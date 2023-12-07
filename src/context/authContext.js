@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import authService from '../services/authService';
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext(null);
 

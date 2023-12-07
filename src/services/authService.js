@@ -57,6 +57,8 @@ const authService = {
       });
       return response.data;
     } catch (error) {
+      Cookies.remove('accessToken');
+      localStorage.removeItem('accessToken');
       throw new Error('Não foi possível buscar os detalhes do usuário.');
     }
   },

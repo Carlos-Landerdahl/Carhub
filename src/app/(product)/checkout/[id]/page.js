@@ -32,9 +32,9 @@ export default function Checkout({ params: { id } }) {
 
   const formik = useFormik({
     initialValues: {
-      bookingStart: '',
-      bookingDate: '',
-      returnDate: '',
+      bookingStart: null,
+      bookingDate: null,
+      returnDate: null,
     },
     validationSchema,
     onSubmit: (values) => {
@@ -184,7 +184,7 @@ export default function Checkout({ params: { id } }) {
                   />
                   <DatePicker
                     label="Retirada"
-                    value={formik.values.bookingDate ? parseISO(formik.values.bookingDate) : null}
+                    value={formik.values.bookingDate}
                     inputFormat="dd/MM/yyyy"
                     name="bookingDate"
                     onChange={(value) => formik.setFieldValue('bookingDate', value)}
@@ -200,7 +200,7 @@ export default function Checkout({ params: { id } }) {
                   <TimePicker
                     label="Horário de Retirada"
                     name="bookingStart"
-                    value={formik.values.bookingStart ? parseISO(formik.values.bookingStart) : null}
+                    value={formik.values.bookingStart}
                     onChange={(value) => formik.setFieldValue('bookingStart', value)}
                     slotProps={{
                       textField: {
@@ -213,7 +213,7 @@ export default function Checkout({ params: { id } }) {
                   <DatePicker
                     label="Devolução"
                     name="returnDate"
-                    value={formik.values.returnDate ? parseISO(formik.values.returnDate) : null}
+                    value={formik.values.returnDate}
                     inputFormat="dd/MM/yyyy"
                     minDate={formik.returnDate || today}
                     onChange={(value) => formik.setFieldValue('returnDate', value)}

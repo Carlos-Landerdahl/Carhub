@@ -16,10 +16,13 @@ export function middleware(request) {
   if (!token && pathname.startsWith('/checkout/')) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
+  if (!token && pathname.startsWith('/profile/')) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/checkout/:path*', '/login', '/register'],
+  matcher: ['/checkout/:path*', '/profile/:path*', '/login', '/register'],
 };

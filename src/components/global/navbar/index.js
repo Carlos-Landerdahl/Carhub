@@ -25,6 +25,7 @@ import theme from '@/styles/theme';
 import { useAuth } from '@/context/authContext';
 import Swal from 'sweetalert2';
 import { FacebookRounded, LinkedIn, Instagram, Twitter } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 
 const drawerWidth = 240;
 const navItems = ['Criar conta', 'Iniciar sessão'];
@@ -34,6 +35,7 @@ export default function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const router = useRouter();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -96,6 +98,18 @@ export default function Navbar(props) {
                 }}
               >
                 <ListItemText primary="Logout" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => router.push(`/profile/${user.id}`)}
+                sx={{
+                  textAlign: 'center',
+                  color: theme.palette.default.primary,
+                  borderBottom: '1px solid #595959',
+                }}
+              >
+                <ListItemText primary="Perfil" />
               </ListItemButton>
             </ListItem>
           </>
@@ -165,10 +179,15 @@ export default function Navbar(props) {
               {!isMobile && (
                 <>
                   {loading ? (
-                    <CircularProgress size={25} />
+                    <CircularProgress size={25} sx={{ mr: '10px' }} />
                   ) : user ? (
                     <>
                       <span>Olá, {user.fullName}</span>
+                      <Link href={`/profile/${user.id}`} passHref>
+                        <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
+                          Perfil
+                        </Button>
+                      </Link>
                       <Button
                         onClick={handleLogout}
                         variant="outlined"
