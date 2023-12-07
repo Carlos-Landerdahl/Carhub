@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import axios from '@/services/axios';
 import {
   Container,
   Typography,
@@ -17,14 +16,15 @@ import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
 import EventIcon from '@mui/icons-material/Event';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useAuth } from '@/context/authContext';
-import { fetchCarById } from '@/services/apiService';
 import { teal, amber } from '@mui/material/colors';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
 import theme from '@/styles/theme';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import { fetchBookingsByUserId, fetchCarById, cancelBooking } from '@/services/apiService';
 import Link from 'next/link';
 import GlobalLoader from '@/components/global/loader';
+import Swal from 'sweetalert2';
 
 export default function Profile() {
   const { user } = useAuth();
@@ -36,17 +36,39 @@ export default function Profile() {
     return format(parseISO(dateString), 'dd/MM/yyyy', { locale: ptBR });
   };
 
+  const handleCancelReservation = async (bookingId) => {
+    const result = await Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Você não poderá reverter isso!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, cancelar reserva!',
+      cancelButtonText: 'Não, manter reserva',
+    });
+
+    if (result.isConfirmed) {
+      try {
+        setLoading(true);
+        await cancelBooking(bookingId, token);
+        setReservas(reservas.filter((reserva) => reserva.id !== bookingId));
+        Swal.fire('Cancelada!', 'A reserva foi cancelada.', 'success');
+      } catch (error) {
+        console.error('Erro ao cancelar reserva:', error);
+        Swal.fire('Erro!', 'Não foi possível cancelar a reserva.', 'error');
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   useEffect(() => {
-    if (user) {
-      setLoading(true);
-      axios
-        .get(`/api/bookings/user/${user.id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(async (response) => {
-          const bookings = response.data;
+    const fetchReservas = async () => {
+      try {
+        if (user) {
+          setLoading(true);
+          const bookings = await fetchBookingsByUserId(user.id, token);
           const carsDetailsPromises = bookings.map((booking) =>
             fetchCarById(booking.carId).catch((error) => {
               console.error('Erro ao buscar detalhes do carro:', error);
@@ -60,14 +82,15 @@ export default function Profile() {
             carDetails: carsDetails[index] || {},
           }));
           setReservas(reservasComDetalhes);
-        })
-        .catch((error) => {
-          console.error('Erro ao buscar reservas:', error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar reservas:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReservas();
   }, [token, user]);
 
   return (
@@ -124,7 +147,7 @@ export default function Profile() {
         >
           Reservas do {user ? user.fullName : 'usuário'}
         </Typography>
-        {!loading ? (
+        {loading ? (
           <GlobalLoader />
         ) : (
           <Grid
@@ -169,6 +192,15 @@ export default function Profile() {
                           {`Data da devolução: ${formatDate(reserva.returnDate)}`}
                         </Typography>
                       </Box>
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        fullWidth
+                        sx={{ mt: '10px' }}
+                        onClick={() => handleCancelReservation(reserva.id)}
+                      >
+                        Cancelar Reserva
+                      </Button>
                     </CardContent>
                   </Card>
                 </Grid>

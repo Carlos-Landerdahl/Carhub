@@ -1,8 +1,9 @@
 import axios from './axios';
 
-const get = async (url) => {
+const get = async (url, token) => {
   try {
-    const response = await axios.get(url);
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    const response = await axios.get(url, { headers });
     return response.data;
   } catch (error) {
     console.error(`Erro ao fazer a requisição GET para ${url}:`, error);
@@ -34,8 +35,30 @@ const postWithAuth = async (url, data, token) => {
   }
 };
 
+const deleteWithAuth = async (url, token) => {
+  try {
+    const response = await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Erro ao fazer a requisição DELETE para ${url}:`, error);
+    throw error;
+  }
+};
+
 export const createUser = (userData) => post('/api/users', userData);
 export const checkout = (data, token) => postWithAuth('/api/bookings', data, token);
+
+export const createBooking = (bookingData, token) =>
+  postWithAuth('/api/bookings', bookingData, token);
+
+export const cancelBooking = (bookingId, token) =>
+  deleteWithAuth(`/api/bookings/${bookingId}`, token);
+
+export const fetchBookingsByUserId = (userId, token) => get(`/api/bookings/user/${userId}`, token);
 
 export const fetchCategories = () => get('/api/categories');
 export const fetchAllCars = () => get('/api/cars');

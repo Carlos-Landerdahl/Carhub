@@ -8,14 +8,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ptBR from 'date-fns/locale/pt-BR';
 import theme from '@/styles/theme';
 import { checkout, fetchCarById } from '@/services/apiService';
-import CheckoutConfirmation from '@/components/pages/checkout/confirmation';
 import { useFormik } from 'formik';
 import { useAuth } from '@/context/authContext';
-import Toast from '@/components/shared/toasts';
 import * as Yup from 'yup';
-import { parseISO } from 'date-fns';
 import { format } from 'date-fns';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import Swal from 'sweetalert2';
 
 const validationSchema = Yup.object({
   bookingStart: Yup.string().required('O horário de início é obrigatório'),
@@ -37,34 +35,47 @@ export default function Checkout({ params: { id } }) {
       returnDate: null,
     },
     validationSchema,
-    onSubmit: (values) => {
-      const bookingData = {
-        carId: parseInt(id),
-        userId: user?.id,
-        bookingStart: format(values.bookingStart, 'HH:mm:ss'),
-        bookingDate: format(values.bookingDate, 'yyyy-MM-dd'),
-        returnDate: format(values.returnDate, 'yyyy-MM-dd'),
-      };
+    onSubmit: async (values) => {
+      const formattedBookingStart = format(values.bookingStart, 'HH:mm', { locale: ptBR });
+      const formattedBookingDate = format(values.bookingDate, 'dd/MM/yyyy', { locale: ptBR });
+      const formattedReturnDate = format(values.returnDate, 'dd/MM/yyyy', { locale: ptBR });
 
-      const token = localStorage.getItem('accessToken');
-      if (token) {
-        checkout(bookingData, token)
-          .then((response) => {
-            Toast.fire({
-              icon: 'success',
-              title: 'Reserva realizada',
-            });
-            console.log('Reserva criada com sucesso:', response);
-          })
-          .catch((error) => {
-            Toast.fire({
-              icon: 'error',
-              title: 'Você já possui uma reserva',
-            });
-            console.error('Erro ao criar reserva:', error);
-          });
-      } else {
-        console.error('Token de autenticação não encontrado');
+      const result = await Swal.fire({
+        title: 'Confirmar Reserva',
+        html: `
+          <p>Carro: ${car.brand} ${car.model}</p>
+          <p>Retirada: ${formattedBookingDate} às ${formattedBookingStart}</p>
+          <p>Devolução: ${formattedReturnDate}</p>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+      });
+
+      if (result.isConfirmed) {
+        const bookingData = {
+          carId: parseInt(id),
+          userId: user?.id,
+          bookingStart: format(values.bookingStart, 'HH:mm:ss'),
+          bookingDate: format(values.bookingDate, 'yyyy-MM-dd'),
+          returnDate: format(values.returnDate, 'yyyy-MM-dd'),
+        };
+
+        const token = localStorage.getItem('accessToken');
+
+        if (token) {
+          try {
+            await checkout(bookingData, token);
+            Swal.fire('Reserva Realizada!', 'Sua reserva foi realizada com sucesso.', 'success');
+          } catch (error) {
+            Swal.fire('Erro!', 'Você já tem uma reserva ativa', 'error');
+          }
+        } else {
+          console.error('Token de autenticação não encontrado');
+        }
       }
     },
   });
@@ -228,7 +239,6 @@ export default function Checkout({ params: { id } }) {
                   <Button variant="contained" type="submit" sx={{ height: '50px' }}>
                     Reservar
                   </Button>
-                  {/* <CheckoutConfirmation /> */}
                 </Box>
               </CardContent>
             </Card>
