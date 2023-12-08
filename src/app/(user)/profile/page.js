@@ -25,12 +25,12 @@ import { fetchBookingsByUserId, fetchCarById, cancelBooking } from '@/services/a
 import Link from 'next/link';
 import GlobalLoader from '@/components/global/loader';
 import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
 
 export default function Profile() {
   const { user } = useAuth();
   const [reservas, setReservas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem('accessToken');
 
   const formatDate = (dateString) => {
     return format(parseISO(dateString), 'dd/MM/yyyy', { locale: ptBR });
@@ -65,6 +65,7 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchReservas = async () => {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
       try {
         if (user) {
           setLoading(true);
@@ -91,7 +92,7 @@ export default function Profile() {
     };
 
     fetchReservas();
-  }, [token, user]);
+  }, [user]);
 
   return (
     <Box
