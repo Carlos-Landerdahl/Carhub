@@ -36,6 +36,7 @@ export default function Navbar(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
+  const isAdmin = (user) => user && user.roles.includes('ROLE_ADMIN');
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -102,7 +103,7 @@ export default function Navbar(props) {
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton
-                onClick={() => router.push(`/profile/${user.id}`)}
+                onClick={() => router.push(`/profile`)}
                 sx={{
                   textAlign: 'center',
                   color: theme.palette.default.primary,
@@ -112,6 +113,20 @@ export default function Navbar(props) {
                 <ListItemText primary="Perfil" />
               </ListItemButton>
             </ListItem>
+            {isAdmin(user) && (
+              <ListItem disablePadding>
+                <ListItemButton
+                  onClick={() => router.push(`/admin`)}
+                  sx={{
+                    textAlign: 'center',
+                    color: theme.palette.default.primary,
+                    borderBottom: '1px solid #595959',
+                  }}
+                >
+                  <ListItemText primary="Painel admin" />
+                </ListItemButton>
+              </ListItem>
+            )}
           </>
         ) : (
           navItems.map((item) => (
@@ -183,7 +198,14 @@ export default function Navbar(props) {
                   ) : user ? (
                     <>
                       <span>Olá, {user.fullName}</span>
-                      <Link href={`/profile/${user.id}`} passHref>
+                      {isAdmin(user) && (
+                        <Link href="/admin" passHref>
+                          <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
+                            Painel admin
+                          </Button>
+                        </Link>
+                      )}
+                      <Link href={`/profile`} passHref>
                         <Button variant="outlined" sx={{ color: theme.palette.default.primary }}>
                           Perfil
                         </Button>

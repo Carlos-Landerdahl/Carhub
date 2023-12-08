@@ -1,22 +1,23 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 
 export function middleware(request) {
-  const cookieStore = cookies();
-  const token = cookieStore.get('accessToken');
+  const { cookies } = request;
+  const token = cookies.get('accessToken');
+  const userRole = cookies.get('userRole');
   const pathname = request.nextUrl.pathname;
-  // console.log(token);
 
-  // Se o token existir e o usuário estiver acessando rotas de login/register, redirecione para a home
+  // Redireciona do login/register se já estiver autenticado
   if (token && (pathname === '/login' || pathname === '/register')) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // Se o token não existir e a rota for privada, redirecione para a página de login
-  if (!token && pathname.startsWith('/checkout/')) {
+  // Redireciona para login se tentar acessar rotas privadas sem autenticação
+  if (!token && (pathname.startsWith('/checkout/') || pathname.startsWith('/profile/'))) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
-  if (!token && pathname.startsWith('/profile/')) {
+
+  // Restringe acesso à rota /admin apenas para usuários com role 'ROLE_ADMIN'
+  if (pathname.startsWith('/admin') && userRole.value !== 'ROLE_ADMIN') {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
@@ -24,5 +25,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/checkout/:path*', '/profile/:path*', '/login', '/register'],
+  matcher: ['/checkout/:path*', '/profile/:path*', '/login', '/register', '/admin/:path*'],
 };

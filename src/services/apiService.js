@@ -49,14 +49,54 @@ const deleteWithAuth = async (url, token) => {
   }
 };
 
+export const updateCar = async (carId, carData, token) => {
+  try {
+    const response = await axios.put(`/api/cars/${carId}`, carData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Erro ao fazer a requisição PUT para /api/cars/${carId}:`, error);
+    throw error;
+  }
+};
+
+export const linkCharacteristicToCar = async (characteristicId, carId, token) => {
+  try {
+    const url = `/api/characteristics/link/${characteristicId}/car/${carId}`;
+    const response = await axios.post(
+      url,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Erro ao fazer a requisição POST para ${url}:`, error);
+    throw error;
+  }
+};
+
 export const createUser = (userData) => post('/api/users', userData);
 export const checkout = (data, token) => postWithAuth('/api/bookings', data, token);
 
 export const createBooking = (bookingData, token) =>
   postWithAuth('/api/bookings', bookingData, token);
 
+export const createCar = async (carData, token) => {
+  const url = '/api/cars';
+  return await postWithAuth(url, carData, token);
+};
+
 export const cancelBooking = (bookingId, token) =>
   deleteWithAuth(`/api/bookings/${bookingId}`, token);
+
+export const deleteCar = (carId, token) => deleteWithAuth(`/api/cars/${carId}`, token);
 
 export const fetchBookingsByUserId = (userId, token) => get(`/api/bookings/user/${userId}`, token);
 

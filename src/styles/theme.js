@@ -86,6 +86,9 @@ const theme = createTheme(
           '.custom-toast': {
             zIndex: '1100 !important',
           },
+          '.swal2-container': {
+            zIndex: '2000 !important',
+          },
         },
       },
       MuiFormHelperText: {

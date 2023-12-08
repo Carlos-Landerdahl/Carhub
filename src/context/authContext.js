@@ -29,6 +29,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = await authService.login(credentials);
       const userData = await authService.fetchUser(token);
+
+      if (userData && userData.roles) {
+        Cookies.set('userRole', userData.roles[0], { expires: 1 });
+      }
+
       setUser(userData);
       router.push('/');
       router.refresh();
@@ -42,6 +47,7 @@ export const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     authService.logout();
     setUser(null);
+    Cookies.remove('userRole');
     router.push('/');
     router.refresh();
   };
