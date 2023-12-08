@@ -25,7 +25,6 @@ import { fetchBookingsByUserId, fetchCarById, cancelBooking } from '@/services/a
 import Link from 'next/link';
 import GlobalLoader from '@/components/global/loader';
 import Swal from 'sweetalert2';
-import Cookies from 'js-cookie';
 
 export default function Profile() {
   const { user } = useAuth();

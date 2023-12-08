@@ -12,13 +12,15 @@ import {
   Checkbox,
   Grid,
   Box,
+  CircularProgress,
 } from '@mui/material';
 import { createCar, linkCharacteristicToCar } from '@/services/apiService';
 import Toast from '@/components/shared/toasts';
 import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 export default function CreateCars() {
-  const router = useRouter();
+  const [isCreating, setIsCreating] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -59,6 +61,7 @@ export default function CreateCars() {
         }).then(async (result) => {
           if (result.isConfirmed) {
             try {
+              setIsCreating(true);
               const newCar = await createCar(values, token);
               await linkCharacteristicToCar(values.characteristicId, newCar.id, token);
               Toast.fire({
@@ -72,6 +75,8 @@ export default function CreateCars() {
                 title: 'Erro ao adicionar carro',
               });
               console.error('Erro ao adicionar carro', error);
+            } finally {
+              setIsCreating(false);
             }
           }
         });
@@ -228,8 +233,9 @@ export default function CreateCars() {
             variant="contained"
             color="primary"
             sx={{ mt: 3, mb: 2, height: '40px' }}
+            disabled={isCreating}
           >
-            Adicionar Carro
+            {isCreating ? <CircularProgress size={20} /> : 'Adicionar Carro'}
           </Button>
         </form>
       </Container>

@@ -16,6 +16,7 @@ import {
   useTheme,
   FormControlLabel,
   Checkbox,
+  CircularProgress,
 } from '@mui/material';
 import Swal from 'sweetalert2';
 
@@ -24,6 +25,10 @@ export default function CarTable({ cars, onUpdateCar, onDeleteCar }) {
   const [editData, setEditData] = useState({});
   const [searchId, setSearchId] = useState('');
   const [filteredCars, setFilteredCars] = useState(cars || []);
+  const [isSearching, setIsSearching] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isUpdateProcessing, setIsUpdateProcessing] = useState(false);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -68,21 +73,31 @@ export default function CarTable({ cars, onUpdateCar, onDeleteCar }) {
   };
 
   const handleSearch = () => {
+    setIsSearching(true);
     const searchResults = cars.filter((car) => car.id.toString().includes(searchId));
     setFilteredCars(searchResults.slice(0, 5));
+    setIsSearching(false);
   };
 
   const handleClose = () => setOpen(false);
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     const { id, category, rentalCompany, ...carData } = editData;
     const updatedCarData = {
       ...carData,
       categoryId: category.id,
       rentalCompanyId: rentalCompany.id,
     };
-    onUpdateCar(id, updatedCarData);
-    handleClose();
+
+    try {
+      setIsUpdateProcessing(true);
+      await onUpdateCar(id, updatedCarData);
+    } catch (error) {
+      console.error('Erro ao atualizar o carro', error);
+    } finally {
+      setIsUpdateProcessing(false);
+      handleClose();
+    }
   };
 
   const handleConfirmUpdate = () => {
@@ -93,9 +108,10 @@ export default function CarTable({ cars, onUpdateCar, onDeleteCar }) {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, salvar!',
+      confirmButtonText: isUpdateProcessing ? <CircularProgress size={20} /> : 'Sim, salvar!',
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed && !isUpdateProcessing) {
         handleUpdate();
       }
     });
@@ -138,8 +154,13 @@ export default function CarTable({ cars, onUpdateCar, onDeleteCar }) {
           variant="outlined"
           fullWidth
         />
-        <Button variant="contained" onClick={handleSearch} sx={{ height: '56px', px: 6 }}>
-          Pesquisar
+        <Button
+          variant="contained"
+          onClick={handleSearch}
+          sx={{ height: '56px', px: 6 }}
+          disabled={isSearching}
+        >
+          {isSearching ? <CircularProgress size={20} /> : 'Pesquisar'}
         </Button>
       </Box>
       <TableContainer component={Paper}>
@@ -277,8 +298,9 @@ export default function CarTable({ cars, onUpdateCar, onDeleteCar }) {
             variant="contained"
             fullWidth
             sx={{ mt: 2 }}
+            disabled={isUpdateProcessing}
           >
-            Salvar Alterações
+            {isUpdateProcessing ? <CircularProgress size={18} /> : 'Salvar Alterações'}
           </Button>
         </Box>
       </Modal>
